@@ -1,4 +1,5 @@
 import {distance, findPointFromDist, slopeBetween, perpendicularSlope} from '../math/Graphing.js';
+import React, { Component } from 'react';
 
 class Arrow {
 
@@ -76,7 +77,10 @@ class Arrow {
 		Draws the arrow to the given context
 	*/
 	draw = (context) => {
-
+<React.Fragment>
+	<rect width="300" height="100" x="20" y="20" style="fill:rgb(0,0,255);stroke-width:20;stroke:rgb(15,100,0)" />
+</ React.Fragment>
+/*
 		//Slope of the line between pointCoord and endCoord
 		var slope = slopeBetween(this.pointCoord, this.endCoord);
 		var headCoords = this.calcHeadCoords(this.pointCoord, slope, this.headHeight, this.headWidth / 2);
@@ -101,6 +105,7 @@ class Arrow {
 		context.strokeStyle = this.color;
 		context.lineWidth = this.thickness;
 		context.stroke();
+		*/
 	}
 
 

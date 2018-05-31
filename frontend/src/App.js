@@ -3,6 +3,7 @@ import logo from './logo.svg';
 import './App.css';
 import './reset.css';
 import LinearSearch from './pages/LinearSearch.js';
+import Test from './pages/Test.js';
 
 class App extends Component {
   render() {

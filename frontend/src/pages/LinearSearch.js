@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import "./styles.css";
-import {Canvas, clearCanvas} from '../components/canvas/Canvas.js';
+import {DrawArea} from '../components/drawArea/DrawArea.js';
 import CodeBox from '../components/codeBox/CodeBox.js';
-import Square from '../components/canvas/shapes/Square.js';
-import Arrow from '../components/canvas/shapes/Arrow.js';
+import Square from '../components/drawArea/shapes/Square.js';
+import Arrow from '../components/drawArea/shapes/Arrow.js';
 
-import Coord from '../components/canvas/math/Coord.js';
+import Coord from '../components/drawArea/math/Coord.js';
 
 class LinearSearch extends React.Component{
 
@@ -81,12 +81,12 @@ class LinearSearch extends React.Component{
     }
 
     updateCanvas = () => {
-		clearCanvas();
-		var context = document.getElementById("drawArea").getContext("2d");
+
         var r = new Square();
 
         r.usePreset("SMALL");
         r.setColor("orange");
+		console.log("We're going to draw " + this.state.elements.length + " elements");
         for(var i = 0; i < this.state.elements.length; i++){
             r.setTopLeft(new Coord(0 + 50 * i, 50));
             r.setText(this.state.elements[i]);
@@ -97,7 +97,7 @@ class LinearSearch extends React.Component{
 			} else{
 				r.setColor("orange");
 			}
-            r.draw(context);
+            r.draw();
         }
     }
 
@@ -112,7 +112,7 @@ class LinearSearch extends React.Component{
 					<input type="text" onChange={this.handleElementsChange}></input>
 					<input type="submit" value="Visualize"></input>
 				</form>
-		        <Canvas />
+		        <DrawArea />
 				<CodeBox linesOfCode={this.algorithm}/>
 
 			</div>

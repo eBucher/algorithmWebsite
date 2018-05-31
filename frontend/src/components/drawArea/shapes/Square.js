@@ -1,8 +1,9 @@
 import Coord from '../math/Coord.js';
 import React, { Component } from 'react';
 
-class Square {
+class Square extends React.Component{
 	constructor(){
+		super();
 		this.topLeft = null;
 		this.size = null;
 		this.color = null;
@@ -49,7 +50,7 @@ class Square {
 		this.size = newSize;
 		this.thickness = this.size *.02;
 		this.centerFontSize = this.size/2;
-		this.outerFontSize = this.size/5;
+		this.outerFontSize = this.size/4;
 		this.outerFontSpacing = this.size/10;
 		return this;
 	}
@@ -101,76 +102,95 @@ class Square {
     draw = (context) => {
 		this._drawSquare(context);
 		this._drawCenterText(context);
-		this._drawTopText(context);
-		this._drawBottomText(context);
+		//this._drawTopText(context);
+		//this._drawBottomText(context);
 	}
 
 
 	_drawSquare = (context) => {
-		var rect = document.createElementNS("http://www.w3.org/2000/svg", 'rect');
-        rect.setAttributeNS(null, 'x', this.topLeft.x + this.thickness/2);
-        rect.setAttributeNS(null, 'y', this.topLeft.y + this.thickness/2);
-        rect.setAttributeNS(null, 'height', this.size - this.thickness);
-        rect.setAttributeNS(null, 'width', this.size - this.thickness);
-        rect.setAttributeNS(null, 'fill', this.color);
-		rect.setAttributeNS(null, "style",
-							"fill:" + this.color + "; " +
-							"stroke-width:" + this.thickness + "; " +
-							"stroke: #000000"
-		);
-        document.getElementById('drawArea').appendChild(rect);
+		return (
+			<rect x={this.topLeft.x + this.thickness/2}
+					y={this.topLeft.y + this.thickness/2}
+					height={this.size - this.thickness}
+					width={this.size - this.thickness}
+					fill={this.color}
+					style={{
+						strokeWidth : this.thickness,
+						stroke : "#000000"
+					}}
+			/>
+		)
 
 	}
 
 
 	_drawCenterText = (context) => {
 		if(this.centerText != null){
-			var text = document.createElementNS("http://www.w3.org/2000/svg", 'text');
-			text.textContent = this.centerText;
-	        text.setAttributeNS(null, 'x', this.getCenterPoint().x);
-	        text.setAttributeNS(null, 'y', this.getCenterPoint().y + this.centerFontSize/2 - this.centerFontSize * .1);
-	        text.setAttributeNS(null, 'fill', "#000000");
-			text.setAttributeNS(null, "style",
-								"font:" + this.centerFontSize + "px Arial;" +
-								"text-anchor: middle;"
-
-			);
-			document.getElementById('drawArea').appendChild(text);
+			return (
+				<text
+					x={this.getCenterPoint().x}
+					y={this.getCenterPoint().y + this.centerFontSize/2 - this.centerFontSize * .1}
+					fill="#000000"
+					style= {{
+						font :  this.centerFontSize + "px Arial",
+						textAnchor: "middle"
+					}}
+				>
+					{this.centerText}
+				</text>
+			)
 		}
 	}
 
 
 	_drawTopText = (context) => {
 		if(this.topText != null){
-			var text = document.createElementNS("http://www.w3.org/2000/svg", 'text');
-			text.textContent = this.topText;
-	        text.setAttributeNS(null, 'x', this.getCenterPoint().x);
-	        text.setAttributeNS(null, 'y', this.topLeft.y - this.outerFontSpacing);
-	        text.setAttributeNS(null, 'fill', "#000000");
-			text.setAttributeNS(null, "style",
-								"font:" + this.outerFontSize + "pt Arial;" +
-								"text-anchor: middle;"
-
-			);
-			document.getElementById('drawArea').appendChild(text);
+			return(
+				<text
+					x={this.getCenterPoint().x}
+					y={this.topLeft.y - this.outerFontSpacing}
+					fill="#000000"
+					style= {{
+						font :  this.outerFontSize + "px Arial",
+						textAnchor: "middle"
+					}}
+				>
+					{this.topText}
+				</text>
+			)
 		}
 	}
 
 
 	_drawBottomText = (context) => {
 		if(this.bottomText != null){
-			var text = document.createElementNS("http://www.w3.org/2000/svg", 'text');
-			text.textContent = this.topText;
-	        text.setAttributeNS(null, 'x', this.getCenterPoint().x);
-	        text.setAttributeNS(null, 'y', this.topLeft.y + this.size);
-	        text.setAttributeNS(null, 'fill', "#000000");
-			text.setAttributeNS(null, "style",
-								"font:" + this.outerFontSize + "pt Arial;" +
-								"text-anchor: middle; dominant-baseline: hanging;"
-
-			);
-			document.getElementById('drawArea').appendChild(text);
+			return(
+				<text
+					x={this.getCenterPoint().x}
+					y={this.topLeft.y + this.size}
+					fill="#000000"
+					style= {{
+						font :  this.outerFontSize + "px Arial",
+						textAnchor: "middle",
+						dominantBaseline: "hanging"
+					}}
+				>
+					{this.bottomText}
+				</text>
+			)
 		}
+	}
+
+	render() {
+		return (
+			<React.Fragment>
+				{this._drawSquare()}
+				{this._drawCenterText()}
+				{this._drawTopText()}
+				{this._drawBottomText()}
+			</React.Fragment>
+		)
+
 	}
 
 

@@ -8,16 +8,18 @@ import Coord from './math/Coord.js';
 class DrawArea extends Component {
     constructor(){
         super();
-        this.state = {
-            displayedPieces : ""
-        }
     }
 
 
     render() {
+        console.log("TIme to display: ");
+        console.log(this.props.displayedPieces);
         return (
             <svg id="drawArea" width="1000px" height="500px">
-                {this.state.displayedPieces}
+                {this.props.displayedPieces.map((MyComponent, index) => {
+                    return (
+                        MyComponent.render()
+                )} )}
             </svg>
         );
     }

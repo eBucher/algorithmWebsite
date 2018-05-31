@@ -35,6 +35,7 @@ class LinearSearch extends React.Component{
 
 	}
 
+	// currentIndex is where the array will be pointing to.
 	calculateSteps = () => {
 		var i = 0;
 		this.steps.push({currentIndex: i, highlightLine: 1});
@@ -66,28 +67,20 @@ class LinearSearch extends React.Component{
 		newElements = newElements.split(',');
 		//Convert all of the strings to numbers
 		for(var i = 0; i < newElements.length; i++){newElements[i] = Number(newElements[i])};
-		console.log("New elements are " + newElements);
+		
 		this.setState({target : this.state.tempTarget,
 					   elements: newElements});
 		event.preventDefault();
 	}
 
-    componentDidMount() {
-        this.updateCanvas();
-    }
 
-    componentDidUpdate() {
-        this.updateCanvas();
-    }
+    visualizeAlgorithm = (currentStep, steps) => {
 
-    updateCanvas = () => {
-
-        var r = new Square();
-
-        r.usePreset("SMALL");
-        r.setColor("orange");
-		console.log("We're going to draw " + this.state.elements.length + " elements");
+		var elementsToDraw = [];
         for(var i = 0; i < this.state.elements.length; i++){
+	        var r = new Square();
+	        r.usePreset("SMALL");
+	        r.setColor("orange");
             r.setTopLeft(new Coord(0 + 50 * i, 50));
             r.setText(this.state.elements[i]);
             r.setText("ptr1", "TOP");
@@ -97,11 +90,14 @@ class LinearSearch extends React.Component{
 			} else{
 				r.setColor("orange");
 			}
-            r.draw();
+            elementsToDraw.push(r);
         }
+		return (elementsToDraw);
     }
 
 	render(){
+		var piecesToShow = this.visualizeAlgorithm(1, this.steps);
+
 		return (
 			<div id="AlgorithmContainer">
 
@@ -112,7 +108,7 @@ class LinearSearch extends React.Component{
 					<input type="text" onChange={this.handleElementsChange}></input>
 					<input type="submit" value="Visualize"></input>
 				</form>
-		        <DrawArea />
+		        <DrawArea displayedPieces={piecesToShow}/>
 				<CodeBox linesOfCode={this.algorithm}/>
 
 			</div>

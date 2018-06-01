@@ -10,16 +10,16 @@ class DrawArea extends Component {
         super();
     }
 
-
     render() {
-        console.log("TIme to display: ");
-        console.log(this.props.displayedPieces);
         return (
             <svg id="drawArea" width="1000px" height="500px">
                 {this.props.displayedPieces.map((MyComponent, index) => {
-                    return (
-                        MyComponent.render()
-                )} )}
+                        if(MyComponent instanceof React.Component){
+                            return (MyComponent.render());
+                        } else {
+                            return (<React.Fragment>{MyComponent}</React.Fragment>);
+                        }
+                } )}
             </svg>
         );
     }
@@ -27,4 +27,4 @@ class DrawArea extends Component {
 
 
 
-export {DrawArea};
+export default DrawArea;

@@ -15,9 +15,7 @@ function distance(p1, p2){
 	moving to the right.
 */
 function findPointFromDist(point, distance, slope){
-	console.log(point, distance, slope, " is what we got");
 	if (slope === Infinity){
-		console.log("Returning ", new Coord(point.x, point.y + distance));
 		return new Coord(point.x, point.y + distance);
 	}
 	if (slope == 0){
@@ -25,7 +23,6 @@ function findPointFromDist(point, distance, slope){
 	}
 	var xOffset = distance / Math.sqrt(1 + Math.pow(slope, 2));
 	var yOffset = slope * xOffset;
-	console.log("slope is ", slope);
 	return new Coord(point.x + xOffset, point.y + yOffset);
 }
 

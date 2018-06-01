@@ -16,25 +16,10 @@ class Arrow extends React.Component{
 		super();
 		this.pointCoord = null;
 		this.endCoord = null;
-		this.color = null;
+		this.color = "#000000";
 		this.headHeight = null;
 		this.headWidth = null;
 		this.thickness = null;
-	}
-
-
-	/*
-	 Given a size, the method will automatically set the headHeight,
-	 headWidth, and thickness to preset values.
-	 Parameter options: "SMALL"
-	*/
-	usePreset(size){
-		if(size == "SMALL"){
-			this.setHeadHeight(20);
-			this.setHeadWidth(20);
-			this.setThickness(8);
-		}
-		return this;
 	}
 
 
@@ -71,39 +56,6 @@ class Arrow extends React.Component{
 	setThickness = (newThickness) => {
 		this.thickness = newThickness;
 		return this;
-	}
-
-
-	/*
-		Draws the arrow to the given context
-	*/
-	draw = (context) => {
-/*
-		//Slope of the line between pointCoord and endCoord
-		var slope = slopeBetween(this.pointCoord, this.endCoord);
-		var headCoords = this.calcHeadCoords(this.pointCoord, slope, this.headHeight, this.headWidth / 2);
-
-		var leftCoord = headCoords[0];
-		var rightCoord = headCoords[2];
-		var baseOfHead = headCoords[3];
-
-		//Draw the head
-		context.beginPath();
-		context.moveTo(this.pointCoord.x, this.pointCoord.y);
-		context.lineTo(leftCoord.x, leftCoord.y);
-		context.lineTo(rightCoord.x, rightCoord.y);
-		context.closePath();
-		context.fillStyle = this.color;
-		context.fill();
-
-		//Draw the vertical line
-		context.beginPath();
-		context.moveTo(baseOfHead.x, baseOfHead.y);
-		context.lineTo(this.endCoord.x, this.endCoord.y);
-		context.strokeStyle = this.color;
-		context.lineWidth = this.thickness;
-		context.stroke();
-		*/
 	}
 
 
@@ -150,7 +102,7 @@ class Arrow extends React.Component{
 						" L " + rightCoord.x + " " + rightCoord.y +
 						" Z"
 					}
-					fill = "#000000"
+					fill = {this.color}
 				/>
 				<path
 					d={
@@ -158,7 +110,7 @@ class Arrow extends React.Component{
 						" L" + this.endCoord.x + " " + this.endCoord.y +
 						" Z"
 					}
-					stroke= "#000000"
+					stroke= {this.color}
 					strokeWidth = {this.thickness}
 				/>
 			</React.Fragment>

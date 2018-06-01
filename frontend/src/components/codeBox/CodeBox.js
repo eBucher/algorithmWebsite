@@ -8,16 +8,25 @@ class CodeBox extends React.Component{
 		this.linesOfCode = null;
 	}
 
-	generateLinesOfCode = (lines) => {
-		var linesOfCode = lines.map(function(line) {
-								return <div><pre>{line}</pre></div>
-						});
+	generateLinesOfCode = () => {
+		var t = this.props.highlightedLines;
+		var linesOfCode = this.props.linesOfCode.map(this.buildLine(this.props.highlightedLines));
 		return linesOfCode;
+	}
+
+	buildLine = (highlightedLines) => {
+		return function(line, index){
+			if(highlightedLines.includes(index)){
+
+				return <div style={{backgroundColor: "red"}}><pre>{line}</pre></div>
+			}
+			return <div><pre>{line}</pre></div>
+		}
 	}
 
 	render(){
 		return (
-			<div id="codeBox">{this.generateLinesOfCode(this.props.linesOfCode)}</div>
+			<div id="codeBox">{this.generateLinesOfCode()}</div>
 		)
 	}
 

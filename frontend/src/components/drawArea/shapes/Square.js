@@ -32,6 +32,27 @@ class Square extends React.Component{
 	}
 
 
+	getCoord = (position) => {
+		if(position == "CENTER"){
+			return new Coord(this.topLeft.x + this.size/2,
+				this.topLeft.y + this.size/2);
+		} else if (position == "TOP"){
+			return new Coord(this.topLeft.x + this.size/2,
+				this.topLeft.y)
+		} else if (position == "BOTTOM"){
+			return new Coord(this.topLeft.x + this.size/2,
+				this.topLeft.y + this.size)
+		} else if (position == "LEFT"){
+			return new Coord(this.topLeft.x,
+				this.topLeft.y + this.size/2)
+		} else if (position == "RIGHT"){
+			return new Coord(this.topLeft.x + this.size,
+				this.topLeft.y + this.size/2)
+		} else {
+			return null;
+		}
+	}
+
 	/*
 		Given a Coord object with nonzero x and y values, the top left corner
 		of the square will be set to that position.

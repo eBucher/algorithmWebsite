@@ -3,7 +3,7 @@ import "./styles.css";
 import DrawArea from 'components/drawArea/DrawArea.js';
 import CodeBox from 'components/codeBox/CodeBox.js';
 import Square from 'components/drawArea/shapes/Square.js';
-import Arrow from 'components/drawArea/shapes/Arrow.js';
+import Pointer from 'components/drawArea/shapes/Pointer.js';
 
 import Coord from 'components/drawArea/math/Coord.js';
 
@@ -22,12 +22,11 @@ class LinearSearch extends React.Component{
 			"}"
 		];
 		this.state = {
-			//User Input
 			tempTarget : "",
 			tempElements : "",
 			target : null,
 			elements : [],
-
+			currentStep: 0,
 			index : null,
 			steps : [],
 			highlightedLines : [],
@@ -36,20 +35,21 @@ class LinearSearch extends React.Component{
 	}
 
 	// currentIndex is where the array will be pointing to.
-	calculateSteps = () => {
+	calculateSteps = (target, elements) => {
 		var i = 0;
-		this.steps.push({currentIndex: i, highlightLine: 1});
-		for(i; i < this.elements.length; i++){
-			this.steps.push({currentIndex: i, highlightLine: 2});
-			if(this.elements[i] == this.target){
-				this.steps.push({ currentIndex: i,highlightLine: 3});
-				return i;
+		var steps = [];
+		steps.push({currentIndex: null, highlightLine: [1]});
+		for(i; i < elements.length; i++){
+			steps.push({currentIndex: i, highlightLine: [2]});
+			if(elements[i] == target){
+				steps.push({ currentIndex: i,highlightLine: [3]});
+				return steps;
 			}
 			//Check the loop's condition again
-			this.steps.push({currentIndex: i, highlightLine: 1});
+			steps.push({currentIndex: i, highlightLine: [1]});
 		}
-		this.steps.push({currentIndex: i, highlightLine: 6});
-		return -1;
+		steps.push({currentIndex: i, highlightLine: [6]});
+		return steps;
 	}
 
 	handleTargetChange = (event) => {
@@ -67,43 +67,68 @@ class LinearSearch extends React.Component{
 		newElements = newElements.split(',');
 		//Convert all of the strings to numbers
 		for(var i = 0; i < newElements.length; i++){newElements[i] = Number(newElements[i])};
-
+		var newSteps = this.calculateSteps(this.state.tempTarget, newElements);
 		this.setState({target : this.state.tempTarget,
-					   elements: newElements});
+					   elements: newElements,
+				   	   steps: newSteps,
+					   highlightedLines: [1]
+		});
 		event.preventDefault();
 	}
 
+	nextStep = () => {
+		if(this.state.currentStep != this.state.steps.length - 1){
+			console.log("We did it because we were on step " + this.state.currentStep + "and the max is " + (this.state.steps.length - 1));
+			this.setState({
+				currentStep: this.state.currentStep + 1,
+				highlightedLines: this.state.steps[this.state.currentStep].highlightLine
+			});
+		}
+	}
 
-    visualizeAlgorithm = (currentStep, steps) => {
+	previousStep = () => {
+		if(this.state.currentStep != 0)
+			this.setState({
+				currentStep: this.state.currentStep - 1,
+				highlightedLines: this.state.steps[this.state.currentStep].highlightLine
+			});
+	}
+
+
+    visualizeAlgorithm = () => {
 
 		var elementsToDraw = [];
-        for(var i = 0; i < this.state.elements.length; i++){
-	        var r = new Square();
-	        r.usePreset("SMALL");
-	        r.setColor("orange");
-            r.setTopLeft(new Coord(0 + 50 * i, 50));
-            r.setText(this.state.elements[i]);
-            r.setText("ptr1", "TOP");
-            r.setText("ptr2", "BOTTOM");
-			if(this.state.target == this.state.elements[i]){
-				r.setColor("green");
-			} else{
-				r.setColor("orange");
-			}
-            elementsToDraw.push(r);
-        }
+		if(this.state.elements.length > 0){
+			console.log("Visualizing step " + this.state.currentStep);
+			var currentStepState = this.state.steps[this.state.currentStep];
+	        for(var i = 0; i < this.state.elements.length; i++){
+		        var r = new Square();
+		        r.usePreset("SMALL");
+		        r.setColor("orange");
+	            r.setTopLeft(new Coord(0 + 50 * i, 50));
+	            r.setText(this.state.elements[i]);
+	            r.setText(i, "TOP");
+				if(this.state.target == this.state.elements[i]){
+					r.setColor("green");
+				} else{
+					r.setColor("orange");
+				}
+	            elementsToDraw.push(r);
 
-		var a = new Arrow();
-		a.usePreset("SMALL");
-		a.setPointCoord(new Coord(100, 100));
-		a.setEndCoord(new Coord(200, 200));
-		elementsToDraw.push(a);
+	        }
+			if(currentStepState.currentIndex != null){
+				var p = new Pointer();
+				p.setPosition("BOTTOM");
+				p.pointTo(elementsToDraw[currentStepState.currentIndex]);
+				elementsToDraw.push(p);
+			}
+		}
 		return (elementsToDraw);
     }
 
 	render(){
-		var piecesToShow = this.visualizeAlgorithm(1, this.steps);
-
+		var piecesToShow = this.visualizeAlgorithm();
+		console.log("Rendering...");
 		return (
 			<div id="AlgorithmContainer">
 
@@ -114,8 +139,14 @@ class LinearSearch extends React.Component{
 					<input type="text" onChange={this.handleElementsChange}></input>
 					<input type="submit" value="Visualize"></input>
 				</form>
+				<button onClick={this.previousStep}>
+					Previous Step
+				</button>
+				<button onClick={this.nextStep}>
+					Next Step
+				</button>
 		        <DrawArea displayedPieces={piecesToShow}/>
-				<CodeBox linesOfCode={this.algorithm}/>
+				<CodeBox linesOfCode={this.algorithm} highlightedLines={this.state.highlightedLines}/>
 
 			</div>
 

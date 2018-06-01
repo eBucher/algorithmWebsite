@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import './DrawArea.css';
-import Square from './shapes/Square.js';
-import Arrow from './shapes/Arrow.js';
-import Coord from './math/Coord.js';
+import Square from 'components/drawArea/shapes/Square.js';
+import Arrow from 'components/drawArea/shapes/Arrow.js';
+import Coord from 'components/drawArea/math/Coord.js';
 
 
 class DrawArea extends Component {

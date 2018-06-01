@@ -1,4 +1,4 @@
-import Coord from '../math/Coord.js';
+import Coord from 'components/drawArea/math/Coord.js';
 import React, { Component } from 'react';
 
 class Square extends React.Component{

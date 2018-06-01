@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import './CodeBox.css';
+import 'components/codeBox/CodeBox.css';
 
 class CodeBox extends React.Component{
 

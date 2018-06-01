@@ -1,4 +1,4 @@
-import Coord from './Coord.js';
+import Coord from 'components/drawArea/math/Coord.js';
 
 /*
 	Takes in two Coords. Returns the distance between them.

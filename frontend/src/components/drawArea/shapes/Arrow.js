@@ -1,4 +1,4 @@
-import {distance, findPointFromDist, slopeBetween, perpendicularSlope} from '../math/Graphing.js';
+import {distance, findPointFromDist, slopeBetween, perpendicularSlope} from 'components/drawArea/math/Graphing.js';
 import React, { Component } from 'react';
 
 class Arrow {

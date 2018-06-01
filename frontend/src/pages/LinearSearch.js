@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import "./styles.css";
-import {DrawArea} from '../components/drawArea/DrawArea.js';
-import CodeBox from '../components/codeBox/CodeBox.js';
-import Square from '../components/drawArea/shapes/Square.js';
-import Arrow from '../components/drawArea/shapes/Arrow.js';
+import {DrawArea} from 'components/drawArea/DrawArea.js';
+import CodeBox from 'components/codeBox/CodeBox.js';
+import Square from 'components/drawArea/shapes/Square.js';
+import Arrow from 'components/drawArea/shapes/Arrow.js';
 
-import Coord from '../components/drawArea/math/Coord.js';
+import Coord from 'components/drawArea/math/Coord.js';
 
 class LinearSearch extends React.Component{
 
@@ -67,7 +67,7 @@ class LinearSearch extends React.Component{
 		newElements = newElements.split(',');
 		//Convert all of the strings to numbers
 		for(var i = 0; i < newElements.length; i++){newElements[i] = Number(newElements[i])};
-		
+
 		this.setState({target : this.state.tempTarget,
 					   elements: newElements});
 		event.preventDefault();

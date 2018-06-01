@@ -92,6 +92,12 @@ class LinearSearch extends React.Component{
 			}
             elementsToDraw.push(r);
         }
+
+		var a = new Arrow();
+		a.usePreset("SMALL");
+		a.setPointCoord(new Coord(100, 100));
+		a.setEndCoord(new Coord(200, 200));
+		elementsToDraw.push(a);
 		return (elementsToDraw);
     }
 

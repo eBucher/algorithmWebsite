@@ -1,7 +1,7 @@
 import {distance, findPointFromDist, slopeBetween, perpendicularSlope} from 'components/drawArea/math/Graphing.js';
 import React, { Component } from 'react';
 
-class Arrow {
+class Arrow extends React.Component{
 
 	/*
 		pointCoord:	The Coordinate of the tip of the arrow
@@ -13,6 +13,7 @@ class Arrow {
 		color:			The color of the arrow
 	*/
 	constructor(){
+		super();
 		this.pointCoord = null;
 		this.endCoord = null;
 		this.color = null;
@@ -77,9 +78,6 @@ class Arrow {
 		Draws the arrow to the given context
 	*/
 	draw = (context) => {
-<React.Fragment>
-	<rect width="300" height="100" x="20" y="20" style="fill:rgb(0,0,255);stroke-width:20;stroke:rgb(15,100,0)" />
-</ React.Fragment>
 /*
 		//Slope of the line between pointCoord and endCoord
 		var slope = slopeBetween(this.pointCoord, this.endCoord);
@@ -131,6 +129,40 @@ class Arrow {
 		var leftPoint = findPointFromDist(baseOfHead, -1 * headWidth, perpSlope);
 		var rightPoint = findPointFromDist(baseOfHead, 1 * headWidth, perpSlope);
 		return [leftPoint, pointCoord, rightPoint, baseOfHead];
+	}
+
+	render(){
+		//Slope of the line between pointCoord and endCoord
+		var slope = slopeBetween(this.pointCoord, this.endCoord);
+		var headCoords = this.calcHeadCoords(this.pointCoord, slope, this.headHeight, this.headWidth / 2);
+
+		var leftCoord = headCoords[0];
+		var rightCoord = headCoords[2];
+		var baseOfHead = headCoords[3];
+
+		//Draw the head
+		return (
+			<React.Fragment>
+				<path
+					d={
+						" M" + this.pointCoord.x + " " + this.pointCoord.y +
+						" L" + leftCoord.x + " " + leftCoord.y +
+						" L " + rightCoord.x + " " + rightCoord.y +
+						" Z"
+					}
+					fill = "#000000"
+				/>
+				<path
+					d={
+						" M" + baseOfHead.x + " " + baseOfHead.y +
+						" L" + this.endCoord.x + " " + this.endCoord.y +
+						" Z"
+					}
+					stroke= "#000000"
+					strokeWidth = {this.thickness}
+				/>
+			</React.Fragment>
+		)
 	}
 }
 

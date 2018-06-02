@@ -38,19 +38,26 @@ class LinearSearch extends React.Component{
 	calculateSteps = (target, elements) => {
 		var i = 0;
 		var steps = [];
-		steps.push({currentIndex: null, highlightLine: [1]});
+		steps.push({currentIndex: null, highlightLine: [0]});
+		steps.push({currentIndex: i, highlightLine: [1]});
 		for(i; i < elements.length; i++){
 			steps.push({currentIndex: i, highlightLine: [2]});
 			if(elements[i] == target){
 				steps.push({ currentIndex: i,highlightLine: [3]});
+				console.log("The steps are ");
+				console.log(steps);
 				return steps;
 			}
 			//Check the loop's condition again
-			steps.push({currentIndex: i, highlightLine: [1]});
+			if(i + 1 < elements.length)
+				steps.push({currentIndex: i + 1, highlightLine: [1]});
 		}
-		steps.push({currentIndex: i, highlightLine: [6]});
+		steps.push({currentIndex: i - 1, highlightLine: [6]});
+		console.log("The steps are ");
+		console.log(steps);
 		return steps;
 	}
+
 
 	handleTargetChange = (event) => {
 		this.setState({tempTarget : event.target.value});
@@ -71,17 +78,17 @@ class LinearSearch extends React.Component{
 		this.setState({target : this.state.tempTarget,
 					   elements: newElements,
 				   	   steps: newSteps,
-					   highlightedLines: [1]
+					   currentStep: 0,
+					   highlightedLines: newSteps[0].highlightLine
 		});
 		event.preventDefault();
 	}
 
 	nextStep = () => {
 		if(this.state.currentStep != this.state.steps.length - 1){
-			console.log("We did it because we were on step " + this.state.currentStep + "and the max is " + (this.state.steps.length - 1));
 			this.setState({
 				currentStep: this.state.currentStep + 1,
-				highlightedLines: this.state.steps[this.state.currentStep].highlightLine
+				highlightedLines: this.state.steps[this.state.currentStep + 1].highlightLine
 			});
 		}
 	}
@@ -90,7 +97,7 @@ class LinearSearch extends React.Component{
 		if(this.state.currentStep != 0)
 			this.setState({
 				currentStep: this.state.currentStep - 1,
-				highlightedLines: this.state.steps[this.state.currentStep].highlightLine
+				highlightedLines: this.state.steps[this.state.currentStep - 1].highlightLine
 			});
 	}
 
@@ -99,19 +106,21 @@ class LinearSearch extends React.Component{
 
 		var elementsToDraw = [];
 		if(this.state.elements.length > 0){
-			console.log("Visualizing step " + this.state.currentStep);
 			var currentStepState = this.state.steps[this.state.currentStep];
+
 	        for(var i = 0; i < this.state.elements.length; i++){
 		        var r = new Square();
 		        r.usePreset("SMALL");
-		        r.setColor("orange");
 	            r.setTopLeft(new Coord(0 + 50 * i, 50));
 	            r.setText(this.state.elements[i]);
 	            r.setText(i, "TOP");
-				if(this.state.target == this.state.elements[i]){
+				if(this.state.target == this.state.elements[i] &&
+					this.state.steps.length - 1 == this.state.currentStep){
 					r.setColor("green");
-				} else{
-					r.setColor("orange");
+				} else if (this.state.steps[this.state.currentStep].currentIndex > i){
+					r.setColor("grey");
+				} else {
+					r.setColor("white");
 				}
 	            elementsToDraw.push(r);
 
@@ -128,7 +137,7 @@ class LinearSearch extends React.Component{
 
 	render(){
 		var piecesToShow = this.visualizeAlgorithm();
-		console.log("Rendering...");
+		console.log("Our highlighted lines will be " + this.state.highlightedLines);
 		return (
 			<div id="AlgorithmContainer">
 

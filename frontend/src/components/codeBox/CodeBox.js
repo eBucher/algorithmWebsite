@@ -17,7 +17,6 @@ class CodeBox extends React.Component{
 	buildLine = (highlightedLines) => {
 		return function(line, index){
 			if(highlightedLines.includes(index)){
-
 				return <div style={{backgroundColor: "red"}}><pre>{line}</pre></div>
 			}
 			return <div><pre>{line}</pre></div>
@@ -25,6 +24,7 @@ class CodeBox extends React.Component{
 	}
 
 	render(){
+
 		return (
 			<div id="codeBox">{this.generateLinesOfCode()}</div>
 		)

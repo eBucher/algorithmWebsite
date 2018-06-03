@@ -94,6 +94,8 @@ class LinearSearch extends AlgorithmPage{
 				if(this.state.target == this.state.elements[i] &&
 					this.state.steps.length - 1 == this.state.currentStepNum){
 					r.setColor("green");
+				} else if (currentStepState.highlightedLines == 6){
+					r.setColor("red");
 				} else if (currentStepState.checkIndex > i){
 					r.setColor("grey");
 				} else {

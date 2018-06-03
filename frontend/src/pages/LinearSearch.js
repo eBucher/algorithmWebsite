@@ -32,6 +32,8 @@ class LinearSearch extends AlgorithmPage{
 			currentStepNum: null,
 			steps : [],
 		}
+		this.areaHeight = 200;
+		this.areaWidth = 1000;
 
 	}
 
@@ -88,7 +90,7 @@ class LinearSearch extends AlgorithmPage{
 	        for(var i = 0; i < this.state.elements.length; i++){
 		        var r = new Square();
 		        r.usePreset("SMALL");
-	            r.setTopLeft(new Coord(0 + 50 * i, 50));
+	            r.setTopLeft(new Coord((500 - this.state.elements.length/2.0*50) + 50 * i, 50));
 	            r.setText(this.state.elements[i]);
 	            r.setText(i, "TOP");
 				if(this.state.target == this.state.elements[i] &&
@@ -134,7 +136,7 @@ class LinearSearch extends AlgorithmPage{
 				<button onClick={this.nextStep}>
 					Next Step
 				</button>
-		        <DrawArea displayedPieces={piecesToShow}/>
+		        <DrawArea w={this.areaWidth} h={this.areaHeight} displayedPieces={piecesToShow}/>
 				<CodeBox linesOfCode={this.algorithm} highlightedLines={this.highlightedLines()}/>
 
 			</div>

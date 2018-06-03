@@ -12,7 +12,7 @@ class DrawArea extends Component {
 
     render() {
         return (
-            <svg id="drawArea" width="1000px" height="200px">
+            <svg id="drawArea" width={this.props.w} height={this.props.h}>
                 {this.props.displayedPieces.map((MyComponent, index) => {
                         if(MyComponent instanceof React.Component){
                             return (MyComponent.render());

@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import "./styles.css";
+import AlgorithmPage from "pages/AlgorithmPage.js";
 import DrawArea from 'components/drawArea/DrawArea.js';
 import CodeBox from 'components/codeBox/CodeBox.js';
 import Square from 'components/drawArea/shapes/Square.js';
@@ -7,7 +8,7 @@ import Pointer from 'components/drawArea/shapes/Pointer.js';
 
 import Coord from 'components/drawArea/math/Coord.js';
 
-class LinearSearch extends React.Component{
+class LinearSearch extends AlgorithmPage{
 
 	constructor(){
 		super();
@@ -28,36 +29,12 @@ class LinearSearch extends React.Component{
 			target : null,
 			elements : [],
 
-			currentStepNum: 0,
+			currentStepNum: null,
 			steps : [],
 		}
 
 	}
 
-	/*
-		Returns the index of the line that should be highlighted. If there are
-		no lines that need to be highlighted, null is returned.
-	*/
-	highlightedLines = () => {
-		console.log("There are " + this.state.steps.length + " steps");
-		if(this.state.steps.length == 0){
-			return null;
-		} else {
-			return this.state.steps[this.state.currentStepNum].highlightedLines;
-		}
-	}
-
-	/*
-		Returns the current step's information from this.state.steps. If the
-		algorithm hasn't been started, null is returned.
-	*/
-	currentStep = () => {
-		if(this.state.steps.length == 0){
-			return null;
-		} else {
-			return this.state.steps[this.state.currentStepNum];
-		}
-	}
 
 	// checkIndex is where the array will be pointing to.
 	calculateSteps = (target, elements) => {
@@ -83,15 +60,6 @@ class LinearSearch extends React.Component{
 		return steps;
 	}
 
-
-	handleTargetChange = (event) => {
-		this.setState({tempTarget : event.target.value});
-	}
-
-	handleElementsChange = (event) => {
-		this.setState({tempElements : event.target.value});
-	}
-
 	handleSubmit = (event) => {
 		//Trim the whitespace from the input
 		var newElements = this.state.tempElements.replace(/\s/g,'');
@@ -107,21 +75,6 @@ class LinearSearch extends React.Component{
 			currentStepNum: 0,
 		});
 		event.preventDefault();
-	}
-
-	nextStep = () => {
-		if(this.state.currentStepNum != this.state.steps.length - 1){
-			this.setState({
-				currentStepNum: this.state.currentStepNum + 1,
-			});
-		}
-	}
-
-	previousStep = () => {
-		if(this.state.currentStepNum != 0)
-			this.setState({
-				currentStepNum: this.state.currentStepNum - 1,
-			});
 	}
 
 
@@ -159,6 +112,7 @@ class LinearSearch extends React.Component{
 		return (elementsToDraw);
     }
 
+
 	render(){
 		var piecesToShow = this.visualizeAlgorithm();
 		console.log("Our highlighted lines will be " + this.highlightedLines());
@@ -182,8 +136,6 @@ class LinearSearch extends React.Component{
 				<CodeBox linesOfCode={this.algorithm} highlightedLines={this.highlightedLines()}/>
 
 			</div>
-
-
 		)
 	}
 

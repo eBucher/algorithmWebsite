@@ -8,18 +8,29 @@ class CodeBox extends React.Component{
 		this.linesOfCode = null;
 	}
 
+	/*
+	Replaces four consecutive space characters with 4 characters that will
+	be rendered as spaces in the HTML
+	*/
+	cleanLine = (line) => {
+		console.log("Hey there");
+		return line.replace(/    /g, "\u00A0\u00A0\u00A0\u00A0")
+	}
+
 	generateLinesOfCode = () => {
 		var t = this.props.highlightedLines;
-		var linesOfCode = this.props.linesOfCode.map(this.buildLine(this.props.highlightedLines));
+		var linesOfCode = this.props.linesOfCode.map(this.buildLine(this.props.highlightedLines, this.cleanLine));
 		return linesOfCode;
 	}
 
-	buildLine = (highlightedLines) => {
+	buildLine = (highlightedLines, cleanLineCallback) => {
+		console.log(highlightedLines);
 		return function(line, index){
-			if(highlightedLines.includes(index)){
-				return <div style={{backgroundColor: "red"}}><pre>{line}</pre></div>
+			if(highlightedLines == index){
+				console.log("The line is " + line);
+				return <div style={{backgroundColor: "red", whiteSpace: "pre-line"}}>{cleanLineCallback(line)}</div>
 			}
-			return <div><pre>{line}</pre></div>
+			return <div style={{whiteSpace: "pre-line"}}>{cleanLineCallback(line)}</div>
 		}
 	}
 

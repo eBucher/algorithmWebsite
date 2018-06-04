@@ -2,8 +2,9 @@ import React, { Component } from 'react';
 import Arrow from 'components/drawArea/shapes/primitives/Arrow.js';
 import Square from 'components/drawArea/shapes/Square.js';
 import Coord from 'components/drawArea/math/Coord.js';
+import CustomShape from 'components/drawArea/shapes/CustomShape.js';
 
-class Pointer extends React.Component{
+class Pointer extends CustomShape{
 
 
 	constructor(){
@@ -56,10 +57,9 @@ class Pointer extends React.Component{
 	}
 
 
-	render(){
-		console.log(this.arrow);
+	build(){
 		return (
-			this.arrow.render()
+			this.arrow.build()
 		)
 	}
 }

@@ -111,21 +111,17 @@ class LinearSearch extends AlgorithmPage{
 				elementsToDraw.push(p);
 			}
 			console.log("We're on " + this.state.elements[currentStepState.checkIndex] + " and the target is " + this.target);
-			//If statement box
+			var ifBox = new IfStatement();
+			ifBox.setTopLeft(new Coord(475, 180));
 			if(currentStepState.highlightedLines == 2 &&
 				this.state.elements[currentStepState.checkIndex] == this.state.target){
-					elementsToDraw.push(
-						<IfStatement topLeft={new Coord(475, 180)} status="true" />
-					)
+					ifBox.setStatus(true);
 			} else if (currentStepState.highlightedLines == 2){
-				elementsToDraw.push(
-					<IfStatement topLeft={new Coord(475, 180)} status="false" />
-				)
+				ifBox.setStatus(false);
 			} else {
-				elementsToDraw.push(
-					<IfStatement topLeft={new Coord(475, 180)} />
-				)
+				ifBox.setStatus(null);
 			}
+			elementsToDraw.push(ifBox)
 		}
 		return (elementsToDraw);
     }

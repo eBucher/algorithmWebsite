@@ -1,10 +1,21 @@
 import React, { Component } from 'react';
 import Square from 'components/drawArea/shapes/Square.js';
 import Coord from 'components/drawArea/math/Coord.js';
-class IfStatement extends React.Component {
+import CustomShape from 'components/drawArea/shapes/CustomShape.js';
+
+class IfStatement extends CustomShape {
 
 	constructor(){
 		super();
+		this.status = null;
+	}
+
+	setStatus = (newStatus) => {
+		this.status = newStatus;
+	}
+
+	setTopLeft = (newPosition) => {
+		this.topLeft = newPosition;
 	}
 
 
@@ -17,8 +28,8 @@ class IfStatement extends React.Component {
 		//Top left to bottom right
 		<path
 			d = {
-				" M" + (this.props.topLeft.x + 5) + " " + (this.props.topLeft.y + 5) +
-				" L" + (this.props.topLeft.x + 45) + " " + (this.props.topLeft.y + 45)
+				" M" + (this.topLeft.x + 5) + " " + (this.topLeft.y + 5) +
+				" L" + (this.topLeft.x + 45) + " " + (this.topLeft.y + 45)
 			}
 			stroke = {color}
 			strokeWidth = {thickness}
@@ -26,8 +37,8 @@ class IfStatement extends React.Component {
 		//Top right to bottom left
 		<path
 			d = {
-				" M" + (this.props.topLeft.x + 45) + " " + (this.props.topLeft.y + 5) +
-				" L" + (this.props.topLeft.x + 5) + " " + (this.props.topLeft.y + 45)
+				" M" + (this.topLeft.x + 45) + " " + (this.topLeft.y + 5) +
+				" L" + (this.topLeft.x + 5) + " " + (this.topLeft.y + 45)
 			}
 			stroke = {color}
 			strokeWidth = {thickness}
@@ -43,9 +54,9 @@ class IfStatement extends React.Component {
 		return (
 		<path
 			d = {
-				" M" + (this.props.topLeft.x + 10) + " " + (this.props.topLeft.y + 25) +
-				" L" + (this.props.topLeft.x + 20) + " " + (this.props.topLeft.y + 40) +
-				" L" + (this.props.topLeft.x + 45) + " " + (this.props.topLeft.y + 5)
+				" M" + (this.topLeft.x + 10) + " " + (this.topLeft.y + 25) +
+				" L" + (this.topLeft.x + 20) + " " + (this.topLeft.y + 40) +
+				" L" + (this.topLeft.x + 45) + " " + (this.topLeft.y + 5)
 			}
 			stroke = {color}
 			strokeWidth = {thickness}
@@ -55,31 +66,31 @@ class IfStatement extends React.Component {
 	}
 
 	getSymbol = () => {
-		if(this.props.status == "true")
+		if(this.status == true)
 			return this.trueSymbol();
-		else if (this.props.status == "false")
+		else if (this.status == false)
 			return this.falseSymbol();
 		else
 			return "";
 	}
 
 
-	render(){
+	build(){
 		var s = new Square();
 		s.setColor("white");
 		s.usePreset("SMALL");
-		s.setTopLeft(this.props.topLeft);
+		s.setTopLeft(this.topLeft);
 		s.setText("If statement result", "TOP");
 		var symbolToUse = null;
-		if(this.props.status == "true"){
+		if(this.status == true){
 			s.setText("true", "BOTTOM");
-		} else if (this.props.status == "false"){
+		} else if (this.status == false){
 			s.setText("false", "BOTTOM")
 		}
 
 		return (
 			<React.Fragment>
-				{s.render()}
+				{s.build()}
 				{this.getSymbol()}
 			</React.Fragment>
 		)

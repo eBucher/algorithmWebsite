@@ -1,7 +1,8 @@
-import Coord from 'components/drawArea/math/Coord.js';
 import React, { Component } from 'react';
+import Coord from 'components/drawArea/math/Coord.js';
+import CustomShape from 'components/drawArea/shapes/CustomShape.js';
 
-class Square extends React.Component{
+class Square extends CustomShape{
 	constructor(){
 		super();
 		this.topLeft = null;
@@ -202,7 +203,7 @@ class Square extends React.Component{
 		}
 	}
 
-	render() {
+	build() {
 		return (
 			<React.Fragment>
 				{this._drawSquare()}

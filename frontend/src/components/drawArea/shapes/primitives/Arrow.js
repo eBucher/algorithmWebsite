@@ -1,7 +1,8 @@
 import {distance, findPointFromDist, slopeBetween, perpendicularSlope} from 'components/drawArea/math/Graphing.js';
 import React, { Component } from 'react';
+import CustomShape from 'components/drawArea/shapes/CustomShape.js';
 
-class Arrow extends React.Component{
+class Arrow extends CustomShape{
 
 	/*
 		pointCoord:	The Coordinate of the tip of the arrow
@@ -83,7 +84,7 @@ class Arrow extends React.Component{
 		return [leftPoint, pointCoord, rightPoint, baseOfHead];
 	}
 
-	render(){
+	build(){
 		//Slope of the line between pointCoord and endCoord
 		var slope = slopeBetween(this.pointCoord, this.endCoord);
 		var headCoords = this.calcHeadCoords(this.pointCoord, slope, this.headHeight, this.headWidth / 2);

@@ -13,7 +13,6 @@ class CodeBox extends React.Component{
 	be rendered as spaces in the HTML
 	*/
 	cleanLine = (line) => {
-		console.log("Hey there");
 		return line.replace(/    /g, "\u00A0\u00A0\u00A0\u00A0")
 	}
 
@@ -27,7 +26,6 @@ class CodeBox extends React.Component{
 		console.log(highlightedLines);
 		return function(line, index){
 			if(highlightedLines == index){
-				console.log("The line is " + line);
 				return <div style={{backgroundColor: "red", whiteSpace: "pre-line"}}>{cleanLineCallback(line)}</div>
 			}
 			return <div style={{whiteSpace: "pre-line"}}>{cleanLineCallback(line)}</div>

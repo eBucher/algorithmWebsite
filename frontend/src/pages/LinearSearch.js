@@ -5,6 +5,7 @@ import DrawArea from 'components/drawArea/DrawArea.js';
 import CodeBox from 'components/codeBox/CodeBox.js';
 import Square from 'components/drawArea/shapes/Square.js';
 import Pointer from 'components/drawArea/shapes/Pointer.js';
+import IfStatement from 'components/drawArea/IfStatement.js';
 
 import Coord from 'components/drawArea/math/Coord.js';
 
@@ -32,7 +33,7 @@ class LinearSearch extends AlgorithmPage{
 			currentStepNum: null,
 			steps : [],
 		}
-		this.areaHeight = 200;
+		this.areaHeight = 250;
 		this.areaWidth = 1000;
 
 	}
@@ -48,8 +49,6 @@ class LinearSearch extends AlgorithmPage{
 			steps.push({checkIndex: i, highlightedLines: 2});
 			if(elements[i] == target){
 				steps.push({ checkIndex: i,highlightedLines: 3});
-				console.log("The steps are ");
-				console.log(steps);
 				return steps;
 			}
 			//Check the loop's condition again
@@ -57,8 +56,6 @@ class LinearSearch extends AlgorithmPage{
 				steps.push({checkIndex: i + 1, highlightedLines: 1});
 		}
 		steps.push({checkIndex: i - 1, highlightedLines: 6});
-		console.log("The steps are ");
-		console.log(steps);
 		return steps;
 	}
 
@@ -90,7 +87,7 @@ class LinearSearch extends AlgorithmPage{
 	        for(var i = 0; i < this.state.elements.length; i++){
 		        var r = new Square();
 		        r.usePreset("SMALL");
-	            r.setTopLeft(new Coord((500 - this.state.elements.length/2.0*50) + 50 * i, 50));
+	            r.setTopLeft(new Coord((500 - this.state.elements.length/2.0*50) + 50 * i, 20));
 	            r.setText(this.state.elements[i]);
 	            r.setText(i, "TOP");
 				if(this.state.target == this.state.elements[i] &&
@@ -106,11 +103,28 @@ class LinearSearch extends AlgorithmPage{
 	            elementsToDraw.push(r);
 
 	        }
+			//Draw the arrow
 			if(currentStepState.checkIndex != null){
 				var p = new Pointer();
 				p.setPosition("BOTTOM");
 				p.pointTo(elementsToDraw[currentStepState.checkIndex]);
 				elementsToDraw.push(p);
+			}
+			console.log("We're on " + this.state.elements[currentStepState.checkIndex] + " and the target is " + this.target);
+			//If statement box
+			if(currentStepState.highlightedLines == 2 &&
+				this.state.elements[currentStepState.checkIndex] == this.state.target){
+					elementsToDraw.push(
+						<IfStatement topLeft={new Coord(475, 180)} status="true" />
+					)
+			} else if (currentStepState.highlightedLines == 2){
+				elementsToDraw.push(
+					<IfStatement topLeft={new Coord(475, 180)} status="false" />
+				)
+			} else {
+				elementsToDraw.push(
+					<IfStatement topLeft={new Coord(475, 180)} />
+				)
 			}
 		}
 		return (elementsToDraw);
@@ -119,7 +133,6 @@ class LinearSearch extends AlgorithmPage{
 
 	render(){
 		var piecesToShow = this.visualizeAlgorithm();
-		console.log("Our highlighted lines will be " + this.highlightedLines());
 		return (
 			<div id="AlgorithmContainer">
 

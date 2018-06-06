@@ -2,12 +2,14 @@ import React, { Component } from 'react';
 import Square from 'components/drawArea/shapes/Square.js';
 import Coord from 'components/drawArea/math/Coord.js';
 import CustomShape from 'components/drawArea/shapes/CustomShape.js';
+import CheckMark from 'components/drawArea/shapes/primitives/CheckMark.js';
 
 class IfStatement extends CustomShape {
 
 	constructor(){
 		super();
 		this.status = null;
+		this.topLeft = null;
 	}
 
 	setStatus = (newStatus) => {
@@ -49,20 +51,11 @@ class IfStatement extends CustomShape {
 
 	//Creates a check symbol
 	trueSymbol = () => {
-		var thickness = 8;
-		var color = "green";
-		return (
-		<path
-			d = {
-				" M" + (this.topLeft.x + 10) + " " + (this.topLeft.y + 25) +
-				" L" + (this.topLeft.x + 20) + " " + (this.topLeft.y + 40) +
-				" L" + (this.topLeft.x + 45) + " " + (this.topLeft.y + 5)
-			}
-			stroke = {color}
-			strokeWidth = {thickness}
-			fill = "none"
-		/>
-		)
+		var check = new CheckMark();
+		check.setColor("green");
+		check.setHeight(45);
+		check.setCenter(new Coord(this.topLeft.x + 25, this.topLeft.y + 25));
+		return check.build();
 	}
 
 	getSymbol = () => {

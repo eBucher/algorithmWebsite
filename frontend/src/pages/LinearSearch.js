@@ -6,7 +6,7 @@ import CodeBox from 'components/codeBox/CodeBox.js';
 import Square from 'components/drawArea/shapes/Square.js';
 import Pointer from 'components/drawArea/shapes/Pointer.js';
 import BooleanBox from 'components/drawArea/shapes/BooleanBox.js';
-import {CONTENT_SQUARE, SMALL_POINTER, IF_STATEMENT} from 'components/drawArea/shapes/Presets.js';
+import {CONTENT_SQUARE, SMALL_POINTER, IF_STATEMENT, LOOP_CONTINUATION} from 'components/drawArea/shapes/Presets.js';
 import Coord from 'components/drawArea/math/Coord.js';
 
 class LinearSearch extends AlgorithmPage{
@@ -44,18 +44,19 @@ class LinearSearch extends AlgorithmPage{
 		var i = 0;
 		var steps = [];
 		steps.push({checkIndex: null, highlightedLines: 0});
-		steps.push({checkIndex: i, highlightedLines: 1});
+
 		for(i; i < elements.length; i++){
-			steps.push({checkIndex: i, highlightedLines: 2});
+			steps.push({checkIndex: i, highlightedLines: 1, loopBox: true});
 			if(elements[i] == target){
+				steps.push({checkIndex: i, highlightedLines: 2, ifBox: true});
 				steps.push({ checkIndex: i,highlightedLines: 3});
 				return steps;
+			} else {
+				steps.push({checkIndex: i, highlightedLines: 2, ifBox: false});
 			}
-			//Check the loop's condition again
-			if(i + 1 < elements.length)
-				steps.push({checkIndex: i + 1, highlightedLines: 1});
 		}
-		steps.push({checkIndex: i - 1, highlightedLines: 6});
+		steps.push({checkIndex: null, highlightedLines: 1, loopBox: false});
+		steps.push({checkIndex: null, highlightedLines: 6});
 		return steps;
 	}
 
@@ -110,18 +111,20 @@ class LinearSearch extends AlgorithmPage{
 				p.setMessage("i = " + currentStepState.checkIndex);
 				elementsToDraw.push(p);
 			}
-			console.log("We're on " + this.state.elements[currentStepState.checkIndex] + " and the target is " + this.target);
+			//Draw the if box
 			var ifBox = new BooleanBox(IF_STATEMENT);
-			ifBox.setTopLeft(new Coord(475, 180));
-			if(currentStepState.highlightedLines == 2 &&
-				this.state.elements[currentStepState.checkIndex] == this.state.target){
-					ifBox.setStatus(true);
-			} else if (currentStepState.highlightedLines == 2){
-				ifBox.setStatus(false);
-			} else {
-				ifBox.setStatus(null);
+			ifBox.setTopLeft(new Coord(400, 180));
+			if(typeof currentStepState.ifBox !== "undefined"){
+				ifBox.setStatus(currentStepState.ifBox);
 			}
 			elementsToDraw.push(ifBox)
+			//Draw the loop box
+			var loopBox = new BooleanBox(LOOP_CONTINUATION);
+			loopBox.setTopLeft(new Coord(550, 180));
+			if(typeof currentStepState.loopBox !== "undefined"){
+				loopBox.setStatus(currentStepState.loopBox);
+			}
+			elementsToDraw.push(loopBox)
 		}
 		return (elementsToDraw);
     }

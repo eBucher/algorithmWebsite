@@ -6,7 +6,7 @@ import CodeBox from 'components/codeBox/CodeBox.js';
 import Square from 'components/drawArea/shapes/Square.js';
 import Pointer from 'components/drawArea/shapes/Pointer.js';
 import IfStatement from 'components/drawArea/IfStatement.js';
-
+import {CONTENT_SQUARE, SMALL_POINTER} from 'components/drawArea/shapes/Presets.js';
 import Coord from 'components/drawArea/math/Coord.js';
 
 class LinearSearch extends AlgorithmPage{
@@ -85,8 +85,7 @@ class LinearSearch extends AlgorithmPage{
 			var currentStepState = this.currentStep();
 
 	        for(var i = 0; i < this.state.elements.length; i++){
-		        var r = new Square();
-		        r.usePreset("SMALL");
+		        var r = new Square(CONTENT_SQUARE);
 	            r.setTopLeft(new Coord((500 - this.state.elements.length/2.0*50) + 50 * i, 20));
 	            r.setText(this.state.elements[i]);
 	            r.setText(i, "TOP");
@@ -105,7 +104,7 @@ class LinearSearch extends AlgorithmPage{
 	        }
 			//Draw the arrow
 			if(currentStepState.checkIndex != null){
-				var p = new Pointer("SMALL");
+				var p = new Pointer(SMALL_POINTER);
 				p.setPosition("BOTTOM");
 				p.pointTo(elementsToDraw[currentStepState.checkIndex]);
 				p.setMessage("i = " + currentStepState.checkIndex);

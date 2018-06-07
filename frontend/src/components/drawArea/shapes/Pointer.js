@@ -7,16 +7,18 @@ import CustomShape from 'components/drawArea/shapes/CustomShape.js';
 class Pointer extends CustomShape{
 
 
-	constructor(preset){
+	constructor(configObj){
 		super();
 		this.otherObject = null;
-		this.color = "#000000";
 		this.message = "";
 		this.fontSize = null;	//In pixels
 		this.position = null;
 		this.arrow = new Arrow();
 		this.length = null;
-		this.usePreset(preset);
+
+		for(var prop in arguments[0])   {
+        	this[prop]=arguments[0][prop];
+    	}
 	}
 
 
@@ -27,7 +29,7 @@ class Pointer extends CustomShape{
 			this.arrow.setHeadHeight(20);
 			this.arrow.setHeadWidth(20);
 			this.arrow.setThickness(8);
-			this.arrow.setColor("#000000");
+			this.arrow.setColor("black");
 		}
 
 	}
@@ -39,7 +41,7 @@ class Pointer extends CustomShape{
 
 
 	setColor = (newColor) => {
-		this.color = newColor;
+		this.arrow.setColor(newColor);
 		return this;
 	}
 

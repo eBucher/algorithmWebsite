@@ -5,6 +5,7 @@ import CustomShape from 'components/drawArea/shapes/CustomShape.js';
 import CheckMark from 'components/drawArea/shapes/primitives/CheckMark.js';
 import XSymbol from 'components/drawArea/shapes/primitives/XSymbol.js';
 import {toHex} from 'utils/Colors.js';
+import {CONTENT_SQUARE} from 'components/drawArea/shapes/Presets.js';
 
 class IfStatement extends CustomShape {
 
@@ -12,6 +13,7 @@ class IfStatement extends CustomShape {
 		super();
 		this.status = null;
 		this.topLeft = null;
+		this.SIZE = 50;
 	}
 
 	setStatus = (newStatus) => {
@@ -27,8 +29,8 @@ class IfStatement extends CustomShape {
 	falseSymbol = () => {
 		var x = new XSymbol();
 		x.setColor("red");
-		x.setHeight(45);
-		x.setCenter(new Coord(this.topLeft.x + 25, this.topLeft.y + 25));
+		x.setHeight(this.SIZE * .9);
+		x.setCenter(new Coord(this.topLeft.x + this.SIZE/2, this.topLeft.y + this.SIZE/2));
 		return x.build();
 	}
 
@@ -37,7 +39,7 @@ class IfStatement extends CustomShape {
 		var check = new CheckMark();
 		check.setColor("green");
 		check.setHeight(45);
-		check.setCenter(new Coord(this.topLeft.x + 25, this.topLeft.y + 25));
+		check.setCenter(new Coord(this.topLeft.x + this.SIZE/2, this.topLeft.y + this.SIZE/2));
 		return check.build();
 	}
 
@@ -52,9 +54,9 @@ class IfStatement extends CustomShape {
 
 
 	build(){
-		var s = new Square();
+		var s = new Square(CONTENT_SQUARE);
 		s.setColor("white");
-		s.usePreset("SMALL");
+
 		s.setTopLeft(this.topLeft);
 		s.setText("If statement result", "TOP");
 		var symbolToUse = null;

@@ -13,7 +13,7 @@ class Arrow extends CustomShape{
 		thickness:		How thick the line coming from the triangle should be (in pixels)
 		color:			The color of the arrow
 	*/
-	constructor(){
+	constructor(configObj){
 		super();
 		this.pointCoord = null;
 		this.endCoord = null;
@@ -21,6 +21,10 @@ class Arrow extends CustomShape{
 		this.headHeight = null;
 		this.headWidth = null;
 		this.thickness = null;
+
+		for(var prop in arguments[0])   {
+        	this[prop]=arguments[0][prop];
+    	}
 	}
 
 

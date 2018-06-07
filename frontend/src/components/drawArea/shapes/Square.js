@@ -4,7 +4,7 @@ import CustomShape from 'components/drawArea/shapes/CustomShape.js';
 import {toHex} from 'utils/Colors.js';
 
 class Square extends CustomShape{
-	constructor(){
+	constructor(configObj){
 		super();
 		this.topLeft = null;
 		this.size = null;
@@ -15,22 +15,11 @@ class Square extends CustomShape{
 		this.centerText = null;
 		this.centerFontSize = null;
 		this.outerFontSize = null;
-		this.outerFontSpacing = null;
 
-	}
+		for(var prop in arguments[0])   {
+        	this[prop]=arguments[0][prop];
+    	}
 
-
-	/*
-	 Given a size, the method will automatically set the square's size property.
-	 Parameter options: "SMALL", "MEDIUM"
-	*/
-	usePreset(size){
-		if(size == "SMALL"){
-			this.setSize(50);
-		} else if (size == "MEDIUM"){
-			this.setSize(80);
-		}
-		return this;
 	}
 
 
@@ -74,7 +63,6 @@ class Square extends CustomShape{
 		this.thickness = this.size *.02;
 		this.centerFontSize = this.size/2;
 		this.outerFontSize = this.size/4;
-		this.outerFontSpacing = this.size/10;
 		return this;
 	}
 
@@ -122,13 +110,6 @@ class Square extends CustomShape{
 			this.topLeft.y + this.size/2);
 	}
 
-    draw = (context) => {
-		this._drawSquare(context);
-		this._drawCenterText(context);
-		//this._drawTopText(context);
-		//this._drawBottomText(context);
-	}
-
 
 	_drawSquare = (context) => {
 		return (
@@ -171,7 +152,7 @@ class Square extends CustomShape{
 			return(
 				<text
 					x={this.getCenterPoint().x}
-					y={this.topLeft.y - this.outerFontSpacing}
+					y={this.topLeft.y - this.outerFontSize*.2}
 					fill="#000000"
 					style= {{
 						font :  this.outerFontSize + "px Arial",

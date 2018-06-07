@@ -7,28 +7,42 @@ import CustomShape from 'components/drawArea/shapes/CustomShape.js';
 class Pointer extends CustomShape{
 
 
-	constructor(){
+	constructor(preset){
 		super();
 		this.otherObject = null;
 		this.color = "#000000";
 		this.message = "";
+		this.fontSize = null;	//In pixels
 		this.position = null;
 		this.arrow = new Arrow();
-		this.length = 50;
-		this.initializeArrow();
+		this.length = null;
+		this.usePreset(preset);
 	}
 
-	initializeArrow = () => {
-		this.arrow.setHeadHeight(20);
-		this.arrow.setHeadWidth(20);
-		this.arrow.setThickness(8);
-		this.arrow.setColor("#000000");
+
+	usePreset = (presetSize) => {
+		if(presetSize == "SMALL"){
+			this.length = 50;
+			this.fontSize = 16;
+			this.arrow.setHeadHeight(20);
+			this.arrow.setHeadWidth(20);
+			this.arrow.setThickness(8);
+			this.arrow.setColor("#000000");
+		}
+
 	}
+
+
+	setMessage = (newMessage) => {
+		this.message = newMessage;
+	}
+
 
 	setColor = (newColor) => {
 		this.color = newColor;
 		return this;
 	}
+
 
 	pointTo = (otherObject) => {
 		if(otherObject instanceof Square){
@@ -40,9 +54,11 @@ class Pointer extends CustomShape{
 		}
 	}
 
+
 	setPosition = (newPosition) => {
 		this.position = newPosition;
 	}
+
 
 	offset = () => {
 		if(this.position == "TOP")
@@ -57,9 +73,62 @@ class Pointer extends CustomShape{
 	}
 
 
+	//The offset from the end of the arrow to the text anchor
+	textOffset = () => {
+		if(this.position == "TOP")
+			return new Coord(0, -this.fontSize * 1.2);
+		if(this.position == "BOTTOM")
+			return new Coord(0, this.fontSize * 1.2);
+		if(this.position == "LEFT")
+			return new Coord(-this.fontSize * 1.2, 0);
+		if(this.position == "RIGHT")
+			return new Coord(this.fontSize * 1.2, 0);
+	}
+
+
+	/*
+		Returns where the text should be anchored relative to the end of
+		the arrow to be used with the textAnchor style.
+	*/
+	textAnchorPosition = () => {
+		if(this.position == "TOP" || this.position == "BOTTOM")
+			return "middle";
+		else if (this.position == "LEFT")
+			return "right";
+		else if (this.position == "RIGHT")
+			return "left";
+		return null;
+	}
+
+
+	drawMessage = () => {
+		if(this.message.toString() != null && this.message.toString() != ""){
+			var offset = this.textOffset();
+
+			return (
+				<text
+					x={this.arrow.endCoord.x + offset.x}
+					y={this.arrow.endCoord.y + offset.y}
+					fill="#000000"
+					style= {{
+						font :  this.fontSize + "px Arial",
+						textAnchor: this.textAnchorPosition()
+					}}
+				>
+					{this.message}
+				</text>
+			)
+		}
+	}
+
+
 	build(){
 		return (
-			this.arrow.build()
+			<React.Fragment>
+				{this.arrow.build()}
+				{this.drawMessage()}
+			</React.Fragment>
+
 		)
 	}
 }

@@ -105,9 +105,10 @@ class LinearSearch extends AlgorithmPage{
 	        }
 			//Draw the arrow
 			if(currentStepState.checkIndex != null){
-				var p = new Pointer();
+				var p = new Pointer("SMALL");
 				p.setPosition("BOTTOM");
 				p.pointTo(elementsToDraw[currentStepState.checkIndex]);
+				p.setMessage("i = " + currentStepState.checkIndex);
 				elementsToDraw.push(p);
 			}
 			console.log("We're on " + this.state.elements[currentStepState.checkIndex] + " and the target is " + this.target);

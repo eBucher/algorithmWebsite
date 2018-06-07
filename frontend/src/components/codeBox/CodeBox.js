@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import 'components/codeBox/CodeBox.css';
+import {toHex} from 'utils/Colors.js';
 
 class CodeBox extends React.Component{
 
@@ -26,7 +27,7 @@ class CodeBox extends React.Component{
 		console.log(highlightedLines);
 		return function(line, index){
 			if(highlightedLines == index){
-				return <div style={{backgroundColor: "red", whiteSpace: "pre-line"}}>{cleanLineCallback(line)}</div>
+				return <div style={{backgroundColor: toHex("red"), whiteSpace: "pre-line"}}>{cleanLineCallback(line)}</div>
 			}
 			return <div style={{whiteSpace: "pre-line"}}>{cleanLineCallback(line)}</div>
 		}

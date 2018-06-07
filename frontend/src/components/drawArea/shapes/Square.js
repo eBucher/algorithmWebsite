@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Coord from 'components/drawArea/math/Coord.js';
 import CustomShape from 'components/drawArea/shapes/CustomShape.js';
+import {toHex} from 'utils/Colors.js';
 
 class Square extends CustomShape{
 	constructor(){

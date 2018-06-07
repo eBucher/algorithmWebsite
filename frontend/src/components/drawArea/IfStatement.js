@@ -3,6 +3,7 @@ import Square from 'components/drawArea/shapes/Square.js';
 import Coord from 'components/drawArea/math/Coord.js';
 import CustomShape from 'components/drawArea/shapes/CustomShape.js';
 import CheckMark from 'components/drawArea/shapes/primitives/CheckMark.js';
+import {toHex} from 'utils/Colors.js';
 
 class IfStatement extends CustomShape {
 
@@ -24,7 +25,7 @@ class IfStatement extends CustomShape {
 	//Creates an X
 	falseSymbol = () => {
 		var thickness = 8;
-		var color = "red";
+		var color = toHex("red");
 		return (
 		<React.Fragment>
 		//Top left to bottom right

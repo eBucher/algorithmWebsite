@@ -1,6 +1,7 @@
 import CustomShape from 'components/drawArea/shapes/CustomShape.js';
 import React, {Component} from 'react';
 import Coord from 'components/drawArea/math/Coord.js';
+import {toHex} from 'utils/Colors.js';
 
 class CheckMark extends CustomShape {
 	constructor(){
@@ -28,8 +29,11 @@ class CheckMark extends CustomShape {
 	}
 
 
+	/*
+		newColor should be the name of a color, not the hex value.
+	*/
 	setColor = (newColor) => {
-		this.color = newColor;
+		this.color = toHex(newColor);
 	}
 
 

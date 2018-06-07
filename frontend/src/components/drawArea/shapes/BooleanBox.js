@@ -9,11 +9,16 @@ import {CONTENT_SQUARE} from 'components/drawArea/shapes/Presets.js';
 
 class IfStatement extends CustomShape {
 
-	constructor(){
+	constructor(configObj){
 		super();
 		this.status = null;
 		this.topLeft = null;
-		this.SIZE = 50;
+		this.topText = null;
+		this.size = null;
+
+		for(var prop in arguments[0])   {
+        	this[prop]=arguments[0][prop];
+    	}
 	}
 
 	setStatus = (newStatus) => {
@@ -29,8 +34,8 @@ class IfStatement extends CustomShape {
 	falseSymbol = () => {
 		var x = new XSymbol();
 		x.setColor("red");
-		x.setHeight(this.SIZE * .9);
-		x.setCenter(new Coord(this.topLeft.x + this.SIZE/2, this.topLeft.y + this.SIZE/2));
+		x.setHeight(this.size * .9);
+		x.setCenter(new Coord(this.topLeft.x + this.size/2, this.topLeft.y + this.size/2));
 		return x.build();
 	}
 
@@ -39,7 +44,7 @@ class IfStatement extends CustomShape {
 		var check = new CheckMark();
 		check.setColor("green");
 		check.setHeight(45);
-		check.setCenter(new Coord(this.topLeft.x + this.SIZE/2, this.topLeft.y + this.SIZE/2));
+		check.setCenter(new Coord(this.topLeft.x + this.size/2, this.topLeft.y + this.size/2));
 		return check.build();
 	}
 
@@ -56,9 +61,8 @@ class IfStatement extends CustomShape {
 	build(){
 		var s = new Square(CONTENT_SQUARE);
 		s.setColor("white");
-
 		s.setTopLeft(this.topLeft);
-		s.setText("If statement result", "TOP");
+		s.setText(this.topText, "TOP");
 		var symbolToUse = null;
 		if(this.status == true){
 			s.setText("true", "BOTTOM");

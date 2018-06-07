@@ -5,8 +5,8 @@ import DrawArea from 'components/drawArea/DrawArea.js';
 import CodeBox from 'components/codeBox/CodeBox.js';
 import Square from 'components/drawArea/shapes/Square.js';
 import Pointer from 'components/drawArea/shapes/Pointer.js';
-import IfStatement from 'components/drawArea/IfStatement.js';
-import {CONTENT_SQUARE, SMALL_POINTER} from 'components/drawArea/shapes/Presets.js';
+import BooleanBox from 'components/drawArea/shapes/BooleanBox.js';
+import {CONTENT_SQUARE, SMALL_POINTER, IF_STATEMENT} from 'components/drawArea/shapes/Presets.js';
 import Coord from 'components/drawArea/math/Coord.js';
 
 class LinearSearch extends AlgorithmPage{
@@ -111,7 +111,7 @@ class LinearSearch extends AlgorithmPage{
 				elementsToDraw.push(p);
 			}
 			console.log("We're on " + this.state.elements[currentStepState.checkIndex] + " and the target is " + this.target);
-			var ifBox = new IfStatement();
+			var ifBox = new BooleanBox(IF_STATEMENT);
 			ifBox.setTopLeft(new Coord(475, 180));
 			if(currentStepState.highlightedLines == 2 &&
 				this.state.elements[currentStepState.checkIndex] == this.state.target){

@@ -4,7 +4,6 @@ import DrawArea from '../components/drawArea/DrawArea.js';
 import CodeBox from '../components/codeBox/CodeBox.js';
 import Square from '../components/drawArea/shapes/Square.js';
 import Arrow from 'components/drawArea/shapes/primitives/Arrow.js';
-import IfStatement from 'components/drawArea/IfStatement.js';
 import CheckMark from 'components/drawArea/shapes/primitives/CheckMark.js';
 import Coord from '../components/drawArea/math/Coord.js';
 

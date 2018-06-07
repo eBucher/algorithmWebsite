@@ -19,4 +19,16 @@ var SMALL_POINTER = {
 	})
 }
 
-export {CONTENT_SQUARE, SMALL_POINTER};
+
+var IF_STATEMENT = {
+	size : 50,
+	topText : "if statement result",
+}
+
+
+var LOOP_CONTINUATION = {
+	size: 50,
+	topText : "continue loop?"
+}
+
+export {CONTENT_SQUARE, SMALL_POINTER, IF_STATEMENT, LOOP_CONTINUATION};

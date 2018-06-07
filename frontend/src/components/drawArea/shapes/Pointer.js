@@ -22,19 +22,6 @@ class Pointer extends CustomShape{
 	}
 
 
-	usePreset = (presetSize) => {
-		if(presetSize == "SMALL"){
-			this.length = 50;
-			this.fontSize = 16;
-			this.arrow.setHeadHeight(20);
-			this.arrow.setHeadWidth(20);
-			this.arrow.setThickness(8);
-			this.arrow.setColor("black");
-		}
-
-	}
-
-
 	setMessage = (newMessage) => {
 		this.message = newMessage;
 	}

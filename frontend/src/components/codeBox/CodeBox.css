@@ -1,16 +1,19 @@
 #codeBox{
-	border: 1px solid black;
-	width: 503px;
+	border-right: 1px solid black;
+	width: 504px;
 	float: left;
 	text-align: left;
-	font-family: "Courier New", Courier, monospace;
-	font-size: 14px;
 	color: black;
-	padding-top: 5px;
-	padding-bottom: 5px;
 }
 
-#codeBox div {
+.code {
+		padding-top: 5px;
+		padding-bottom: 5px;
+}
+
+.code div {
+	font-family: "Courier New", Courier, monospace;
+	font-size: 14px;
 	margin-bottom: 2px;
 	padding-left: 5px;
 	padding-right: 5px;

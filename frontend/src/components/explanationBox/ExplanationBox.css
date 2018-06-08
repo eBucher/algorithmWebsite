@@ -1,11 +1,12 @@
 #explanationBox{
-	border: 1px solid black;
-	width: 503px;
+	width: 505px;
 	float: left;
 	text-align: left;
-	font-family: "Courier New", Courier, monospace;
-	font-size: 14px;
 	color: black;
-	padding-top: 5px;
-	padding-bottom: 5px;
+}
+
+#explanation{
+	padding: 5px;
+	font-size: 14px;
+	font-family: arial;
 }

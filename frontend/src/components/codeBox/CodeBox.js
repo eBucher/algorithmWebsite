@@ -36,7 +36,14 @@ class CodeBox extends React.Component{
 	render(){
 
 		return (
-			<div id="codeBox">{this.generateLinesOfCode()}</div>
+			<div id="codeBox">
+				<div class="BoxTitle">
+					Algorithm
+				</div>
+				<div class="code">
+					{this.generateLinesOfCode()}
+				</div>
+			</div>
 		)
 	}
 

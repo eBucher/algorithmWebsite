@@ -1,6 +1,7 @@
 #AlgorithmContainer{
 	width: 1010px;
 	margin: auto;
+	overflow: hidden;
 }
 
 .BoxTitle{

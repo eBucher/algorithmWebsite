@@ -37,10 +37,10 @@ class CodeBox extends React.Component{
 
 		return (
 			<div id="codeBox">
-				<div class="BoxTitle">
+				<div className="BoxTitle">
 					Algorithm
 				</div>
-				<div class="code">
+				<div className="code">
 					{this.generateLinesOfCode()}
 				</div>
 			</div>

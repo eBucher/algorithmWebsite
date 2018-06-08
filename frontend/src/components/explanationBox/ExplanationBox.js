@@ -8,7 +8,7 @@ class ExplanationBox extends React.Component{
 
 		return (
 			<div id="explanationBox">
-				<div class="BoxTitle">
+				<div className="BoxTitle">
 					What is happening
 				</div>
 				<div id="explanation">

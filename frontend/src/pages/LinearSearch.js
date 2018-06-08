@@ -167,6 +167,11 @@ class LinearSearch extends AlgorithmPage{
 				<button onClick={this.nextStep}>
 					Next Step
 				</button>
+				<br/>
+				<input id="stepSlider" type="range" min="0" max={this.state.steps.length - 1}
+					step="1" onChange={this.handleSliderChange}
+					value={this.state.currentStepNum} disabled={!this.allowSlider()}
+				/>
 		        <DrawArea w={this.areaWidth} h={this.areaHeight} displayedPieces={piecesToShow}/>
 				<CodeBox linesOfCode={this.algorithm} highlightedLines={this.highlightedLines()}/>
 				<ExplanationBox text={this.generateExplanation()} />

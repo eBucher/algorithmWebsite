@@ -27,6 +27,23 @@ class AlgorithmPage extends React.Component{
 
 	}
 
+	/*
+		Returns true if the user has entered input and the algorithm is being
+		visualized. Otherwise, it returns false.
+	*/
+	isRunning = () => {
+		if(this.state.steps.length > 0)
+			return true;
+		return false;
+	}
+
+	allowSlider = () => {
+		console.log("ALLOW SLIDER? " + this.isRunning())
+		if(this.isRunning())
+			return true;
+		return false;
+	}
+
 
 	/*
 		Returns the index of the line that should be highlighted. If there are
@@ -77,6 +94,11 @@ class AlgorithmPage extends React.Component{
 			this.setState({
 				currentStepNum: this.state.currentStepNum - 1,
 			});
+	}
+
+	handleSliderChange = (event) => {
+		console.log("SLIDIN'!")
+		this.setState({currentStepNum: event.target.value});
 	}
 
 

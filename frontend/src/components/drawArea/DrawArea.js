@@ -15,7 +15,6 @@ class DrawArea extends Component {
         return (
             <svg id="drawArea" width={this.props.w} height={this.props.h}>
                 {this.props.displayedPieces.map((MyComponent, index) => {
-                        console.log(MyComponent);
                         if(MyComponent instanceof CustomShape){
                             return (MyComponent.build());
                         } else {

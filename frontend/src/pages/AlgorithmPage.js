@@ -23,25 +23,9 @@ class AlgorithmPage extends React.Component{
 
 			currentStepNum: null,
 			steps : [],
+			started : false
 		}
 
-	}
-
-	/*
-		Returns true if the user has entered input and the algorithm is being
-		visualized. Otherwise, it returns false.
-	*/
-	isRunning = () => {
-		if(this.state.steps.length > 0)
-			return true;
-		return false;
-	}
-
-	allowSlider = () => {
-		console.log("ALLOW SLIDER? " + this.isRunning())
-		if(this.isRunning())
-			return true;
-		return false;
 	}
 
 
@@ -57,6 +41,7 @@ class AlgorithmPage extends React.Component{
 		}
 	}
 
+
 	/*
 		Returns the current step's information from this.state.steps. If the
 		algorithm hasn't been started, null is returned.
@@ -65,6 +50,7 @@ class AlgorithmPage extends React.Component{
 		if(this.state.steps.length == 0){
 			return null;
 		} else {
+			console.log("Your current step number is " + this.state.currentStepNum);
 			return this.state.steps[this.state.currentStepNum];
 		}
 	}
@@ -96,9 +82,10 @@ class AlgorithmPage extends React.Component{
 			});
 	}
 
+
 	handleSliderChange = (event) => {
 		console.log("SLIDIN'!")
-		this.setState({currentStepNum: event.target.value});
+		this.setState({currentStepNum: Number(event.target.value)});
 	}
 
 
@@ -131,6 +118,7 @@ class AlgorithmPage extends React.Component{
 	*/
     visualizeAlgorithm = () => {
     }
+
 
 	/*
 		REQUIRED TO IMPLEMENT

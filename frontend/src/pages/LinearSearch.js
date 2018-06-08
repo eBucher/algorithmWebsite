@@ -33,6 +33,7 @@ class LinearSearch extends AlgorithmPage{
 
 			currentStepNum: null,
 			steps : [],
+			started : false
 		}
 		this.areaHeight = 250;
 		this.areaWidth = 1000;
@@ -61,6 +62,7 @@ class LinearSearch extends AlgorithmPage{
 		return steps;
 	}
 
+
 	handleSubmit = (event) => {
 		//Trim the whitespace from the input
 		var newElements = this.state.tempElements.replace(/\s/g,'');
@@ -74,33 +76,58 @@ class LinearSearch extends AlgorithmPage{
 			elements: newElements,
 			steps: newSteps,
 			currentStepNum: 0,
+			started: true,
 		});
 		event.preventDefault();
+	}
+
+
+	/*
+		Given the current step object and the index of the element that will
+		be drawn, the function returns what color the element's box should
+		be.
+	*/
+	getBoxColor = (currentStepState, currentElementIndex) => {
+		if(currentStepState.highlightedLines == 3 &&
+			this.state.elements[currentElementIndex] == this.state.target)
+			return "green";
+		else if (currentStepState.highlightedLines == 6)
+			return "red";
+		else if (currentStepState.checkIndex > currentElementIndex)
+			return "grey";
+
+		return "white";
+	}
+
+
+	/*
+		Returns the top left coordinate of where the element at the given
+		index should be drawn.
+	*/
+	boxLocation = (currentElementIndex) => {
+		var drawAreaCenterX = this.areaWidth /2;
+		var squareSize = CONTENT_SQUARE.size;
+
+		var x = (drawAreaCenterX - this.state.elements.length/2.0*squareSize) +
+			squareSize * currentElementIndex;
+		var y = 20;
+		return new Coord(x, y);
 	}
 
 
     visualizeAlgorithm = () => {
 
 		var elementsToDraw = [];
-		if(this.state.elements.length > 0){
+		if(this.state.started){
 
 			var currentStepState = this.currentStep();
 
 	        for(var i = 0; i < this.state.elements.length; i++){
 		        var r = new Square(CONTENT_SQUARE);
-	            r.setTopLeft(new Coord((500 - this.state.elements.length/2.0*50) + 50 * i, 20));
+	            r.setTopLeft(this.boxLocation(i));
 	            r.setText(this.state.elements[i]);
 	            r.setText(i, "TOP");
-				if(this.state.target == this.state.elements[i] &&
-					this.state.steps.length - 1 == this.state.currentStepNum){
-					r.setColor("green");
-				} else if (currentStepState.highlightedLines == 6){
-					r.setColor("red");
-				} else if (currentStepState.checkIndex > i){
-					r.setColor("grey");
-				} else {
-					r.setColor("white");
-				}
+				r.setColor(this.getBoxColor(currentStepState, i));
 	            elementsToDraw.push(r);
 
 	        }
@@ -114,14 +141,14 @@ class LinearSearch extends AlgorithmPage{
 			}
 			//Draw the if box
 			var ifBox = new BooleanBox(IF_STATEMENT);
-			ifBox.setTopLeft(new Coord(400, 180));
+			ifBox.setTopLeft(new Coord(this.areaWidth / 2 - 100, 180));
 			if(typeof currentStepState.ifBox !== "undefined"){
 				ifBox.setStatus(currentStepState.ifBox);
 			}
 			elementsToDraw.push(ifBox)
 			//Draw the loop box
 			var loopBox = new BooleanBox(LOOP_CONTINUATION);
-			loopBox.setTopLeft(new Coord(550, 180));
+			loopBox.setTopLeft(new Coord(this.areaWidth / 2 + CONTENT_SQUARE.size, 180));
 			if(typeof currentStepState.loopBox !== "undefined"){
 				loopBox.setStatus(currentStepState.loopBox);
 			}
@@ -170,7 +197,7 @@ class LinearSearch extends AlgorithmPage{
 				<br/>
 				<input id="stepSlider" type="range" min="0" max={this.state.steps.length - 1}
 					step="1" onChange={this.handleSliderChange}
-					value={this.state.currentStepNum} disabled={!this.allowSlider()}
+					value={this.state.currentStepNum} disabled={!this.state.started}
 				/>
 		        <DrawArea w={this.areaWidth} h={this.areaHeight} displayedPieces={piecesToShow}/>
 				<CodeBox linesOfCode={this.algorithm} highlightedLines={this.highlightedLines()}/>

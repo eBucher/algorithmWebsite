@@ -3,6 +3,7 @@ import "./styles.css";
 import AlgorithmPage from "pages/AlgorithmPage.js";
 import DrawArea from 'components/drawArea/DrawArea.js';
 import CodeBox from 'components/codeBox/CodeBox.js';
+import ExplanationBox from 'components/explanationBox/ExplanationBox.js';
 import Square from 'components/drawArea/shapes/Square.js';
 import Pointer from 'components/drawArea/shapes/Pointer.js';
 import BooleanBox from 'components/drawArea/shapes/BooleanBox.js';
@@ -130,6 +131,24 @@ class LinearSearch extends AlgorithmPage{
     }
 
 
+	generateExplanation(){
+
+		if(this.state.elements.length == 0)
+			return "";
+
+		var highlightedLine = this.state.steps[this.state.currentStepNum].highlightedLines;
+		if(highlightedLine == 0)
+			return "Goal: Determine whether the target is in the given elements.";
+		if(highlightedLine == 1 || highlightedLine == 2)
+			return "Loop through each element and see if it matches the target."
+		if(highlightedLine == 3)
+			return "The target was found and its index was returned.";
+		if(highlightedLine == 6)
+			return "Since all of the elements have been checked and the target was" +
+					" not found, the algorithm returns a -1."
+		return "Nothing to show.";
+	}
+
 	render(){
 		var piecesToShow = this.visualizeAlgorithm();
 		return (
@@ -150,7 +169,7 @@ class LinearSearch extends AlgorithmPage{
 				</button>
 		        <DrawArea w={this.areaWidth} h={this.areaHeight} displayedPieces={piecesToShow}/>
 				<CodeBox linesOfCode={this.algorithm} highlightedLines={this.highlightedLines()}/>
-
+				<ExplanationBox text={this.generateExplanation()} />
 			</div>
 		)
 	}

@@ -1,4 +1,4 @@
-#codeBox{
+#explanationBox{
 	border: 1px solid black;
 	width: 503px;
 	float: left;
@@ -8,10 +8,4 @@
 	color: black;
 	padding-top: 5px;
 	padding-bottom: 5px;
-}
-
-#codeBox div {
-	margin-bottom: 2px;
-	padding-left: 5px;
-	padding-right: 5px;
 }

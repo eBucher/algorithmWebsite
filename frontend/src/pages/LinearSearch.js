@@ -106,7 +106,7 @@ class LinearSearch extends AlgorithmPage{
 	*/
 	boxLocation = (currentElementIndex) => {
 		var drawAreaCenterX = this.areaWidth /2;
-		var squareSize = CONTENT_SQUARE.size;
+		var squareSize = CONTENT_SQUARE().size;
 
 		var x = (drawAreaCenterX - this.state.elements.length/2.0*squareSize) +
 			squareSize * currentElementIndex;
@@ -123,7 +123,7 @@ class LinearSearch extends AlgorithmPage{
 			var currentStepState = this.currentStep();
 
 	        for(var i = 0; i < this.state.elements.length; i++){
-		        var r = new Square(CONTENT_SQUARE);
+		        var r = new Square(CONTENT_SQUARE());
 	            r.setTopLeft(this.boxLocation(i));
 	            r.setText(this.state.elements[i]);
 	            r.setText(i, "TOP");
@@ -133,22 +133,22 @@ class LinearSearch extends AlgorithmPage{
 	        }
 			//Draw the arrow
 			if(currentStepState.checkIndex != null){
-				var p = new Pointer(SMALL_POINTER);
+				var p = new Pointer(SMALL_POINTER());
 				p.setPosition("BOTTOM");
 				p.pointTo(elementsToDraw[currentStepState.checkIndex]);
 				p.setMessage("i = " + currentStepState.checkIndex);
 				elementsToDraw.push(p);
 			}
 			//Draw the if box
-			var ifBox = new BooleanBox(IF_STATEMENT);
+			var ifBox = new BooleanBox(IF_STATEMENT());
 			ifBox.setTopLeft(new Coord(this.areaWidth / 2 - 100, 180));
 			if(typeof currentStepState.ifBox !== "undefined"){
 				ifBox.setStatus(currentStepState.ifBox);
 			}
 			elementsToDraw.push(ifBox)
 			//Draw the loop box
-			var loopBox = new BooleanBox(LOOP_CONTINUATION);
-			loopBox.setTopLeft(new Coord(this.areaWidth / 2 + CONTENT_SQUARE.size, 180));
+			var loopBox = new BooleanBox(LOOP_CONTINUATION());
+			loopBox.setTopLeft(new Coord(this.areaWidth / 2 + CONTENT_SQUARE().size, 180));
 			if(typeof currentStepState.loopBox !== "undefined"){
 				loopBox.setStatus(currentStepState.loopBox);
 			}

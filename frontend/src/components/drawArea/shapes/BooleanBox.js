@@ -59,7 +59,7 @@ class IfStatement extends CustomShape {
 
 
 	build(){
-		var s = new Square(CONTENT_SQUARE);
+		var s = new Square(CONTENT_SQUARE());
 		s.setColor("white");
 		s.setTopLeft(this.topLeft);
 		s.setText(this.topText, "TOP");

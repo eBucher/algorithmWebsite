@@ -48,6 +48,16 @@ class BinarySearch extends AlgorithmPage{
 	}
 
 
+	handleTargetChange = (event) => {
+		this.setState({tempTarget : event.target.value});
+	}
+
+
+	handleElementsChange = (event) => {
+		this.setState({tempElements : event.target.value});
+	}
+
+
 	// checkIndex is where the array will be pointing to.
 	calculateSteps = (elements, leftIdx, rightIdx, target) => {
 		alert("Calculate steps(" + elements + ", " + leftIdx + ", " + rightIdx + ", " + target + ")");

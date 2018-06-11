@@ -40,6 +40,15 @@ class LinearSearch extends AlgorithmPage{
 
 	}
 
+	handleTargetChange = (event) => {
+		this.setState({tempTarget : event.target.value});
+	}
+
+
+	handleElementsChange = (event) => {
+		this.setState({tempElements : event.target.value});
+	}
+
 
 	// checkIndex is where the array will be pointing to.
 	calculateSteps = (target, elements) => {

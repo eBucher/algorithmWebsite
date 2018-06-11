@@ -56,15 +56,6 @@ class AlgorithmPage extends React.Component{
 	}
 
 
-	handleTargetChange = (event) => {
-		this.setState({tempTarget : event.target.value});
-	}
-
-
-	handleElementsChange = (event) => {
-		this.setState({tempElements : event.target.value});
-	}
-
 
 	nextStep = () => {
 		if(this.state.currentStepNum != this.state.steps.length - 1){

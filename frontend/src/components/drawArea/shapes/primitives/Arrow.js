@@ -1,6 +1,7 @@
 import {distance, findPointFromDist, slopeBetween, perpendicularSlope} from 'components/drawArea/math/Graphing.js';
 import React, { Component } from 'react';
 import CustomShape from 'components/drawArea/shapes/CustomShape.js';
+import Coord from 'components/drawArea/math/Coord.js';
 
 class Arrow extends CustomShape{
 
@@ -65,60 +66,72 @@ class Arrow extends CustomShape{
 
 
 	/*
-	The function returns the coordinates of the corners of the head of the arrow, and
-	the spot where the line of the arrow meets the head. The coordinates are in the
-	following order if the arrow was pointing vertically and the head is at the top:
-		0. The bottom left point
-		1. The top point
-		2. The bottom right point
-		3. The point where the line of the arrow meets the head
+	The function returns the coordinates of the corners of the head of the arrow
+	as if the arrow was laying horizontally and pointing to the right. The baseOfHead
+	coord is the one where the line of the arrow would meet the head.
 	*/
-	calcHeadCoords = (pointCoord, slope, headHeight, headWidth) => {
-		var perpSlope = perpendicularSlope(slope); //slope of the line perpendicular to the slope variable
-		var headDirection = 1;
-
-		// Flip the head to face the right direction if needed
-		if (pointCoord.x > this.endCoord.x || (pointCoord.y > this.endCoord.y && pointCoord.x == this.endCoord.x)) {
-			headDirection = -1;
-		}
-
-		var baseOfHead = findPointFromDist(pointCoord, headDirection * headHeight, slope);
-		var leftPoint = findPointFromDist(baseOfHead, -1 * headWidth, perpSlope);
-		var rightPoint = findPointFromDist(baseOfHead, 1 * headWidth, perpSlope);
-		return [leftPoint, pointCoord, rightPoint, baseOfHead];
+	calcHeadCoords = () => {
+		var lengthOfArrow = distance(this.pointCoord, this.endCoord);
+		var pointCoord = new Coord(
+			this.endCoord.x + lengthOfArrow,
+			this.endCoord.y
+		);
+		var topCoord = new Coord(
+			this.endCoord.x + lengthOfArrow - this.headHeight,
+			this.endCoord.y - this.headWidth /2
+		);
+		var bottomCoord = new Coord(
+			this.endCoord.x + lengthOfArrow - this.headHeight,
+			this.endCoord.y + this.headWidth /2
+		);
+		var baseOfHead = new Coord(
+			this.endCoord.x + lengthOfArrow - this.headHeight,
+			this.endCoord.y
+		)
+		return {pointCoord, topCoord, bottomCoord, baseOfHead}
 	}
 
-	build(){
-		//Slope of the line between pointCoord and endCoord
-		var slope = slopeBetween(this.pointCoord, this.endCoord);
-		var headCoords = this.calcHeadCoords(this.pointCoord, slope, this.headHeight, this.headWidth / 2);
 
-		var leftCoord = headCoords[0];
-		var rightCoord = headCoords[2];
-		var baseOfHead = headCoords[3];
+	/*
+		Assuming the arrow is pointing horizontally to the left, the function
+		returns the angle (in degrees) needed to rotate the arrow around the
+		endCoord so that it is between endCoord and StartCoord.
+	*/
+	getRotation = (point, end) => {
+		var y = point.y - end.y;
+		var x = point.x - end.x;
+		return Math.atan2(y, x) * 180 / Math.PI;
+	}
+
+
+	build(){
+		var head = this.calcHeadCoords();
+
+		var rotation = this.getRotation(this.pointCoord, this.endCoord);
 
 		//Draw the head
 		return (
-			<React.Fragment>
+			<g transform = {"rotate(" + rotation + " " + this.endCoord.x + " " + this.endCoord.y + ")"}>
 				<path
 					d={
-						" M" + this.pointCoord.x + " " + this.pointCoord.y +
-						" L" + leftCoord.x + " " + leftCoord.y +
-						" L " + rightCoord.x + " " + rightCoord.y +
+						" M" + head.pointCoord.x + " " + head.pointCoord.y +
+						" L" + head.topCoord.x + " " + head.topCoord.y +
+						" L " + head.bottomCoord.x + " " + head.bottomCoord.y +
 						" Z"
 					}
 					fill = {this.color}
+
 				/>
 				<path
 					d={
-						" M" + baseOfHead.x + " " + baseOfHead.y +
+						" M" + head.baseOfHead.x + " " + head.baseOfHead.y +
 						" L" + this.endCoord.x + " " + this.endCoord.y +
 						" Z"
 					}
 					stroke= {this.color}
 					strokeWidth = {this.thickness}
 				/>
-			</React.Fragment>
+			</g>
 		)
 	}
 }

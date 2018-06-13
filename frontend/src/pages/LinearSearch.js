@@ -143,9 +143,9 @@ class LinearSearch extends AlgorithmPage{
 			//Draw the arrow
 			if(currentStepState.checkIndex != null){
 				var p = new Pointer(SMALL_POINTER());
-				p.setPosition("BOTTOM");
-				p.pointTo(elementsToDraw[currentStepState.checkIndex]);
-				p.setMessage("i = " + currentStepState.checkIndex);
+				p.direction = "UP";
+				p.pointCoord = elementsToDraw[currentStepState.checkIndex].getCoord("BOTTOM");
+				p.message = "i = " + currentStepState.checkIndex;
 				elementsToDraw.push(p);
 			}
 			//Draw the if box

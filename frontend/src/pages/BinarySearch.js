@@ -60,7 +60,6 @@ class BinarySearch extends AlgorithmPage{
 
 	// checkIndex is where the array will be pointing to.
 	calculateSteps = (elements, leftIdx, rightIdx, target) => {
-		alert("Calculate steps(" + elements + ", " + leftIdx + ", " + rightIdx + ", " + target + ")");
 		var steps = [];
 		steps.push({left: leftIdx, right: rightIdx, mid: null, highlightedLines: 0});
 
@@ -170,9 +169,9 @@ class BinarySearch extends AlgorithmPage{
 	addArrow = (indexOfSquare, text, elements) => {
 		if(indexOfSquare != null && indexOfSquare >= 0 && indexOfSquare < this.state.elements.length){
 			var ptr = new Pointer(SMALL_POINTER());
-			ptr.setPosition("BOTTOM");
-			ptr.pointTo(elements[indexOfSquare]);
-			ptr.setMessage(text);
+			ptr.direction = "UP";
+			ptr.pointCoord = elements[indexOfSquare].getCoord("BOTTOM")
+			ptr.message = text;
 			elements.push(ptr);
 		}
 	}

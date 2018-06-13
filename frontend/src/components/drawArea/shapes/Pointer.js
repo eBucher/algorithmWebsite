@@ -9,12 +9,15 @@ class Pointer extends CustomShape{
 
 	constructor(configObj){
 		super();
-		this.otherObject = null;
-		this.message = "";
-		this.fontSize = null;	//In pixels
-		this.position = null;
-		this.arrow = new Arrow();
-		this.length = null;
+		this.pointCoord = null,
+		this.message = null,
+		this.fontSize = 12,
+		this.headWidth = 20,
+		this.headHeight = 20,
+		this.thickness = 8,
+		this.length = 50,
+		this.direction = "UP",
+		this.color = "black"
 
 		for(var prop in arguments[0])   {
         	this[prop]=arguments[0][prop];
@@ -22,86 +25,59 @@ class Pointer extends CustomShape{
 	}
 
 
-	setMessage = (newMessage) => {
-		this.message = newMessage;
+	textPositionData = (endPoint) => {
+		if(this.direction == "UP")
+			return {
+				anchor: "middle",
+				baseline: "hanging",
+				position: new Coord(endPoint.x, endPoint.y + this.fontSize * .4)
+			}
+		if(this.direction == "DOWN")
+			return {
+				anchor: "middle",
+				baseline: "bottom",
+				position: new Coord(endPoint.x, endPoint.y - this.fontSize * .5)
+			}
+		if(this.direction == "LEFT")
+			return {
+				anchor: "start",
+				baseline: "middle",
+				position: new Coord(endPoint.x  + this.fontSize * .5, endPoint.y)
+			}
+		if(this.direction == "RIGHT")
+			return {
+				anchor: "end",
+				baseline: "middle",
+				position: new Coord(endPoint.x  - this.fontSize * .5, endPoint.y)
+			}
+	}
+
+	getEndCoord = () => {
+		if(this.direction == "UP")
+			return new Coord(this.pointCoord.x, this.pointCoord.y + this.length);
+		if(this.direction == "DOWN")
+			return new Coord(this.pointCoord.x, this.pointCoord.y - this.length);
+		if(this.direction == "LEFT")
+			return new Coord(this.pointCoord.x + this.length, this.pointCoord.y);
+		if(this.direction == "RIGHT")
+			return new Coord(this.pointCoord.x - this.length, this.pointCoord.y);
 	}
 
 
-	setColor = (newColor) => {
-		this.arrow.setColor(newColor);
-		return this;
-	}
 
-
-	pointTo = (otherObject) => {
-		if(otherObject instanceof Square){
-			var refCoord = otherObject.getCoord(this.position);
-			var pointCoord = new Coord(refCoord.x, refCoord.y);
-			this.arrow.setPointCoord(pointCoord);
-			var endCoord = pointCoord.add(this.offset())
-			this.arrow.setEndCoord(endCoord);
-		}
-	}
-
-
-	setPosition = (newPosition) => {
-		this.position = newPosition;
-	}
-
-
-	offset = () => {
-		if(this.position == "TOP")
-			return new Coord(0, -this.length);
-		if(this.position == "BOTTOM")
-			return new Coord(0, this.length);
-		if(this.position == "LEFT")
-			return new Coord(-this.length, 0);
-		if(this.position == "RIGHT")
-			return new Coord(this.length, 0);
-
-	}
-
-
-	//The offset from the end of the arrow to the text anchor
-	textOffset = () => {
-		if(this.position == "TOP")
-			return new Coord(0, -this.fontSize * 1.2);
-		if(this.position == "BOTTOM")
-			return new Coord(0, this.fontSize * 1.2);
-		if(this.position == "LEFT")
-			return new Coord(-this.fontSize * 1.2, 0);
-		if(this.position == "RIGHT")
-			return new Coord(this.fontSize * 1.2, 0);
-	}
-
-
-	/*
-		Returns where the text should be anchored relative to the end of
-		the arrow to be used with the textAnchor style.
-	*/
-	textAnchorPosition = () => {
-		if(this.position == "TOP" || this.position == "BOTTOM")
-			return "middle";
-		else if (this.position == "LEFT")
-			return "right";
-		else if (this.position == "RIGHT")
-			return "left";
-		return null;
-	}
-
-
-	drawMessage = () => {
+	drawMessage = (endPoint) => {
 		if(this.message.toString() != null && this.message.toString() != ""){
-			var offset = this.textOffset();
+			var positionData = this.textPositionData(endPoint);
 
 			return (
 				<text
-					x={this.arrow.endCoord.x + offset.x}
-					y={this.arrow.endCoord.y + offset.y}
+					x={positionData.position.x}
+					y={positionData.position.y}
 					fill="#000000"
+					textAnchor={positionData.anchor}
+					dominantBaseline={positionData.baseline}
 					style= {{
 						font :  this.fontSize + "px Arial",
-						textAnchor: this.textAnchorPosition()
 					}}
 				>
 					{this.message}
@@ -112,10 +88,19 @@ class Pointer extends CustomShape{
 
 
 	build(){
+		var endPoint = this.getEndCoord();
+		var arrow = new Arrow({
+			thickness: this.thickness,
+			headHeight: this.headHeight,
+			headWidth: this.headWidth,
+			color: this.color,
+			pointCoord: this.pointCoord,
+			endCoord: endPoint
+		});
 		return (
 			<React.Fragment>
-				{this.arrow.build()}
-				{this.drawMessage()}
+				{arrow.build()}
+				{this.drawMessage(endPoint)}
 			</React.Fragment>
 
 		)

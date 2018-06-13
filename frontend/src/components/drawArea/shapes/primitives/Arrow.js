@@ -29,42 +29,6 @@ class Arrow extends CustomShape{
 	}
 
 
-	setPointCoord = (pointCoord) => {
-		this.pointCoord = pointCoord;
-		return this;
-	}
-
-
-	setEndCoord = (endCoord) => {
-		this.endCoord = endCoord;
-		return this;
-	}
-
-
-	setColor = (newColor) => {
-		this.color = newColor;
-		return this;
-	}
-
-
-	setHeadHeight = (newHeight) => {
-		this.headHeight = newHeight;
-		return this;
-	}
-
-
-	setHeadWidth = (newWidth) => {
-		this.headWidth = newWidth;
-		return this;
-	}
-
-
-	setThickness = (newThickness) => {
-		this.thickness = newThickness;
-		return this;
-	}
-
-
 	/*
 	The function returns the coordinates of the corners of the head of the arrow
 	as if the arrow was laying horizontally and pointing to the right. The baseOfHead

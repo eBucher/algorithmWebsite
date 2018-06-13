@@ -9,35 +9,11 @@ class CheckMark extends CustomShape {
 		this.color = "#000000";
 		this.center = null;
 		this.height = null;
-		this.thickness = null
-	}
-
-
-	setHeight = (newHeight) => {
-		this.height = newHeight;
-		this.thickness = this.height * .15;
-	}
-
-
-	/*
-		newCenter must be a Coordinate object. The center coordinate is the
-		position that would be in the center of a bounding rectangle around
-		the checkmark.
-	*/
-	setCenter = (newCenter) => {
-		this.center = newCenter;
-	}
-
-
-	/*
-		newColor should be the name of a color, not the hex value.
-	*/
-	setColor = (newColor) => {
-		this.color = toHex(newColor);
 	}
 
 
 	build = () => {
+		var thickness = this.height * .15;
 		return (
 		<path
 			d = {
@@ -45,8 +21,8 @@ class CheckMark extends CustomShape {
 				" L" + (this.center.x - this.height * .1) + " " + (this.center.y + this.height * .35) +
 				" L" + (this.center.x + this.height * .35) + " " + (this.center.y - this.height * .45)
 			}
-			stroke = {this.color}
-			strokeWidth = {this.thickness}
+			stroke = {toHex(this.color)}
+			strokeWidth = {thickness}
 			fill = "none"
 		/>
 		)

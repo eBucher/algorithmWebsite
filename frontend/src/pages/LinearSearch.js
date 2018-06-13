@@ -133,10 +133,10 @@ class LinearSearch extends AlgorithmPage{
 
 	        for(var i = 0; i < this.state.elements.length; i++){
 		        var r = new Square(CONTENT_SQUARE());
-	            r.setTopLeft(this.boxLocation(i));
-	            r.setText(this.state.elements[i]);
-	            r.setText(i, "TOP");
-				r.setColor(this.getBoxColor(currentStepState, i));
+	            r.topLeft = this.boxLocation(i);
+	            r.centerText = this.state.elements[i];
+	            r.topText = i;
+				r.color = this.getBoxColor(currentStepState, i);
 	            elementsToDraw.push(r);
 
 	        }
@@ -150,16 +150,17 @@ class LinearSearch extends AlgorithmPage{
 			}
 			//Draw the if box
 			var ifBox = new BooleanBox(IF_STATEMENT());
-			ifBox.setTopLeft(new Coord(this.areaWidth / 2 - 100, 180));
+			ifBox.topLeft = new Coord(this.areaWidth / 2 - 100, 180);
 			if(typeof currentStepState.ifBox !== "undefined"){
-				ifBox.setStatus(currentStepState.ifBox);
+				ifBox.status = currentStepState.ifBox;
 			}
+
 			elementsToDraw.push(ifBox)
 			//Draw the loop box
 			var loopBox = new BooleanBox(LOOP_CONTINUATION());
-			loopBox.setTopLeft(new Coord(this.areaWidth / 2 + CONTENT_SQUARE().size, 180));
+			loopBox.topLeft = new Coord(this.areaWidth / 2 + CONTENT_SQUARE().size, 180);
 			if(typeof currentStepState.loopBox !== "undefined"){
-				loopBox.setStatus(currentStepState.loopBox);
+				loopBox.status = currentStepState.loopBox;
 			}
 			elementsToDraw.push(loopBox)
 		}

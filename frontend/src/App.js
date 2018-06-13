@@ -12,7 +12,7 @@ class App extends Component {
     return (
       <div className="App">
         <HeaderBar/>
-        <BinarySearch/>
+        <LinearSearch/>
       </div>
     );
   }

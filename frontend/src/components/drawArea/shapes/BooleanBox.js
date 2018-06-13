@@ -21,30 +21,22 @@ class IfStatement extends CustomShape {
     	}
 	}
 
-	setStatus = (newStatus) => {
-		this.status = newStatus;
-	}
-
-	setTopLeft = (newPosition) => {
-		this.topLeft = newPosition;
-	}
-
 
 	//Creates an X
 	falseSymbol = () => {
 		var x = new XSymbol();
-		x.setColor("red");
-		x.setHeight(this.size * .9);
-		x.setCenter(new Coord(this.topLeft.x + this.size/2, this.topLeft.y + this.size/2));
+		x.color = "red";
+		x.height = this.size * .9;
+		x.center = new Coord(this.topLeft.x + this.size/2, this.topLeft.y + this.size/2);
 		return x.build();
 	}
 
 	//Creates a check symbol
 	trueSymbol = () => {
 		var check = new CheckMark();
-		check.setColor("green");
-		check.setHeight(45);
-		check.setCenter(new Coord(this.topLeft.x + this.size/2, this.topLeft.y + this.size/2));
+		check.color = "green";
+		check.height = 45;
+		check.center = new Coord(this.topLeft.x + this.size/2, this.topLeft.y + this.size/2);
 		return check.build();
 	}
 
@@ -60,14 +52,14 @@ class IfStatement extends CustomShape {
 
 	build(){
 		var s = new Square(CONTENT_SQUARE());
-		s.setColor("white");
-		s.setTopLeft(this.topLeft);
-		s.setText(this.topText, "TOP");
+		s.color = "white";
+		s.topLeft = this.topLeft;
+		s.topText = this.topText;
 		var symbolToUse = null;
 		if(this.status == true){
-			s.setText("true", "BOTTOM");
+			s.bottomText = "true";
 		} else if (this.status == false){
-			s.setText("false", "BOTTOM")
+			s.bottomText = "false";
 		}
 
 		return (

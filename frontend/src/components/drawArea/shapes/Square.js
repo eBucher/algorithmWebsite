@@ -82,11 +82,12 @@ class Square extends CustomShape{
 			return (
 				<text
 					x={this.getCenterPoint().x}
-					y={this.getCenterPoint().y + this.centerFontSize/2 - this.centerFontSize * .1}
+					y={this.getCenterPoint().y}
 					fill="#000000"
+					textAnchor="middle"
+					dominantBaseline="middle"
 					style= {{
 						font :  this.centerFontSize + "px Arial",
-						textAnchor: "middle"
 					}}
 				>
 					{this.centerText}
@@ -103,9 +104,10 @@ class Square extends CustomShape{
 					x={this.getCenterPoint().x}
 					y={this.topLeft.y - this.outerFontSize*.2}
 					fill="#000000"
+					textAnchor="middle"
+					dominantBaseline="bottom"
 					style= {{
 						font :  this.outerFontSize + "px Arial",
-						textAnchor: "middle"
 					}}
 				>
 					{this.topText}
@@ -122,10 +124,10 @@ class Square extends CustomShape{
 					x={this.getCenterPoint().x}
 					y={this.topLeft.y + this.size}
 					fill="#000000"
+					textAnchor="middle"
+					dominantBaseline="hanging"
 					style= {{
 						font :  this.outerFontSize + "px Arial",
-						textAnchor: "middle",
-						dominantBaseline: "hanging"
 					}}
 				>
 					{this.bottomText}

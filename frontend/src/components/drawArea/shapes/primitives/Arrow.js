@@ -1,5 +1,6 @@
 import {distance, findPointFromDist, slopeBetween, perpendicularSlope} from 'components/drawArea/math/Graphing.js';
 import React, { Component } from 'react';
+import {toHex} from 'utils/Colors.js';
 import CustomShape from 'components/drawArea/shapes/CustomShape.js';
 import Coord from 'components/drawArea/math/Coord.js';
 
@@ -83,7 +84,7 @@ class Arrow extends CustomShape{
 						" L " + head.bottomCoord.x + " " + head.bottomCoord.y +
 						" Z"
 					}
-					fill = {this.color}
+					fill = {toHex(this.color)}
 
 				/>
 				<path
@@ -92,7 +93,7 @@ class Arrow extends CustomShape{
 						" L" + this.endCoord.x + " " + this.endCoord.y +
 						" Z"
 					}
-					stroke= {this.color}
+					stroke= {toHex(this.color)}
 					strokeWidth = {this.thickness}
 				/>
 			</g>

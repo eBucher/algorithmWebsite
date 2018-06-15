@@ -27,7 +27,6 @@ function SMALL_POINTER() {
 function IF_STATEMENT() {
 	return {
 		size : 50,
-		topText : "if statement result",
 	}
 }
 
@@ -35,7 +34,6 @@ function IF_STATEMENT() {
 function LOOP_CONTINUATION() {
 	return {
 		size: 50,
-		topText : "continue loop?"
 	}
 }
 

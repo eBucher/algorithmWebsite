@@ -66,7 +66,7 @@ class LinearSearch extends AlgorithmPage{
 				steps.push({checkIndex: i, highlightedLines: 2, ifBox: false});
 			}
 		}
-		steps.push({checkIndex: null, highlightedLines: 1, loopBox: false});
+		steps.push({checkIndex: i, highlightedLines: 1, loopBox: false});
 		steps.push({checkIndex: null, highlightedLines: 6});
 		return steps;
 	}
@@ -124,6 +124,66 @@ class LinearSearch extends AlgorithmPage{
 	}
 
 
+	beyondBoundsArrow = (elementsToDraw, i) => {
+		var lastArrowPos = elementsToDraw[i - 1].getCoord("BOTTOM");
+		var p = new Pointer(SMALL_POINTER());
+		p.color = "red";
+		p.direction = "UP";
+		p.pointCoord = lastArrowPos.add(new Coord(CONTENT_SQUARE().size, 0));
+		p.message = "i = " + i;
+		elementsToDraw.push(p);
+	}
+
+
+	addBoxesTo(elementsToDraw, currentStep){
+		for(var i = 0; i < this.state.elements.length; i++){
+			var r = new Square(CONTENT_SQUARE());
+			r.topLeft = this.boxLocation(i);
+			r.centerText = this.state.elements[i];
+			r.topText = i;
+			r.color = this.getBoxColor(currentStep, i);
+			elementsToDraw.push(r);
+		}
+	}
+
+
+	addArrowTo(elementsToDraw, currentStep){
+
+		if(currentStep.checkIndex != null && currentStep.checkIndex < this.state.elements.length){
+			var p = new Pointer(SMALL_POINTER());
+			p.direction = "UP";
+			p.pointCoord = elementsToDraw[currentStep.checkIndex].getCoord("BOTTOM");
+			p.message = "i = " + currentStep.checkIndex;
+			elementsToDraw.push(p);
+		}
+		if(currentStep.checkIndex == this.state.elements.length){
+			this.beyondBoundsArrow(elementsToDraw, currentStep.checkIndex);
+		}
+	}
+
+
+	addConditionBoxesTo(elementsToDraw, currentStep){
+		var ifBox = new BooleanBox(IF_STATEMENT());
+		ifBox.topText = "Is it a match?";
+		ifBox.topLeft = new Coord(this.areaWidth / 2 - 100, 180);
+		if(typeof currentStep.ifBox !== "undefined"){
+			ifBox.status = currentStep.ifBox;
+
+		}
+		elementsToDraw.push(ifBox);
+
+		var loopBox = new BooleanBox(LOOP_CONTINUATION());
+		loopBox.topText = "Continue checking?";
+		loopBox.topLeft = new Coord(this.areaWidth / 2 + CONTENT_SQUARE().size, 180);
+		if(typeof currentStep.loopBox !== "undefined"){
+			loopBox.status = currentStep.loopBox;
+
+		}
+		elementsToDraw.push(loopBox);
+	}
+
+
+
     visualizeAlgorithm = () => {
 
 		var elementsToDraw = [];
@@ -131,38 +191,13 @@ class LinearSearch extends AlgorithmPage{
 
 			var currentStepState = this.currentStep();
 
-	        for(var i = 0; i < this.state.elements.length; i++){
-		        var r = new Square(CONTENT_SQUARE());
-	            r.topLeft = this.boxLocation(i);
-	            r.centerText = this.state.elements[i];
-	            r.topText = i;
-				r.color = this.getBoxColor(currentStepState, i);
-	            elementsToDraw.push(r);
+	        this.addBoxesTo(elementsToDraw, currentStepState);
 
-	        }
-			//Draw the arrow
-			if(currentStepState.checkIndex != null){
-				var p = new Pointer(SMALL_POINTER());
-				p.direction = "UP";
-				p.pointCoord = elementsToDraw[currentStepState.checkIndex].getCoord("BOTTOM");
-				p.message = "i = " + currentStepState.checkIndex;
-				elementsToDraw.push(p);
-			}
-			//Draw the if box
-			var ifBox = new BooleanBox(IF_STATEMENT());
-			ifBox.topLeft = new Coord(this.areaWidth / 2 - 100, 180);
-			if(typeof currentStepState.ifBox !== "undefined"){
-				ifBox.status = currentStepState.ifBox;
-			}
+			this.addArrowTo(elementsToDraw, currentStepState);
 
-			elementsToDraw.push(ifBox)
-			//Draw the loop box
-			var loopBox = new BooleanBox(LOOP_CONTINUATION());
-			loopBox.topLeft = new Coord(this.areaWidth / 2 + CONTENT_SQUARE().size, 180);
-			if(typeof currentStepState.loopBox !== "undefined"){
-				loopBox.status = currentStepState.loopBox;
-			}
-			elementsToDraw.push(loopBox)
+			this.addConditionBoxesTo(elementsToDraw, currentStepState);
+
+
 		}
 		return (elementsToDraw);
     }
@@ -176,6 +211,8 @@ class LinearSearch extends AlgorithmPage{
 		var highlightedLine = this.state.steps[this.state.currentStepNum].highlightedLines;
 		if(highlightedLine == 0)
 			return "Goal: Determine whether the target is in the given elements.";
+		if(highlightedLine == 1 && this.state.steps[this.state.currentStepNum].loopBox == false)
+			return "There are no more elements to check.";
 		if(highlightedLine == 1 || highlightedLine == 2)
 			return "Loop through each element and see if it matches the target."
 		if(highlightedLine == 3)

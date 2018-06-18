@@ -39,8 +39,8 @@ class LinearSearch extends AlgorithmPage{
 	}
 
 
-	generateExplanation(){
-
+	generateExplanation = () => {
+		console.log("Yo there");
 		if(this.state.elements.length == 0)
 			return "";
 

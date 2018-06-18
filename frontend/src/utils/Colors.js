@@ -14,7 +14,7 @@ function toHex(color){
 	} else if (color == "grey"){
 		return "#95a5a6";
 	} else if (color == "black"){
-		return "#000000";
+		return "#333333";
 	} else if (color == "white"){
 		return "#FFFFFF";
 	}

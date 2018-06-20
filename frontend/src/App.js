@@ -8,6 +8,7 @@ import Test from 'pages/Test.js';
 import HeaderBar from 'components/headerBar/HeaderBar.js';
 //import BinarySearch from 'pages/BinarySearch.js';
 import BinarySearch from 'pages/binarySearch/BinarySearch.js';
+import Display from 'components/display/Display.js';
 
 class App extends Component {
   render() {

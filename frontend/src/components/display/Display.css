@@ -1,0 +1,23 @@
+#display{
+    display: inline-block;
+    width: 1010px;
+    height: 250px;
+    z-index: 1;
+    position: relative;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+#drawAreaSpace{
+    position: absolute;
+    z-index: 2;
+    left: 0px;
+    top: 0px;
+}
+
+#stepManagerSpace{
+    position: absolute;
+    z-index: 3;
+    bottom: 0px;
+    right: 15px;
+}

@@ -11,3 +11,41 @@
 	padding-right: 5px;
 	padding-top: 10px;
 }
+
+.inputArea input[type="text"] {
+    border: 3px solid #4CAF50;
+	border-radius: 3px;
+
+}
+
+.inputArea input[type="text"]:hover{
+    border: 3px solid #388E3C;
+}
+
+.inputArea input[type="text"]:focus{
+    border: 3px solid #388E3C;
+}
+
+.inputArea {
+    text-align: left;
+	padding-top: 20px;
+
+}
+
+.inputArea input[type=submit] {
+	-webkit-border-radius: 3;
+  -moz-border-radius: 3;
+  border-radius: 3px;
+  font-family: Arial;
+  color: #ffffff;
+  font-size: 18px;
+  background: #4caf50;
+  padding: 10px 20px 10px 20px;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.inputArea input[type=submit]:hover {
+	background: #087f23;
+  	text-decoration: none;
+}

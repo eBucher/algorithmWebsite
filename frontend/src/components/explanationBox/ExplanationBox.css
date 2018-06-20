@@ -2,6 +2,7 @@
 	width: 305px;
 	float: left;
 	text-align: left;
+	display: inline-block;
 }
 
 #explanation{

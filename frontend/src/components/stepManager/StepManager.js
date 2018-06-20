@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import "pages/styles.css";
+import './StepManager.css';
 
 class StepManager extends React.Component{
 	constructor(){

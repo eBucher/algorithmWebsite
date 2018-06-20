@@ -4,14 +4,11 @@ import AlgorithmPage from "pages/AlgorithmPage.js";
 import DrawArea from 'components/drawArea/DrawArea.js';
 import CodeBox from 'components/codeBox/CodeBox.js';
 import ExplanationBox from 'components/explanationBox/ExplanationBox.js';
-import Square from 'components/drawArea/shapes/Square.js';
-import Pointer from 'components/drawArea/shapes/Pointer.js';
-import BooleanBox from 'components/drawArea/shapes/BooleanBox.js';
-import {CONTENT_SQUARE, SMALL_POINTER, IF_STATEMENT, LOOP_CONTINUATION} from 'components/drawArea/shapes/Presets.js';
-import Coord from 'components/drawArea/math/Coord.js';
 import StepManager from 'components/stepManager/StepManager.js';
 import BinarySearchInput from 'pages/binarySearch/BinarySearchInput.js';
 import BinarySearchDraw from 'pages/binarySearch/BinarySearchDraw.js';
+import VisualizationTitle from 'components/visualizationTitle/VisualizationTitle.js';
+import Display from 'components/display/Display.js';
 
 class BinarySearch extends AlgorithmPage{
 
@@ -49,9 +46,6 @@ class BinarySearch extends AlgorithmPage{
 		this.areaWidth = 1000;
 
 	}
-
-
-
 
 
 	generateExplanation = () => {
@@ -93,17 +87,18 @@ class BinarySearch extends AlgorithmPage{
 		}
 		return (
 			<div id="AlgorithmContainer">
-
+				<VisualizationTitle algorithm="Binary Search" />
 				<BinarySearchInput parent={this}/>
-				<StepManager value ={this.state.currentStepNum} numSteps={this.state.steps.length - 1} enabled={this.state.started} parent={this}/>
+				<Display>
+					<DrawArea w={this.areaWidth} h={this.areaHeight} displayedPieces={piecesToShow}/>
+					<StepManager value ={this.state.currentStepNum} numSteps={this.state.steps.length} enabled={this.state.started} parent={this}/>
+				</Display>
 
-		        <DrawArea w={this.areaWidth} h={this.areaHeight} displayedPieces={piecesToShow}/>
 				<CodeBox linesOfCode={this.algorithm} highlightedLines={this.highlightedLines()}/>
 				<ExplanationBox text={this.generateExplanation()} />
 			</div>
 		)
 	}
-
 }
 
 export default BinarySearch;

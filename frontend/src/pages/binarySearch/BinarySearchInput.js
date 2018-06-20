@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import 'pages/styles.css';
 
 class BinarySearchInput extends React.Component {
 
@@ -65,13 +66,19 @@ class BinarySearchInput extends React.Component {
 
     render(){
         return (
-            <form onSubmit={this.handleSubmit}>
-                Target
-                <input type="text" onChange={this.handleTargetChange}></input>
-                Sorted Elements to search through
-                <input type="text" onChange={this.handleElementsChange}></input>
-                <input type="submit" value="Visualize"></input>
-            </form>
+            <div class="inputArea">
+                <form onSubmit={this.handleSubmit}>
+                    Target <br/>
+                    <input type="text" onChange={this.handleTargetChange}></input>
+                    <br/>
+                    <br/>
+                    Sorted Elements to search through <br/>
+                    <input type="text" onChange={this.handleElementsChange}></input>
+                    <br/>
+                    <br/>
+                    <input type="submit" value="Visualize" class="visualizeBtn"></input>
+                </form>
+            </div>
         )
     }
 }

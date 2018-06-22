@@ -1,8 +1,8 @@
 #explanationBox{
-	width: 305px;
-	float: left;
 	text-align: left;
-	display: inline-block;
+	min-width: min-content;
+	flex-grow: 1;
+	flex-basis: 20%;
 }
 
 #explanation{

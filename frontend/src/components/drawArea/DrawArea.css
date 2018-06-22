@@ -1,4 +1,7 @@
 #drawArea{
 
 	border: 5px solid #087f23;
+	position: relative;
+	top: 50%;
+	transform: translateY(-50%);
 }

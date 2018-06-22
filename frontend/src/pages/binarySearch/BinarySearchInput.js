@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import 'pages/styles.css';
+import {CONTENT_SQUARE} from 'components/drawArea/shapes/Presets.js';
 
 class BinarySearchInput extends React.Component {
 
@@ -60,6 +61,8 @@ class BinarySearchInput extends React.Component {
             steps: newSteps,
             currentStepNum: 0,
             started: true,
+            areaWidth: CONTENT_SQUARE().size * (newElements.length + 2),
+            areaHeight: 250,
         });
         event.preventDefault();
     }

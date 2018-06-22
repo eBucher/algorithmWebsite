@@ -42,8 +42,6 @@ class BinarySearch extends AlgorithmPage{
 			steps : [],
 			started : false
 		}
-		this.areaHeight = 250;
-		this.areaWidth = 1000;
 
 	}
 
@@ -82,20 +80,26 @@ class BinarySearch extends AlgorithmPage{
 		var piecesToShow = [];
 		if(this.state.started)
 		{
-			var drawHandler = new BinarySearchDraw(this.state.target, this.state.elements, this.areaWidth, this.areaHeight)
+			var drawHandler = new BinarySearchDraw(this.state.target, this.state.elements, this.state.areaWidth, this.state.areaHeight)
 			var piecesToShow = drawHandler.visualizeAlgorithm(this.state.steps[this.state.currentStepNum]);
 		}
 		return (
 			<div id="AlgorithmContainer">
-				<VisualizationTitle algorithm="Binary Search" />
-				<BinarySearchInput parent={this}/>
-				<Display>
-					<DrawArea w={this.areaWidth} h={this.areaHeight} displayedPieces={piecesToShow}/>
-					<StepManager value ={this.state.currentStepNum} numSteps={this.state.steps.length} enabled={this.state.started} parent={this}/>
-				</Display>
+				<div class="algorithmVisualization">
+					<div class="algorithmSidebar">
+						<VisualizationTitle algorithm="Binary Search" />
+						<BinarySearchInput parent={this}/>
+						<StepManager value ={this.state.currentStepNum} numSteps={this.state.steps.length} enabled={this.state.started} parent={this}/>
+					</div>
+					<Display>
+						<DrawArea w={this.state.areaWidth} h={this.state.areaHeight} displayedPieces={piecesToShow}/>
+					</Display>
+				</div>
 
-				<CodeBox linesOfCode={this.algorithm} highlightedLines={this.highlightedLines()}/>
-				<ExplanationBox text={this.generateExplanation()} />
+				<div class="bottomDescriptions">
+					<CodeBox linesOfCode={this.algorithm} highlightedLines={this.highlightedLines()}/>
+					<ExplanationBox text={this.generateExplanation()} />
+				</div>
 			</div>
 		)
 	}

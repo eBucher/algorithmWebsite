@@ -1,7 +1,35 @@
 #AlgorithmContainer{
-	width: 1010px;
-	margin: auto;
-	overflow: hidden;
+	display: grid;
+	grid-template-columns: auto minmax(500px, 90%) auto;
+	grid-template-rows: min-content min-content;
+	width: 100%;
+}
+
+.algorithmVisualization{
+	display: flex;
+	flex-basis: 100%;
+	flex-direction: row;
+	grid-column-start: 2;
+	grid-column-end: 3;
+	grid-row-start: 1;
+	grid-row-end: 1;
+}
+
+.bottomDescriptions{
+	display: flex;
+	flex-wrap: wrap;
+	width: 100%;
+	flex-direction: row;
+	grid-column-start: 2;
+	grid-column-end: 3;
+	grid-row-start: 2;
+	grid-row-end: 2;
+}
+
+.algorithmSidebar{
+	width: min-content;
+	border: 1px solid black;
+	padding: 10px;
 }
 
 .BoxTitle{
@@ -10,6 +38,13 @@
 	padding-left: 5px;
 	padding-right: 5px;
 	padding-top: 10px;
+	display: flex;
+}
+
+.inputArea {
+    text-align: left;
+	padding-top: 20px;
+
 }
 
 .inputArea input[type="text"] {
@@ -24,12 +59,6 @@
 
 .inputArea input[type="text"]:focus{
     border: 3px solid #388E3C;
-}
-
-.inputArea {
-    text-align: left;
-	padding-top: 20px;
-
 }
 
 .inputArea input[type=submit] {

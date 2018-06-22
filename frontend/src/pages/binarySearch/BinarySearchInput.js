@@ -1,18 +1,9 @@
 import React, { Component } from 'react';
 import 'pages/styles.css';
 import {CONTENT_SQUARE} from 'components/drawArea/shapes/Presets.js';
+import AlgorithmInputForm from 'components/algorithmInputForm/AlgorithmInputForm.js';
 
 class BinarySearchInput extends React.Component {
-
-    handleTargetChange = (event) => {
-        this.setState({tempTarget : event.target.value});
-    }
-
-
-    handleElementsChange = (event) => {
-        this.setState({tempElements : event.target.value});
-    }
-
 
     // checkIndex is where the array will be pointing to.
     calculateSteps = (elements, leftIdx, rightIdx, target) => {
@@ -47,16 +38,25 @@ class BinarySearchInput extends React.Component {
     }
 
 
-    handleSubmit = (event) => {
+    cleanRawElements = (rawElements) => {
         //Trim the whitespace from the input
-        var newElements = this.state.tempElements.replace(/\s/g,'');
+        var newElements = rawElements.replace(/\s/g,'');
         //Convert the elements to an array
         newElements = newElements.split(',');
         //Convert all of the strings to numbers
-        for(var i = 0; i < newElements.length; i++){newElements[i] = Number(newElements[i])};
-        var newSteps = this.calculateSteps(newElements, 0, newElements.length - 1, this.state.tempTarget);
+        for(var i = 0; i < newElements.length; i++){
+            newElements[i] = Number(newElements[i])
+        };
+
+        return newElements;
+    }
+
+
+    handleSubmit = (formState) => {
+        var newElements = this.cleanRawElements(formState.elements);
+        var newSteps = this.calculateSteps(newElements, 0, newElements.length - 1, formState.target);
         this.props.parent.setState({
-            target : this.state.tempTarget,
+            target : formState.target,
             elements: newElements,
             steps: newSteps,
             currentStepNum: 0,
@@ -64,23 +64,18 @@ class BinarySearchInput extends React.Component {
             areaWidth: CONTENT_SQUARE().size * (newElements.length + 2),
             areaHeight: 250,
         });
-        event.preventDefault();
     }
 
     render(){
         return (
             <div class="inputArea">
-                <form onSubmit={this.handleSubmit}>
-                    Target <br/>
-                    <input type="text" onChange={this.handleTargetChange}></input>
-                    <br/>
-                    <br/>
-                    Sorted Elements to search through <br/>
-                    <input type="text" onChange={this.handleElementsChange}></input>
-                    <br/>
-                    <br/>
-                    <input type="submit" value="Visualize" class="visualizeBtn"></input>
-                </form>
+                <AlgorithmInputForm
+                    model={[
+                        {key: "target", displayText: "Target" },
+                        {key: "elements", displayText: "Sorted elements to search through"}
+                    ]}
+                    submitHandler={this.handleSubmit.bind(this)}
+                />
             </div>
         )
     }

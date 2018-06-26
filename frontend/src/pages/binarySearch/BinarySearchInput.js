@@ -71,8 +71,8 @@ class BinarySearchInput extends React.Component {
             <div class="inputArea">
                 <AlgorithmInputForm
                     model={[
-                        {key: "target", displayText: "Target" },
-                        {key: "elements", displayText: "Sorted elements to search through"}
+                        {key: "target", displayText: "Target", tooltipText: "Which number to search for." },
+                        {key: "elements", displayText: "Sorted elements", tooltipText: "All of the numbers to search through to try to find the target. The numbers should be listed in ascending order and be separated by commas."}
                     ]}
                     submitHandler={this.handleSubmit.bind(this)}
                 />

@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import HelpIcon from 'assets/HelpIcon.svg';
 import 'tooltip/balloon.css';
 import InputBox from 'components/inputBox/InputBox.js';
+import ToolTip from 'components/toolTip/ToolTip.js';
 /*
     Required Properties:
     submitHandler - a function to handle when the form is submitted. It should
@@ -35,8 +36,9 @@ class AlgorithmInputForm extends React.Component{
                         width = {150}
                         onChangeHandler = {(event) => {this.handleChange(event, entry.key)}}
                     />
-
-                    <div data-balloon={entry.tooltipText} data-balloon-pos="right" data-balloon-length={this.getToolTipSize(entry.tooltipText)} style={{display: "inline-block"}}><img src={HelpIcon}/></div>
+                    <ToolTip position="right" text={entry.tooltipText}>
+                        <img src={HelpIcon}/>
+                    </ToolTip>
                     <br /> <br />
                 </React.Fragment>
             );

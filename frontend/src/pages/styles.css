@@ -48,17 +48,14 @@
 }
 
 .inputArea input[type="text"] {
-    border: 1px solid #cfcfcf;
+    border: 1.6px solid #9e9e9e;
 	border-radius: 3px;
 
 }
 
-.inputArea input[type="text"]:hover{
-    border: 3px solid #388E3C;
-}
 
 .inputArea input[type="text"]:focus{
-    border: 3px solid #388E3C;
+    border: 1.6px solid #009688;
 }
 
 .inputArea input[type=submit] {
@@ -68,13 +65,14 @@
   font-family: Arial;
   color: #ffffff;
   font-size: 18px;
-  background: #4caf50;
+  background: #ff9800;
   padding: 10px 20px 10px 20px;
   text-decoration: none;
   cursor: pointer;
+  font-weight: bold;
 }
 
 .inputArea input[type=submit]:hover {
-	background: #087f23;
+	background: #ffc947;
   	text-decoration: none;
 }

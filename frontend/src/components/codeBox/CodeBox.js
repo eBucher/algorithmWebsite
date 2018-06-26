@@ -29,7 +29,7 @@ class CodeBox extends React.Component{
 	buildLine = (highlightedLines, cleanLineCallback) => {
 		return function(line, index){
 			if(highlightedLines == index){
-				return <div style={{backgroundColor: toHex("yellow"), whiteSpace: "pre-line"}}>{cleanLineCallback(line)}</div>
+				return <div style={{backgroundColor: toHex("orange"), whiteSpace: "pre-line"}}>{cleanLineCallback(line)}</div>
 			}
 			return <div style={{whiteSpace: "pre-line"}}>{cleanLineCallback(line)}</div>
 		}

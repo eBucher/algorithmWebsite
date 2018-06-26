@@ -7,7 +7,6 @@ import ExplanationBox from 'components/explanationBox/ExplanationBox.js';
 import StepManager from 'components/stepManager/StepManager.js';
 import BinarySearchInput from 'pages/binarySearch/BinarySearchInput.js';
 import BinarySearchDraw from 'pages/binarySearch/BinarySearchDraw.js';
-import VisualizationTitle from 'components/visualizationTitle/VisualizationTitle.js';
 import Display from 'components/display/Display.js';
 
 class BinarySearch extends AlgorithmPage{
@@ -87,7 +86,7 @@ class BinarySearch extends AlgorithmPage{
 			<div id="AlgorithmContainer">
 				<div class="algorithmVisualization">
 					<div class="algorithmSidebar">
-						<VisualizationTitle algorithm="Binary Search" />
+						<h1 class="pageTitle lightPrimary">Binary Search</h1>
 						<BinarySearchInput parent={this}/>
 						<StepManager value ={this.state.currentStepNum} numSteps={this.state.steps.length} enabled={this.state.started} parent={this}/>
 					</div>

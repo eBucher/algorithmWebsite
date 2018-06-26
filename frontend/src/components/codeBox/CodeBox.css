@@ -1,5 +1,4 @@
 #codeBox{
-	border-right: 1px solid black;
 	text-align: left;
 	width: max-content;
 }
@@ -7,6 +6,8 @@
 .code {
 		padding-top: 5px;
 		padding-bottom: 5px;
+		background-color: #f5f5f5;
+		border-right: 1px solid #cfcfcf;
 }
 
 .code div {

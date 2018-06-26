@@ -29,7 +29,7 @@ class CodeBox extends React.Component{
 	buildLine = (highlightedLines, cleanLineCallback) => {
 		return function(line, index){
 			if(highlightedLines == index){
-				return <div style={{backgroundColor: toHex("orange"), whiteSpace: "pre-line"}}>{cleanLineCallback(line)}</div>
+				return <div style={{backgroundColor: "#ffc947", whiteSpace: "pre-line"}}>{cleanLineCallback(line)}</div>
 			}
 			return <div style={{whiteSpace: "pre-line"}}>{cleanLineCallback(line)}</div>
 		}
@@ -40,7 +40,7 @@ class CodeBox extends React.Component{
 		return (
 			<div id="codeBox">
 				<div className="BoxTitle">
-					Algorithm
+					<h2 class="subtitle white">Algorithm</h2>
 				</div>
 				<div className="code">
 					{this.generateLinesOfCode()}

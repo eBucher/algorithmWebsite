@@ -15,6 +15,28 @@
 	grid-row-end: 1;
 }
 
+.pageTitle{
+	font-size: 36px;
+	font-weight: bold;
+	text-align: left;
+	display: block;
+}
+
+.subtitle{
+	font-size: 24px;
+	font-weight: bold;
+	text-align: left;
+	display: block;
+}
+
+.lightPrimary{
+	color: #009688;
+}
+
+.white{
+	color: #FFFFFF;
+}
+
 .bottomDescriptions{
 	display: flex;
 	flex-wrap: wrap;
@@ -28,17 +50,19 @@
 
 .algorithmSidebar{
 	width: min-content;
-	border: 1px solid black;
+	border-left: 3px solid #cfcfcf;
+	border-right: 3px solid #cfcfcf;
 	padding: 10px;
 }
 
 .BoxTitle{
-	font-size: 20px;
-	border-bottom: 1px solid black;
 	padding-left: 5px;
 	padding-right: 5px;
 	padding-top: 10px;
+	padding-bottom: 10px;
 	display: flex;
+	background-color: #00675b;
+	color: #FFFFFF;
 }
 
 .inputArea {

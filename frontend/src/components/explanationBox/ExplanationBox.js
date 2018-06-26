@@ -9,7 +9,7 @@ class ExplanationBox extends React.Component{
 		return (
 			<div id="explanationBox">
 				<div className="BoxTitle">
-					What is happening
+					<h2 class="subtitle white">What is happening</h2>
 				</div>
 				<div id="explanation">
 					{this.props.text}

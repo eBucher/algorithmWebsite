@@ -51,6 +51,24 @@ class AlgorithmPage extends React.Component{
 	}
 
 
+	generateExplanations = () => {
+		var stepsToShow = 5;
+
+		if(this.state.steps.length == 0){
+			return [null, null, null, null, null];
+		}
+		var latestSteps = [];
+		for(var i = this.state.currentStepNum; i > this.state.currentStepNum - stepsToShow; i--){
+			if(i >= 0){
+				latestSteps.push(this.generateExplanation(i));
+			} else {
+				latestSteps.push(null);
+			}
+		}
+		return latestSteps;
+	}
+
+
 	/*
 		REQUIRED TO IMPLEMENT
 		PRE: none

@@ -45,11 +45,11 @@ class BinarySearch extends AlgorithmPage{
 	}
 
 
-	generateExplanation = () => {
+	generateExplanation = (stepNum) => {
 		if(this.state.elements.length == 0)
 			return "";
 
-		var highlightedLine = this.state.steps[this.state.currentStepNum].highlightedLines;
+		var highlightedLine = this.state.steps[stepNum].highlightedLines;
 		if(highlightedLine == 0)
 			return "Goal: Determine whether the target is in the given elements.";
 		if(highlightedLine == 1)
@@ -97,7 +97,7 @@ class BinarySearch extends AlgorithmPage{
 
 				<div class="bottomDescriptions">
 					<CodeBox linesOfCode={this.algorithm} highlightedLines={this.highlightedLines()}/>
-					<ExplanationBox text={this.generateExplanation()} />
+					<ExplanationBox text={this.generateExplanations()} />
 				</div>
 			</div>
 		)

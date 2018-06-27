@@ -5,7 +5,27 @@
 	flex-basis: 20%;
 }
 
-#explanation{
+#explanations{
 	padding: 5px;
+	display: grid;
+	grid-template-columns: min-content auto;
+	color: #9e9e9e;
+	overflow: hidden;
+}
 
+.lineIconContainer{
+	padding-left: 10px;
+	padding-right: 10px;
+	grid-column-start: 1;
+    grid-column-end: 2;
+	font-size: 36px;
+	text-align: right;
+	font-weight: bold;
+}
+
+.explanationContainer{
+	grid-column-start: 2;
+    grid-column-end: 3;
+	padding-top: 8px;
+	padding-bottom: 5px;
 }

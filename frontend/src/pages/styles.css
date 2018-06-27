@@ -29,6 +29,12 @@
 	display: block;
 }
 
+.subtitleIcon{
+	height: 24px;
+	width: 24px;
+	margin-right: 10px;
+}
+
 .lightPrimary{
 	color: #009688;
 }

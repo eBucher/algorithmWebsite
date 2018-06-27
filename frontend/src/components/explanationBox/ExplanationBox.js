@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import 'components/explanationBox/ExplanationBox.css';
+import 'pages/styles.css';
 import {toHex} from 'utils/Colors.js';
+import CommentIcon from 'assets/CommentIcon.svg';
 
 class ExplanationBox extends React.Component{
 
@@ -41,6 +43,7 @@ class ExplanationBox extends React.Component{
 		return (
 			<div id="explanationBox">
 				<div className="BoxTitle">
+					<img src={CommentIcon} class="subtitleIcon"/>
 					<h2 class="subtitle white">What is happening</h2>
 				</div>
 				<div id="explanations">

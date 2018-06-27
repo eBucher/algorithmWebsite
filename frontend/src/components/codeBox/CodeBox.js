@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import 'components/codeBox/CodeBox.css';
 import {toHex} from 'utils/Colors.js';
+import CodeIcon from 'assets/CodeIcon.svg';
 
 class CodeBox extends React.Component{
 
@@ -40,6 +41,7 @@ class CodeBox extends React.Component{
 		return (
 			<div id="codeBox">
 				<div className="BoxTitle">
+				<img src={CodeIcon} class="subtitleIcon"/>
 					<h2 class="subtitle white">Algorithm</h2>
 				</div>
 				<div className="code">

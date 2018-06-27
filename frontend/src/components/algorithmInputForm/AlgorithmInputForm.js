@@ -57,7 +57,7 @@ class AlgorithmInputForm extends React.Component{
         return (
             <form onSubmit={this.submitForm}>
                 {this.inputFields()}
-                <input type="submit" value="Visualize" class="visualizeBtn"></input>
+                <input type="submit" value="Visualize" class="secondaryBtn largeBtn"></input>
             </form>
         )
     }

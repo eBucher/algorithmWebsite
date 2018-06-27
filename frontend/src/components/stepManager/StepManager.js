@@ -40,10 +40,10 @@ class StepManager extends React.Component{
 	render(){
 		return (
 			<div class="stepManager">
-				<button onClick={this.previousStep} disabled={!this.props.enabled}>
+				<button class="primaryBtn smallBtn" onClick={this.previousStep} disabled={!this.props.enabled}>
 					Previous Step
 				</button>
-				<button onClick={this.nextStep} disabled={!this.props.enabled}>
+				<button class="primaryBtn smallBtn" onClick={this.nextStep} disabled={!this.props.enabled}>
 					Next Step
 				</button>
 				<br/>

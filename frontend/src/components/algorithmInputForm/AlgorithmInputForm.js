@@ -27,8 +27,8 @@ class AlgorithmInputForm extends React.Component{
 
     inputFields = () => {
         var elementsToAdd = [];
-        for (var i = 0; i < this.props.model.length; i++){
-            var entry = this.props.model[i];
+        for (var i = 0; i < this.props.model.forms.length; i++){
+            var entry = this.props.model.forms[i];
             elementsToAdd.push(
                 <React.Fragment>
                     <InputBox
@@ -49,7 +49,7 @@ class AlgorithmInputForm extends React.Component{
 
     submitForm = (event) => {
         event.preventDefault();
-        this.props.submitHandler(this.state);
+        this.props.model.submitHandler(this.state);
     }
 
 

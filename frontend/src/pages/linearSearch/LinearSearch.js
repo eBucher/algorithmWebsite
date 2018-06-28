@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import "../styles.css";
-import AlgorithmPage from "pages/AlgorithmPage.js";
+import Algorithm from "pages/Algorithm.js";
 import DrawArea from 'components/drawArea/DrawArea.js';
 import CodeBox from 'components/codeBox/CodeBox.js';
 import ExplanationBox from 'components/explanationBox/ExplanationBox.js';
@@ -8,7 +8,7 @@ import LinearSearchInput from 'pages/linearSearch/LinearSearchInput.js';
 import LinearSearchDraw from 'pages/linearSearch/LinearSearchDraw.js';
 import StepManager from 'components/stepManager/StepManager.js';
 
-class LinearSearch extends AlgorithmPage{
+class LinearSearch extends Algorithm{
 
 	constructor(){
 		super();

@@ -7,6 +7,14 @@ import Arrow from 'components/drawArea/shapes/primitives/Arrow.js';
 import CheckMark from 'components/drawArea/shapes/primitives/CheckMark.js';
 import Coord from '../components/drawArea/math/Coord.js';
 
+class Other extends React.Component {
+	render(){
+		return(
+			<p>Hey there</p>
+		);
+	}
+}
+
 class Test extends React.Component{
 
 	constructor(){
@@ -14,31 +22,13 @@ class Test extends React.Component{
 	}
 
 	render(){
-		var ContentSquare = {
-			size : 50,
-			thickness : 1,
-			centerFontSize : 25,
-			outerFontSize : 16,
-		}
-
-		var s = new Square(ContentSquare);
-		s.setText("Hey");
-		s.setTopLeft(new Coord(100, 100));
-		s.setColor("red");
-		s.setText("there", "TOP");
-		s.setText("123", "BOTTOM");
-		return (
-			<div id="AlgorithmContainer">
-		        <svg width="1000px" height="200px">
-					{s.build()}
-				</svg>
-
+		return(
+			<div style={{width: "500px", height: "500px", backgroundColor: "red"}}>
+				{this.props.otherOne}
 			</div>
-
-
 		)
 	}
 
 }
 
-export default Test;
+export {Test, Other};

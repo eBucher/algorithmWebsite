@@ -3,7 +3,10 @@ import 'pages/styles.css';
 import {CONTENT_SQUARE} from 'components/drawArea/shapes/Presets.js';
 import AlgorithmInputForm from 'components/algorithmInputForm/AlgorithmInputForm.js';
 
-class BinarySearchInput extends React.Component {
+class BinarySearchInput{
+    constructor(algorithmLogic){
+        this.algorithmLogic = algorithmLogic;
+    }
 
     // checkIndex is where the array will be pointing to.
     calculateSteps = (elements, leftIdx, rightIdx, target) => {
@@ -55,7 +58,7 @@ class BinarySearchInput extends React.Component {
     handleSubmit = (formState) => {
         var newElements = this.cleanRawElements(formState.elements);
         var newSteps = this.calculateSteps(newElements, 0, newElements.length - 1, formState.target);
-        this.props.parent.setState({
+        this.algorithmLogic.setState({
             target : formState.target,
             elements: newElements,
             steps: newSteps,
@@ -66,18 +69,15 @@ class BinarySearchInput extends React.Component {
         });
     }
 
-    render(){
-        return (
-            <div class="inputArea">
-                <AlgorithmInputForm
-                    model={[
-                        {key: "target", displayText: "Target", tooltipText: "Which number to search for." },
-                        {key: "elements", displayText: "Sorted elements", tooltipText: "All of the numbers to search through to try to find the target. The numbers should be listed in ascending order and be separated by commas."}
-                    ]}
-                    submitHandler={this.handleSubmit.bind(this)}
-                />
-            </div>
-        )
+
+    buildModel = () => {
+        return {
+            submitHandler: this.handleSubmit.bind(this),
+            forms: [
+                {key: "target", displayText: "Target", tooltipText: "Which number to search for." },
+                {key: "elements", displayText: "Sorted elements", tooltipText: "All of the numbers to search through to try to find the target. The numbers should be listed in ascending order and be separated by commas."}
+            ]
+        }
     }
 }
 

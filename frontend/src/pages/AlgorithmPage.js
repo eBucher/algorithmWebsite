@@ -1,84 +1,36 @@
-import React, { Component } from 'react';
-import "./styles.css";
+import React, {Component} from 'react';
 import DrawArea from 'components/drawArea/DrawArea.js';
 import CodeBox from 'components/codeBox/CodeBox.js';
+import ExplanationBox from 'components/explanationBox/ExplanationBox.js';
+import StepManager from 'components/stepManager/StepManager.js';
+import BinarySearchInput from 'pages/binarySearch/BinarySearchInput.js';
+import Display from 'components/display/Display.js';
+import AlgorithmInputForm from 'components/algorithmInputForm/AlgorithmInputForm.js';
 
-class AlgorithmPage extends React.Component{
+class AlgorithmPage extends React.Component {
+    render(){
+        return(
+            <div id="AlgorithmContainer">
+				<div class="algorithmVisualization">
+					<div class="algorithmSidebar">
+						<h1 class="pageTitle lightPrimary">{this.props.algorithmName}</h1>
+                        <div class="inputArea">
+                            <AlgorithmInputForm model={this.props.inputModel} />
+                        </div>
+						<StepManager value ={this.props.currentStepNum} numSteps={this.props.numSteps} enabled={this.props.started} parent={this.props.parent}/>
+					</div>
+					<Display>
+						<DrawArea w={this.props.areaWidth} h={this.props.areaHeight} displayedPieces={this.props.piecesToShow}/>
+					</Display>
+				</div>
 
-	/*
-		Required member variables:
-		this.algorithm: an array of each line in the algorithm that will get
-		highlighted. \n can be used in a string to indicate where where a line
-		break will be upon output. Use four spaces for one tab.
-		this.state: Initialize its values as shown below along with any
-			other state variables that are needed for the specific algorithm.
-	*/
-	constructor(){
-		super();
-		//Denote a line break as a \n
-		this.algorithm = [];
-		this.state = {
-			tempTarget : "",
-			tempElements : "",
-
-			currentStepNum: null,
-			steps : [],
-			started : false
-		}
-
-	}
-
-
-	/*
-		Returns the index of the line that should be highlighted. If there are
-		no lines that need to be highlighted, null is returned.
-	*/
-	highlightedLines = () => {
-		if(this.state.steps.length == 0){
-			return null;
-		} else {
-			return this.state.steps[this.state.currentStepNum].highlightedLines;
-		}
-	}
-
-
-	/*
-		Must return a line to be displayed in the explanatin box.
-	*/
-	generateExplanation = () => {
-		if(this.constructor == AlgorithmPage)
-			throw new Error("generateExplanation() must be implemented in the " + this.constructor.name + " class.");
-	}
-
-
-	generateExplanations = () => {
-		var stepsToShow = 5;
-
-		if(this.state.steps.length == 0){
-			return [null, null, null, null, null];
-		}
-		var latestSteps = [];
-		for(var i = this.state.currentStepNum; i > this.state.currentStepNum - stepsToShow; i--){
-			if(i >= 0){
-				latestSteps.push(this.generateExplanation(i));
-			} else {
-				latestSteps.push(null);
-			}
-		}
-		return latestSteps;
-	}
-
-
-	/*
-		REQUIRED TO IMPLEMENT
-		PRE: none
-		POST: A div called "AlgorithmContainer" is returned that contains
-		input boxes for the user, the drawArea, and a codeBox.
-	*/
-	render(){
-		return (<div id="AlgorithmContainer"></div>);
-	}
-
+				<div class="bottomDescriptions">
+					<CodeBox linesOfCode={this.props.algorithm} highlightedLines={this.props.highlightedLines}/>
+					<ExplanationBox text={this.props.explanations} />
+				</div>
+			</div>
+        )
+    }
 }
 
 export default AlgorithmPage;

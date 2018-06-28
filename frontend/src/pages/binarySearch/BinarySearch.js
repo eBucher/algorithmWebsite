@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import "pages/styles.css";
+import Algorithm from "pages/Algorithm.js";
 import AlgorithmPage from "pages/AlgorithmPage.js";
 import DrawArea from 'components/drawArea/DrawArea.js';
 import CodeBox from 'components/codeBox/CodeBox.js';
@@ -9,11 +10,12 @@ import BinarySearchInput from 'pages/binarySearch/BinarySearchInput.js';
 import BinarySearchDraw from 'pages/binarySearch/BinarySearchDraw.js';
 import Display from 'components/display/Display.js';
 
-class BinarySearch extends AlgorithmPage{
+class BinarySearch extends Algorithm{
 
 	constructor(){
 		super();
 		//Denote a line break as a \n
+		this.name = "Binary Search";
 		this.algorithm = [
 			"function binarySearch(elements, left, right, target){",
 			"    if (right >= left){",
@@ -75,33 +77,21 @@ class BinarySearch extends AlgorithmPage{
 		return "Nothing to show.";
 	}
 
-	render(){
+	getVisuals = () => {
 		var piecesToShow = [];
 		if(this.state.started)
 		{
 			var drawHandler = new BinarySearchDraw(this.state.target, this.state.elements, this.state.areaWidth, this.state.areaHeight)
 			var piecesToShow = drawHandler.visualizeAlgorithm(this.state.steps[this.state.currentStepNum]);
 		}
-		return (
-			<div id="AlgorithmContainer">
-				<div class="algorithmVisualization">
-					<div class="algorithmSidebar">
-						<h1 class="pageTitle lightPrimary">Binary Search</h1>
-						<BinarySearchInput parent={this}/>
-						<StepManager value ={this.state.currentStepNum} numSteps={this.state.steps.length} enabled={this.state.started} parent={this}/>
-					</div>
-					<Display>
-						<DrawArea w={this.state.areaWidth} h={this.state.areaHeight} displayedPieces={piecesToShow}/>
-					</Display>
-				</div>
-
-				<div class="bottomDescriptions">
-					<CodeBox linesOfCode={this.algorithm} highlightedLines={this.highlightedLines()}/>
-					<ExplanationBox text={this.generateExplanations()} />
-				</div>
-			</div>
-		)
+		return piecesToShow;
 	}
+
+	getInputModel = () => {
+		return new BinarySearchInput(this).buildModel();
+	}
+
+
 }
 
 export default BinarySearch;

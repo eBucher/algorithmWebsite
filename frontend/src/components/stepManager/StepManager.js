@@ -8,6 +8,7 @@ class StepManager extends React.Component{
 		this.currentStepNum = 0;
 	}
 
+
 	nextStep = () => {
 		if(this.currentStepNum != this.props.numSteps - 1){
 			this.currentStepNum++;

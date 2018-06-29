@@ -35,17 +35,17 @@ class AlgorithmInputForm extends React.Component{
 
     inputFields = () => {
         var elementsToAdd = [];
-        for (let i = 0; i < this.props.model.forms.length; i++){
-            var entry = this.props.model.forms[i];
+        for (var i = 0; i < this.props.model.forms.length; i++){
+            let entry = this.props.model.forms[i];
             var errorMsg = "";
             elementsToAdd.push(
                 <React.Fragment>
                     <InputBox
                         label = {entry.displayText}
                         width = {200}
-                        onChangeHandler = {(event) => {this.handleChange(event, this.props.model.forms[i].key)}}
-                        hasError={this.state.errors.includes(this.props.model.forms[i].key)}
-                        errorMsg={this.props.model.forms[i].errorMsg}
+                        onChangeHandler = {(event) => {this.handleChange(event, entry.key)}}
+                        hasError={this.state.errors.includes(entry.key)}
+                        errorMsg={entry.errorMsg}
                         tooltip={entry.tooltipText}
                     />
 
@@ -60,8 +60,8 @@ class AlgorithmInputForm extends React.Component{
     checkInputErrors = () => {
         var errors = [];
         for (var i = 0; i < this.props.model.forms.length; i++){
-            var entry = this.props.model.forms[i];
-            if(!entry.verifyHandler(this.state[this.props.model.forms[i].key])){
+            let entry = this.props.model.forms[i];
+            if(!entry.verifyHandler(this.state[entry.key])){
                 errors.push(entry.key);
             }
         }

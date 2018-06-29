@@ -1,9 +1,16 @@
 import React, {Component} from 'react';
 import './InputBox.css';
 import HelpIcon from 'assets/HelpIcon.svg';
+import SelectedHelpIcon from 'assets/HelpIconLightBlue.svg';
 import ToolTip from 'components/toolTip/ToolTip.js';
 
 class InputBox extends React.Component{
+    constructor(){
+        super();
+        this.state = {
+            toolTipIcon: HelpIcon
+        }
+    }
 
 
     getWidth = () => {
@@ -20,6 +27,18 @@ class InputBox extends React.Component{
         return {visibility: "hidden"};
     }
 
+    toolTipIconEnterHandler = () => {
+        this.setState({
+            toolTipIcon: SelectedHelpIcon
+        })
+    }
+
+    toolTipIconExitHandler = () => {
+        this.setState({
+            toolTipIcon: HelpIcon
+        })
+    }
+
 
     render(){
         return(
@@ -33,8 +52,13 @@ class InputBox extends React.Component{
                         onChange={this.props.onChangeHandler}
                     />
                     <div class="toolTipIconPositioning">
-                        <ToolTip position="right" text={this.props.tooltip}>
-                            <img src={HelpIcon}/>
+                        <ToolTip position="right" text={this.props.tooltip} cursor="help">
+                            <img
+                                src={this.state.toolTipIcon}
+                                onMouseOver={this.toolTipIconEnterHandler}
+                                onMouseOut={this.toolTipIconExitHandler}
+                                class="toolTipIcon_InputBox"
+                            />
                         </ToolTip>
                     </div>
                     <br/>

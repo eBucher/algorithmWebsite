@@ -42,7 +42,7 @@ class AlgorithmInputForm extends React.Component{
                 <React.Fragment>
                     <InputBox
                         label = {entry.displayText}
-                        width = {150}
+                        width = {200}
                         onChangeHandler = {(event) => {this.handleChange(event, this.props.model.forms[i].key)}}
                         hasError={this.state.errors.includes(this.props.model.forms[i].key)}
                         errorMsg={this.props.model.forms[i].errorMsg}

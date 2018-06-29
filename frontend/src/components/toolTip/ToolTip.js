@@ -8,13 +8,20 @@ class ToolTip extends React.Component{
         return "large";
     }
 
+    getCursor = () => {
+        if(this.props.cursor){
+            return this.props.cursor;
+        }
+        return "pointer"
+    }
+
     render(){
         return(
             <div
                 data-balloon={this.props.text}
                 data-balloon-pos={this.props.position}
                 data-balloon-length={this.getToolTipSize(this.props.text)}
-                style={{display: "inline-block"}}
+                style={{display: "inline-block", cursor: this.getCursor()}}
             >
                 {this.props.children}
             </div>

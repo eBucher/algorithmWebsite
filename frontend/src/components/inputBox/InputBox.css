@@ -27,4 +27,10 @@
 .toolTipIconPositioning{
     display: inline-block;
     vertical-align: middle;
+    margin-left: 5px;
+}
+
+.toolTipIcon_InputBox{
+    height: 24px;
+    width: 24px;
 }

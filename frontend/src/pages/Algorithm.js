@@ -69,6 +69,7 @@ class Algorithm extends React.Component{
 			throw new Error("getInputModel() must be implemented in the " + this.constructor.name + " class.");
 	}
 
+
 	generateExplanations = () => {
 		var stepsToShow = 5;
 

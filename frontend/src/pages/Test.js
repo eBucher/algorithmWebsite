@@ -17,11 +17,16 @@ class Other extends React.Component {
 
 class Test extends React.Component{
 
-	constructor(){
-		super();
-	}
+	verifyElements = (input) => {
+		console.log(/^(-?[1-9]+(\s)*,(\s)*)*-?[1-9]+(\s)*$/.test(input));
+        if(/^(-?[1-9]+(\s)*,(\s)*)*-?[1-9]+(\s)*$/.test(input)){
+            return true;
+        }
+        return false;
+    }
 
 	render(){
+		console.log(this.verifyElements("1, 2, 3, 4, 5"));
 		return(
 			<div style={{width: "500px", height: "500px", backgroundColor: "red"}}>
 				{this.props.otherOne}
@@ -31,4 +36,4 @@ class Test extends React.Component{
 
 }
 
-export {Test, Other};
+export default Test;

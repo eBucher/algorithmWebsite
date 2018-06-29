@@ -15,4 +15,16 @@
     font-size: 14px;
     font-weight: bold;
     color: #707070;
+    letter-spacing: .5px;
+}
+
+.inputErrorMsgText{
+    font-size: 14px;
+    color: #e74c3c;
+
+}
+
+.toolTipIconPositioning{
+    display: inline-block;
+    vertical-align: middle;
 }

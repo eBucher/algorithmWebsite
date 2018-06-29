@@ -1,8 +1,7 @@
 import React, {Component} from 'react';
-import HelpIcon from 'assets/HelpIcon.svg';
 import 'tooltip/balloon.css';
 import InputBox from 'components/inputBox/InputBox.js';
-import ToolTip from 'components/toolTip/ToolTip.js';
+
 /*
     Required Properties:
     submitHandler - a function to handle when the form is submitted. It should
@@ -15,8 +14,17 @@ import ToolTip from 'components/toolTip/ToolTip.js';
 */
 class AlgorithmInputForm extends React.Component{
 
+    constructor(){
+        super();
+        this.state = {
+            errors: []
+        }
+    }
+
     handleChange = (event, key) => {
-        this.setState({[key]: event.target.value});
+        this.setState({
+            [key]: event.target.value
+        });
     }
 
     getToolTipSize = (text) => {
@@ -27,18 +35,20 @@ class AlgorithmInputForm extends React.Component{
 
     inputFields = () => {
         var elementsToAdd = [];
-        for (var i = 0; i < this.props.model.forms.length; i++){
+        for (let i = 0; i < this.props.model.forms.length; i++){
             var entry = this.props.model.forms[i];
+            var errorMsg = "";
             elementsToAdd.push(
                 <React.Fragment>
                     <InputBox
                         label = {entry.displayText}
                         width = {150}
-                        onChangeHandler = {(event) => {this.handleChange(event, entry.key)}}
+                        onChangeHandler = {(event) => {this.handleChange(event, this.props.model.forms[i].key)}}
+                        hasError={this.state.errors.includes(this.props.model.forms[i].key)}
+                        errorMsg={this.props.model.forms[i].errorMsg}
+                        tooltip={entry.tooltipText}
                     />
-                    <ToolTip position="right" text={entry.tooltipText}>
-                        <img src={HelpIcon}/>
-                    </ToolTip>
+
                     <br /> <br />
                 </React.Fragment>
             );
@@ -47,9 +57,26 @@ class AlgorithmInputForm extends React.Component{
     }
 
 
+    checkInputErrors = () => {
+        var errors = [];
+        for (var i = 0; i < this.props.model.forms.length; i++){
+            var entry = this.props.model.forms[i];
+            if(!entry.verifyHandler(this.state[this.props.model.forms[i].key])){
+                errors.push(entry.key);
+            }
+        }
+        return errors;
+    }
+
     submitForm = (event) => {
         event.preventDefault();
-        this.props.model.submitHandler(this.state);
+        var errors = this.checkInputErrors();
+        this.setState({
+            errors: errors
+        })
+        if(errors.length == 0){
+            this.props.model.validInputHandler(this.state);
+        }
     }
 
 

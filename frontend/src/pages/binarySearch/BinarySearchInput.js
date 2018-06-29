@@ -55,7 +55,7 @@ class BinarySearchInput{
     }
 
 
-    handleSubmit = (formState) => {
+    validInputHandler = (formState) => {
         var newElements = this.cleanRawElements(formState.elements);
         var newSteps = this.calculateSteps(newElements, 0, newElements.length - 1, formState.target);
         this.algorithmLogic.setState({
@@ -70,12 +70,39 @@ class BinarySearchInput{
     }
 
 
+    verifyTarget = (input) => {
+        if(/^-?[1-9]+$/.test(input)){
+            return true;
+        }
+        return false;
+    }
+
+
+    verifyElements = (input) => {
+        if(/^(-?[0-9]+(\s)*,(\s)*)*-?[0-9]+(\s)*$/.test(input)){
+            return true;
+        }
+        return false;
+    }
+
+
     buildModel = () => {
         return {
-            submitHandler: this.handleSubmit.bind(this),
+            validInputHandler: this.validInputHandler.bind(this),
             forms: [
-                {key: "target", displayText: "Target", tooltipText: "Which number to search for." },
-                {key: "elements", displayText: "Sorted elements", tooltipText: "All of the numbers to search through to try to find the target. The numbers should be listed in ascending order and be separated by commas."}
+                {   key: "target",
+                    displayText: "Target",
+                    tooltipText: "Which number to search for.",
+                    verifyHandler: this.verifyTarget,
+                    errorMsg: "Must be an integer"
+                },
+                {
+                    key: "elements",
+                    displayText: "Sorted elements",
+                    tooltipText: "All of the numbers to search through to try to find the target. The numbers should be listed in ascending order and be separated by commas.",
+                    verifyHandler: this.verifyElements,
+                    errorMsg: "Must be integers separated by commas"
+                }
             ]
         }
     }

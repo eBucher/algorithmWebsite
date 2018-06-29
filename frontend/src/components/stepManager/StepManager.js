@@ -41,13 +41,15 @@ class StepManager extends React.Component{
 	render(){
 		return (
 			<div class="stepManager">
-				<button class="primaryBtn smallBtn" onClick={this.previousStep} disabled={!this.props.enabled}>
-					Previous Step
-				</button>
-				<button class="primaryBtn smallBtn" onClick={this.nextStep} disabled={!this.props.enabled}>
-					Next Step
-				</button>
-				<br/>
+				<div class="btnContainer">
+					<button class="primaryBtn smallBtn" onClick={this.previousStep} disabled={!this.props.enabled}>
+						Previous Step
+					</button>
+					<div class="btnDivider"></div>
+					<button class="primaryBtn smallBtn" onClick={this.nextStep} disabled={!this.props.enabled}>
+						Next Step
+					</button>
+				</div>
 				<input id="stepSlider" type="range" min="0" max={this.props.numSteps}
 					step="1" onChange={this.handleSliderChange}
 					value={this.props.value} disabled={!this.props.enabled}

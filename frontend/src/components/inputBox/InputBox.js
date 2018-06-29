@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import './InputBox.css';
 import HelpIcon from 'assets/HelpIcon.svg';
 import SelectedHelpIcon from 'assets/HelpIconLightBlue.svg';
+import WarningIcon from 'assets/WarningIcon.svg';
 import ToolTip from 'components/toolTip/ToolTip.js';
 
 class InputBox extends React.Component{
@@ -14,10 +15,11 @@ class InputBox extends React.Component{
 
 
     getWidth = () => {
+        var HORIZONTAL_PADDING = 30;
         if(this.props.width){
-            return this.props.width;
+            return this.props.width - HORIZONTAL_PADDING;
         }
-        return 140; //default is 150, but there is padding
+        return 150 - HORIZONTAL_PADDING;
     }
 
     errorMsgVisibility = () => {
@@ -39,6 +41,15 @@ class InputBox extends React.Component{
         })
     }
 
+    getInputStyle = () => {
+        if(this.props.hasError){
+            return {
+                width: (this.getWidth()) + "px",
+                backgroundImage: "url(" + WarningIcon + ")",
+            }
+        }
+        return {width: this.getWidth() + "px"}
+    }
 
     render(){
         return(
@@ -48,7 +59,7 @@ class InputBox extends React.Component{
                 <div>
                     <input
                         type="text"
-                        style={{width: this.getWidth() + "px"}}
+                        style={this.getInputStyle()}
                         onChange={this.props.onChangeHandler}
                     />
                     <div class="toolTipIconPositioning">

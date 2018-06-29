@@ -3,8 +3,10 @@
 	border-radius: 3px;
     font-size: 18px;
     padding-left: 5px;
-    padding-right: 5px;
+    padding-right: 25px;
     font-family: arial;
+    background-repeat: no-repeat;
+    background-position: right;
 }
 
 .inputArea input[type="text"]:focus{
@@ -23,6 +25,7 @@
     color: #e74c3c;
 
 }
+
 
 .toolTipIconPositioning{
     display: inline-block;

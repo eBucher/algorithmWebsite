@@ -5,4 +5,5 @@
     overflow-y: auto;
     overflow: auto;
     position: relative;
+    min-width: 300px;
 }

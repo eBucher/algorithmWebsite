@@ -17,8 +17,10 @@ class AlgorithmPage extends React.Component {
                         <div class="inputArea">
                             <AlgorithmInputForm model={this.props.inputModel} />
                         </div>
-						<StepManager value ={this.props.currentStepNum} numSteps={this.props.numSteps} enabled={this.props.started} parent={this.props.parent}/>
-					</div>
+                        <div class="stepManagerArea">
+						    <StepManager value ={this.props.currentStepNum} numSteps={this.props.numSteps} enabled={this.props.started} parent={this.props.parent}/>
+                        </div>
+                    </div>
 					<Display>
 						<DrawArea w={this.props.areaWidth} h={this.props.areaHeight} displayedPieces={this.props.piecesToShow}/>
 					</Display>

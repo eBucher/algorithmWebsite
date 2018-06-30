@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import './InputBox.css';
+import 'pages/styles.css';
 import HelpIcon from 'assets/HelpIcon.svg';
 import SelectedHelpIcon from 'assets/HelpIconLightBlue.svg';
 import WarningIcon from 'assets/WarningIcon.svg';
@@ -54,7 +55,7 @@ class InputBox extends React.Component{
     render(){
         return(
             <React.Fragment>
-                <label class="inputBoxLabel">{this.props.label}</label>
+                <label class="smallLabelText">{this.props.label}</label>
                 <br/>
                 <div>
                     <input

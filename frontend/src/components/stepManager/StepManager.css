@@ -1,11 +1,36 @@
 .stepManager{
-    min-width: max-content;
+    min-width: 100%;
+}
+
+.stepManager .previousLabel{
+    text-align: left;
+    display: inline-block;
+    width: 50%;
+}
+
+.stepManager .nextLabel{
+    text-align: right;
+    display: inline-block;
+    width: 50%;
 }
 
 .stepManager .btnContainer{
     display: flex;
     justify-content: space-between;
 }
+
+.forwardIcon{
+    margin: 2px 0px 0px 3px;
+    height: 24px;
+    width: 24px;
+}
+
+.backwardIcon{
+    margin: 2px 2px 0px 0px;
+    height: 24px;
+    width: 24px;
+}
+
 
 .stepManager .btnDivider{
     width: 2px;
@@ -16,8 +41,10 @@
 
 .stepManager input[type=range] {
   -webkit-appearance: none;
-  width: 100%;
+  width: 175px;
   margin: 6.2px 0;
+  margin-left: 5px;
+  margin-right: 5px;
 }
 .stepManager input[type=range]:focus {
   outline: none;

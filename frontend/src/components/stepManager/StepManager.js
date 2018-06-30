@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import "pages/styles.css";
 import './StepManager.css';
+import RightArrow from 'assets/ForwardIcon.svg';
+import LeftArrow from 'assets/BackwardIcon.svg';
 
 class StepManager extends React.Component{
 	constructor(){
@@ -41,19 +43,22 @@ class StepManager extends React.Component{
 	render(){
 		return (
 			<div class="stepManager">
-				<div class="btnContainer">
-					<button class="primaryBtn smallBtn" onClick={this.previousStep} disabled={!this.props.enabled}>
-						Previous Step
-					</button>
-					<div class="btnDivider"></div>
-					<button class="primaryBtn smallBtn" onClick={this.nextStep} disabled={!this.props.enabled}>
-						Next Step
-					</button>
+				<div class="previousLabel">
+					<label class="smallLabelText">Previous Step</label>
 				</div>
+				<div class="nextLabel">
+					<label class="smallLabelText">Next Step</label>
+				</div>
+				<button class="smallCircularBtn primaryBtn" onClick={this.previousStep} disabled={!this.props.enabled}>
+					<img src={LeftArrow} class="backwardIcon"/>
+				</button>
 				<input id="stepSlider" type="range" min="0" max={this.props.numSteps}
 					step="1" onChange={this.handleSliderChange}
 					value={this.props.value} disabled={!this.props.enabled}
 				/>
+				<button class="smallCircularBtn primaryBtn" onClick={this.nextStep} disabled={!this.props.enabled}>
+					<img src={RightArrow} class="forwardIcon"/>
+				</button>
 			</div>
 		)
 	}

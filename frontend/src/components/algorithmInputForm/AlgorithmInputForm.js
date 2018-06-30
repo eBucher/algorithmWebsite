@@ -39,7 +39,7 @@ class AlgorithmInputForm extends React.Component{
             let entry = this.props.model.forms[i];
             var errorMsg = "";
             elementsToAdd.push(
-                <React.Fragment>
+                <div class="inputField">
                     <InputBox
                         label = {entry.displayText}
                         width = {200}
@@ -49,8 +49,7 @@ class AlgorithmInputForm extends React.Component{
                         tooltip={entry.tooltipText}
                     />
 
-                    <br /> <br />
-                </React.Fragment>
+                </div>
             );
         }
         return elementsToAdd;
@@ -84,7 +83,7 @@ class AlgorithmInputForm extends React.Component{
         return (
             <form onSubmit={this.submitForm}>
                 {this.inputFields()}
-                <input type="submit" value="Visualize" class="secondaryBtn largeBtn"></input>
+                <input type="submit" value="Visualize" class="secondaryBtn smallBtn"></input>
             </form>
         )
     }

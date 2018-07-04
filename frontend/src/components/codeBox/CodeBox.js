@@ -39,7 +39,7 @@ class CodeBox extends React.Component{
 	render(){
 
 		return (
-			<div id="codeBox">
+			<div class="codeBox sectionShadow coloredTop">
 				<div className="BoxTitle">
 				<img src={CodeIcon} class="subtitleIcon"/>
 					<h2 class="subtitle white">Algorithm</h2>

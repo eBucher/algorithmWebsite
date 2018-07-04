@@ -6,6 +6,7 @@ import Display from 'components/display/Display.js';
 import AlgorithmSideBar from 'components/algorithmSideBar/AlgorithmSideBar.js';
 
 class AlgorithmPage extends React.Component {
+
     render(){
         return(
             <div id="AlgorithmContainer">
@@ -18,7 +19,7 @@ class AlgorithmPage extends React.Component {
                         started = {this.props.started}
                         parent = {this.props.parent}
                     />
-					<Display>
+					<Display started={this.props.started}>
 						<DrawArea w={this.props.areaWidth} h={this.props.areaHeight} displayedPieces={this.props.piecesToShow}/>
 					</Display>
 				</div>

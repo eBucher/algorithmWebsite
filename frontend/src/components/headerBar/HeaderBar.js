@@ -4,7 +4,7 @@ import 'components/headerBar/HeaderBar.css';
 class HeaderBar extends React.Component {
 	render(){
 		return (
-			<div id="headerBar">
+			<div class="headerBar sectionShadow">
 				<p>A nifty logo and navbar will go up in here.</p>
 			</div>
 		)

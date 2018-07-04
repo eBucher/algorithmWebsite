@@ -1,8 +1,10 @@
-#explanationBox{
+.explanationBox{
 	text-align: left;
 	min-width: 300px;
 	flex-grow: 9999;
 	flex-basis: 20%;
+	background-color: #FFFFFF;
+	margin-bottom: 10px;
 }
 
 #explanations{

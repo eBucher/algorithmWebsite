@@ -13,6 +13,13 @@
 	grid-column-end: 3;
 	grid-row-start: 1;
 	grid-row-end: 1;
+	margin-bottom: 10px;
+}
+
+.sectionShadow{
+	-webkit-box-shadow: 0px 0px 5px 3px rgba(0,0,0,0.2);
+	-moz-box-shadow: 0px 0px 5px 3px rgba(0,0,0,0.2);
+	box-shadow: 0px 0px 5px 3px rgba(0,0,0,0.2);
 }
 
 .subtitleIcon{
@@ -39,6 +46,10 @@
 
 .inputField{
 	margin-bottom: 10px;
+}
+
+.coloredTop{
+	border-top: 5px solid #009688;
 }
 
 /******************* Fonts *******************/
@@ -107,6 +118,10 @@ button:hover, input[type=submit]:hover{
     text-align: center;
 	cursor: pointer;
 	padding: 0px;
+}
+
+.smallCircularBtn::-moz-focus-inner {
+  border: 0;
 }
 
 .smallBtn {

@@ -7,17 +7,27 @@ class Display extends Component {
         super();
     }
 
+    renderContent = () => {
+        console.log(this.props.started);
+        if(this.props.started){
+            return this.props.children;
+        } else {
+            return (
+                <div class="greyCover">
+
+                </div>
+            )
+        }
+    }
+
     render() {
         return (
-            <div id="display">
-                {this.props.children}
+            <div class="display sectionShadow coloredTop">
+                {this.renderContent()}
             </div>
         );
     }
 }
-
-//<DrawArea w="250" h="250" displayedPieces={[]}/>
-//<StepManager />
 
 
 export default Display;

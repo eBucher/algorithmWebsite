@@ -1,9 +1,14 @@
-#display{
+.display{
     flex-grow: 1;
     position: relative;
-    border-right: 3px solid #cfcfcf;;
     overflow-y: auto;
     overflow: auto;
-    position: relative;
     min-width: 300px;
+    background-color: #FFFFFF;
+}
+
+.greyCover{
+    width: 100%;
+    height: 100%;
+    background-color: #9e9e9e;
 }

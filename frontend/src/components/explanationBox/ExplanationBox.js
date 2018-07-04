@@ -41,7 +41,7 @@ class ExplanationBox extends React.Component{
 	render(){
 
 		return (
-			<div id="explanationBox">
+			<div class="explanationBox sectionShadow coloredTop">
 				<div className="BoxTitle">
 					<img src={CommentIcon} class="subtitleIcon"/>
 					<h2 class="subtitle white">What is happening</h2>

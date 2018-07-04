@@ -1,9 +1,9 @@
 .algorithmSidebar{
 	width: 250px;
 	min-width: 250px;
-	border-left: 3px solid #cfcfcf;
-	border-right: 3px solid #cfcfcf;
 	padding: 10px;
+	margin-right: 10px;
+	background-color: #FFFFFF;
 }
 
 .inputArea {

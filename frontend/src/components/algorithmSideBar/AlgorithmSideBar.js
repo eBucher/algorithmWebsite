@@ -6,7 +6,7 @@ import AlgorithmInputForm from 'components/algorithmInputForm/AlgorithmInputForm
 class AlgorithmSideBar extends Component{
     render(){
         return(
-            <div class="algorithmSidebar">
+            <div class="algorithmSidebar sectionShadow coloredTop">
                 <h1 class="pageTitle lightPrimary">{this.props.algorithmName}</h1>
                 <div class="inputArea">
                     <AlgorithmInputForm model={this.props.inputModel} />

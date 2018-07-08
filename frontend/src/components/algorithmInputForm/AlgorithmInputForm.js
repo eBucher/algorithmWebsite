@@ -16,28 +16,64 @@ class AlgorithmInputForm extends React.Component{
 
     constructor(){
         super();
+        this.handledUrlParams = false;
         this.state = {
             errors: []
         }
     }
 
+
+    /*
+        Any time that the user makes a change to the input box, handleChange should
+        be called to record what is now in the box into the state.
+    */
     handleChange = (event, key) => {
         this.setState({
             [key]: event.target.value
         });
     }
 
+
+    /*
+        Given a string, the function returns if a medium or large tooltip is
+        needed.
+    */
     getToolTipSize = (text) => {
         if(text.length < 60)
             return "medium"
         return "large";
     }
 
+
+    /*
+        Given a key, the function will check to see if there is a parameter in
+        the url that matches that key. If there is, and the url parameters have
+        not been handled yet, the function records the parameter's value in the
+        state and returns that value. If no parameter is found, an empty string
+        is returned and no changes are made to the state.
+    */
+    handleUrlParam = (key) => {
+        if(this.props.model.urlParams[key] && !this.handledUrlParams){
+            this.setState({
+                [key]: this.props.model.urlParams[key]
+            });
+            return this.props.model.urlParams[key];
+        }
+        return "";
+    }
+
+
+    /*
+        Returns an array of InputBox objects generated from this.props.model.forms.
+        If there were any url parameters, they will be used as initial values for
+        the forms. this.handledUrlParams will be true by the end of the function.
+    */
     inputFields = () => {
         var elementsToAdd = [];
         for (var i = 0; i < this.props.model.forms.length; i++){
             let entry = this.props.model.forms[i];
             var errorMsg = "";
+            this.handleUrlParam(entry.key);
             elementsToAdd.push(
                 <div class="inputField">
                     <InputBox
@@ -47,15 +83,23 @@ class AlgorithmInputForm extends React.Component{
                         hasError={this.state.errors.includes(entry.key)}
                         errorMsg={entry.errorMsg}
                         tooltip={entry.tooltipText}
+                        text={this.state[entry.key]}
                     />
 
                 </div>
             );
         }
+        this.handledUrlParams = true;
         return elementsToAdd;
     }
 
 
+    /*
+        Loops through each form in the model and checks each input that the
+        user has entered against the input's verifyHandler function. If the
+        user has entered an invalid input, the input's key will be added to
+        an array of errors that is returned at the end of the function.
+    */
     checkInputErrors = () => {
         var errors = [];
         for (var i = 0; i < this.props.model.forms.length; i++){
@@ -67,6 +111,12 @@ class AlgorithmInputForm extends React.Component{
         return errors;
     }
 
+
+    /*
+        Checks all of the inputs for errors. If there are any, they are recorded
+        in the state. If there are no arrors, the given validInputHandler function
+        is called to draw the algorithm.
+    */
     submitForm = (event) => {
         event.preventDefault();
         var errors = this.checkInputErrors();
@@ -80,6 +130,7 @@ class AlgorithmInputForm extends React.Component{
 
 
     render(){
+        console.log(this.props.model.urlParams);
         return (
             <form onSubmit={this.submitForm}>
                 {this.inputFields()}

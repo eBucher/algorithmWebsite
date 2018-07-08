@@ -4,6 +4,7 @@ import CodeBox from 'components/codeBox/CodeBox.js';
 import ExplanationBox from 'components/explanationBox/ExplanationBox.js';
 import Display from 'components/display/Display.js';
 import AlgorithmSideBar from 'components/algorithmSideBar/AlgorithmSideBar.js';
+import { withRouter } from 'react-router';
 
 class AlgorithmPage extends React.Component {
 

@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import 'pages/styles.css';
 import {CONTENT_SQUARE} from 'components/drawArea/shapes/Presets.js';
 import AlgorithmInputForm from 'components/algorithmInputForm/AlgorithmInputForm.js';
+import queryString from 'query-string';
 
 class BinarySearchInput{
     constructor(algorithmLogic){
@@ -89,6 +90,7 @@ class BinarySearchInput{
     buildModel = () => {
         return {
             validInputHandler: this.validInputHandler.bind(this),
+            urlParams: queryString.parse(this.algorithmLogic.props.location.search),
             forms: [
                 {   key: "target",
                     displayText: "Target",

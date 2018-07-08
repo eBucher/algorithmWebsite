@@ -15,6 +15,11 @@ class InputBox extends React.Component{
     }
 
 
+    /*
+        Returns the width that the input field should be without the padding on
+        the right (HORIZONTAL_PADDING) for the error icon to appear in. If a
+        width was not specified in the props, a default value is returned.
+    */
     getWidth = () => {
         var HORIZONTAL_PADDING = 30;
         if(this.props.width){
@@ -23,6 +28,11 @@ class InputBox extends React.Component{
         return 150 - HORIZONTAL_PADDING;
     }
 
+
+    /*
+        If there is an error, the function returns a style that will make the
+        error message visibile. Otherwise, the style will be invisible.
+    */
     errorMsgVisibility = () => {
         if(this.props.hasError){
             return {display: "inline"};
@@ -30,17 +40,20 @@ class InputBox extends React.Component{
         return {visibility: "hidden"};
     }
 
+
     toolTipIconEnterHandler = () => {
         this.setState({
             toolTipIcon: SelectedHelpIcon
         })
     }
 
+
     toolTipIconExitHandler = () => {
         this.setState({
             toolTipIcon: HelpIcon
         })
     }
+
 
     getInputStyle = () => {
         if(this.props.hasError){
@@ -52,6 +65,15 @@ class InputBox extends React.Component{
         return {width: this.getWidth() + "px"}
     }
 
+
+    getValue = () => {
+        if(this.props.text){
+            return this.props.text;
+        }
+        return "";
+    }
+
+
     render(){
         return(
             <React.Fragment>
@@ -62,6 +84,7 @@ class InputBox extends React.Component{
                         type="text"
                         style={this.getInputStyle()}
                         onChange={this.props.onChangeHandler}
+                        value={this.getValue()}
                     />
                     <div class="toolTipIconPositioning">
                         <ToolTip position="right" text={this.props.tooltip} cursor="help">

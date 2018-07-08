@@ -9,13 +9,16 @@ import HeaderBar from 'components/headerBar/HeaderBar.js';
 //import BinarySearch from 'pages/BinarySearch.js';
 import BinarySearch from 'pages/binarySearch/BinarySearch.js';
 import Display from 'components/display/Display.js';
+import { Switch, Route } from 'react-router-dom';
 
 class App extends Component {
   render() {
     return (
       <div className="App">
         <HeaderBar/>
-        <BinarySearch/>
+        <Switch>
+            <Route exact path='/algorithms/binarySearch' component={BinarySearch}/>
+        </Switch>
       </div>
     );
   }

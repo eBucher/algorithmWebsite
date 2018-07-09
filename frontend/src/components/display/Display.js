@@ -23,7 +23,9 @@ class Display extends Component {
     render() {
         return (
             <div class="display">
-                {this.renderContent()}
+                <div class="displayHelper">
+                    {this.renderContent()}
+                </div>
             </div>
         );
     }

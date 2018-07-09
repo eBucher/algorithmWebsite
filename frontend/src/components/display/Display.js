@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import DrawArea from 'components/drawArea/DrawArea.js';
 import './Display.css';
+import ReSizePointer from 'assets/ResizePointer.png';
 
 class Display extends Component {
     constructor(){
@@ -10,11 +11,14 @@ class Display extends Component {
     renderContent = () => {
         console.log(this.props.started);
         if(this.props.started){
-            return this.props.children;
+            return <div class="displayHelper">{this.props.children}</div>;
         } else {
             return (
                 <div class="greyCover">
-
+                    <div class="greyScreenTextBox">
+                        Begin by entering your parameters for the algorithm at the
+                        top of the screen.
+                    </div>
                 </div>
             )
         }
@@ -23,9 +27,8 @@ class Display extends Component {
     render() {
         return (
             <div class="display">
-                <div class="displayHelper">
                     {this.renderContent()}
-                </div>
+                    <p class="b">Resize Screen</p>
             </div>
         );
     }

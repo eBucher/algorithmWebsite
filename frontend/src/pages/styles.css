@@ -50,18 +50,10 @@
 	padding-top: 10px;
 }
 
-.coloredTop{
-	border-top: 5px solid #009688;
-}
-
 /******************* Fonts *******************/
 
 .orangeText{
 	color: #e9711c;
-}
-
-.lightPrimary{
-	color: #009688;
 }
 
 .darkText{
@@ -158,16 +150,6 @@ button:hover, input[type=submit]:hover{
 
 .orangeBtn:hover {
 	background: #ac5415;
-}
-
-.primaryBtn{
-    color: #ffffff;
-    background: #009688;
-	text-shadow: 0px 1px 1px #000000;
-}
-
-.primaryBtn:hover{
-    background: #52c7b8;
 }
 
 button[disabled], button[disabled]:hover,

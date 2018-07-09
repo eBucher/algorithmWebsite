@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import DrawArea from 'components/drawArea/DrawArea.js';
 import './Display.css';
-import ReSizePointer from 'assets/ResizePointer.png';
 
 class Display extends Component {
     constructor(){

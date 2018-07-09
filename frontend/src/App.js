@@ -17,7 +17,9 @@ class App extends Component {
       <div className="App">
         <HeaderBar/>
         <div class="content">
-            <BinarySearch/>
+            <Switch>
+                <Route path="/algorithms/binarySearch" component={BinarySearch}/>
+            </Switch>
         </div>
       </div>
     );

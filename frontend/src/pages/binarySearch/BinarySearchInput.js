@@ -90,7 +90,7 @@ class BinarySearchInput{
     buildModel = () => {
         return {
             validInputHandler: this.validInputHandler.bind(this),
-            urlParams: queryString.parse(this.algorithmLogic.props.location.search),
+            urlParams: new Object(),
             forms: [
                 {   key: "target",
                     displayText: "Target",

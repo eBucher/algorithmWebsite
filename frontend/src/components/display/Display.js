@@ -22,7 +22,7 @@ class Display extends Component {
 
     render() {
         return (
-            <div class="display sectionShadow coloredTop">
+            <div class="display">
                 {this.renderContent()}
             </div>
         );

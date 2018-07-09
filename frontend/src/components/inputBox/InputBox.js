@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import './InputBox.css';
 import 'pages/styles.css';
 import HelpIcon from 'assets/HelpIcon.svg';
-import SelectedHelpIcon from 'assets/HelpIconLightBlue.svg';
+import SelectedHelpIcon from 'assets/HelpIconHighlighted.svg';
 import WarningIcon from 'assets/WarningIcon.svg';
 import ToolTip from 'components/toolTip/ToolTip.js';
 
@@ -76,7 +76,7 @@ class InputBox extends React.Component{
 
     render(){
         return(
-            <React.Fragment>
+            <div class="inputArea">
                 <label class="smallLabelText">{this.props.label}</label>
                 <br/>
                 <div>
@@ -96,15 +96,11 @@ class InputBox extends React.Component{
                             />
                         </ToolTip>
                     </div>
-                    <br/>
                 </div>
-                <span
-                    class="inputErrorMsgText"
-                    style={this.errorMsgVisibility()}
-                >
+                <span class="inputErrorMsgText" style={this.errorMsgVisibility()}>
                     {this.props.errorMsg}
                 </span>
-            </React.Fragment>
+            </div>
         )
     }
 }

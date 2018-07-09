@@ -1,10 +1,13 @@
 .display{
-    flex-grow: 1;
+    min-width: 650px;
+    width: 100%;
     position: relative;
     overflow-y: auto;
     overflow: auto;
-    min-width: 300px;
     background-color: #FFFFFF;
+    height: 250px;
+    border-top: 2px solid #e5e5e5;
+    padding-top: 20px;
 }
 
 .greyCover{

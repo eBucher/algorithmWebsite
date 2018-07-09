@@ -3,26 +3,24 @@
 	min-width: max-content;
 	max-width: 800px;
 	flex-grow: 1;
-	margin-right: 10px;
-	margin-bottom: 10px;
+	margin-right: 20px;
 	background-color: #FFFFFF;
 }
 
 @media only screen and (max-width: 650px) {
     .codeBox {
         margin-right: 0px;
+		border-bottom: 2px solid #e5e5e5;
     }
 }
 
 .code {
-	padding-top: 5px;
-	padding-bottom: 5px;
 }
 
 .code div {
 	font-family: "Courier New", Courier, monospace;
 	font-size: 14px;
 	margin-bottom: 2px;
-	padding-left: 10px;
+
 	padding-right: 10px;
 }

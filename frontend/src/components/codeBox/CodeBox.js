@@ -39,10 +39,10 @@ class CodeBox extends React.Component{
 	render(){
 
 		return (
-			<div class="codeBox sectionShadow coloredTop">
+			<div class="codeBox">
 				<div className="BoxTitle">
-				<img src={CodeIcon} class="subtitleIcon"/>
-					<h2 class="subtitle white">Algorithm</h2>
+					<img src={CodeIcon} class="subtitleIcon"/>
+					<h2 class="subtitle darkText">Algorithm</h2>
 				</div>
 				<div className="code">
 					{this.generateLinesOfCode()}

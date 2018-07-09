@@ -1,6 +1,8 @@
 import React, {Component} from 'react';
 import 'tooltip/balloon.css';
 import InputBox from 'components/inputBox/InputBox.js';
+import './AlgorithmInputForm.css';
+import 'pages/styles.css';
 
 /*
     Required Properties:
@@ -132,9 +134,9 @@ class AlgorithmInputForm extends React.Component{
     render(){
         console.log(this.props.model.urlParams);
         return (
-            <form onSubmit={this.submitForm}>
+            <form class="algorithmInputForm" onSubmit={this.submitForm}>
                 {this.inputFields()}
-                <input type="submit" value="Visualize" class="secondaryBtn smallBtn"></input>
+                <input type="submit" value="Visualize" class="orangeBtn smallBtn"></input>
             </form>
         )
     }

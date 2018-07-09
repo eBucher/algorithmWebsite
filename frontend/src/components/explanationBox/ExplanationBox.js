@@ -11,7 +11,7 @@ class ExplanationBox extends React.Component{
 		if(this.props.text[0] != null){
 			rows.push(
 				<div class="lineIconContainer">
-					<font color="#52c7b8"> > </font>
+					<font color="#e9711c"> > </font>
 				</div>
 			)
 			rows.push(
@@ -41,10 +41,10 @@ class ExplanationBox extends React.Component{
 	render(){
 
 		return (
-			<div class="explanationBox sectionShadow coloredTop">
+			<div class="explanationBox">
 				<div className="BoxTitle">
 					<img src={CommentIcon} class="subtitleIcon"/>
-					<h2 class="subtitle white">What is happening</h2>
+					<h2 class="subtitle darkText">What is happening</h2>
 				</div>
 				<div id="explanations">
 					{this.generateRows()}

@@ -9,13 +9,17 @@ import StepManager from 'components/stepManager/StepManager.js';
 import BinarySearchInput from 'pages/binarySearch/BinarySearchInput.js';
 import BinarySearchDraw from 'pages/binarySearch/BinarySearchDraw.js';
 import Display from 'components/display/Display.js';
+import {connect} from "react-redux";
+import {setAlgorithmName} from "actions/AlgorithmActions.js";
+import {store} from 'store.js';
 
 class BinarySearch extends Algorithm{
 
-	constructor(){
-		super();
+	constructor(props){
+		super(props);
 		//Denote a line break as a \n
 		this.name = "Binary Search";
+		props.setAlgorithmName("Binary Search");
 		this.algorithm = [
 			"function binarySearch(elements, left, right, target){",
 			"    if (right >= left){",
@@ -94,4 +98,18 @@ class BinarySearch extends Algorithm{
 
 }
 
-export default BinarySearch;
+const mapStateToProps = (state) => {
+  return {
+      algorithm: state.Algorithm,
+  };
+};
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+		setAlgorithmName: (newName) => {
+            dispatch(setAlgorithmName(newName));
+		}
+    };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(BinarySearch);

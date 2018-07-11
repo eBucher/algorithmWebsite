@@ -3,6 +3,9 @@ import 'pages/styles.css';
 import {CONTENT_SQUARE} from 'components/drawArea/shapes/Presets.js';
 import AlgorithmInputForm from 'components/algorithmInputForm/AlgorithmInputForm.js';
 import queryString from 'query-string';
+import {connect} from "react-redux";
+import {setStarted, setStepNum, setSteps, setAreaDimensions} from "actions/AlgorithmActions.js";
+import store from "store.js"
 
 class BinarySearchInput{
     constructor(algorithmLogic){
@@ -59,6 +62,10 @@ class BinarySearchInput{
     validInputHandler = (formState) => {
         var newElements = this.cleanRawElements(formState.elements);
         var newSteps = this.calculateSteps(newElements, 0, newElements.length - 1, formState.target);
+        store.dispatch(setStarted(true));
+        store.dispatch(setStepNum(0));
+        store.dispatch(setSteps(newSteps));
+        store.dispatch(setAreaDimensions(CONTENT_SQUARE().size * (newElements.length + 2), 250));
         this.algorithmLogic.setState({
             target : formState.target,
             elements: newElements,
@@ -109,5 +116,6 @@ class BinarySearchInput{
         }
     }
 }
+
 
 export default BinarySearchInput;

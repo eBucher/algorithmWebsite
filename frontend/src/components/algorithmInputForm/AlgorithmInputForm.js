@@ -132,7 +132,6 @@ class AlgorithmInputForm extends React.Component{
 
 
     render(){
-        console.log(this.props.model.urlParams);
         return (
             <form class="algorithmInputForm" onSubmit={this.submitForm}>
                 {this.inputFields()}

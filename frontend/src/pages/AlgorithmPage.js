@@ -11,7 +11,6 @@ import './styles.css';
 class AlgorithmPage extends React.Component {
 
     render(){
-        console.log("hey there");
         return(
             <div id="AlgorithmVisualization">
                 <div class="pageTitle algorithmTitleBox">

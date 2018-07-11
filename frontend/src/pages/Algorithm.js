@@ -3,6 +3,7 @@ import "./styles.css";
 import DrawArea from 'components/drawArea/DrawArea.js';
 import CodeBox from 'components/codeBox/CodeBox.js';
 import AlgorithmPage from 'pages/AlgorithmPage.js';
+import store from 'store.js';
 
 class Algorithm extends React.Component{
 
@@ -91,7 +92,6 @@ class Algorithm extends React.Component{
 	render(){
 		var piecesToShow = this.getVisuals();
 		var inputModel = this.getInputModel();
-		console.log("Trying to render");
 		return (
 			<AlgorithmPage
 				algorithmName = {this.name}

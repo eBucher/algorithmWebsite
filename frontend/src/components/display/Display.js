@@ -8,7 +8,6 @@ class Display extends Component {
     }
 
     renderContent = () => {
-        console.log(this.props.started);
         if(this.props.started){
             return <div class="displayHelper">{this.props.children}</div>;
         } else {

@@ -10,6 +10,8 @@ import HeaderBar from 'components/headerBar/HeaderBar.js';
 import BinarySearch from 'pages/binarySearch/BinarySearch.js';
 import Display from 'components/display/Display.js';
 import { Switch, Route } from 'react-router-dom';
+import {connect} from "react-redux";
+import {setPageType} from "actions/AppActions.js";
 
 class App extends Component {
   render() {
@@ -25,5 +27,18 @@ class App extends Component {
     );
   }
 }
+
+const mapStateToProps = (state) => {
+  return {
+  };
+};
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        setPageType: (pageType) => {
+            dispatch(setPageType(pageType));
+        }
+    };
+};
 
 export default App;

@@ -3,59 +3,66 @@ import "pages/styles.css";
 import './StepManager.css';
 import RightArrow from 'assets/ForwardIcon.svg';
 import LeftArrow from 'assets/BackwardIcon.svg';
+import {setStepNum} from 'actions/AlgorithmActions.js';
+import {connect} from "react-redux";
 
 class StepManager extends React.Component{
 	constructor(){
 		super();
-		this.currentStepNum = 0;
 	}
 
 
 	nextStep = () => {
-		if(this.currentStepNum != this.props.numSteps - 1){
-			this.currentStepNum++;
-			this.updateParentStepTo(this.currentStepNum);
+		if(this.props.algorithm.stepNum != this.props.algorithm.steps.length - 1){
+			var newStepNum = this.props.algorithm.stepNum + 1;
+			this.props.setStepNum(newStepNum);
 		}
 	}
 
 
 	previousStep = () => {
-		if(this.currentStepNum != 0){
-			this.currentStepNum--;
-			this.updateParentStepTo(this.currentStepNum);
+		if(this.props.algorithm.stepNum != 0){
+			var newStepNum = this.props.algorithm.stepNum - 1;
+			this.props.setStepNum(newStepNum);
 		}
 	}
 
 
 	handleSliderChange = (event) => {
-		this.currentStepNum = Number(event.target.value);
-		this.updateParentStepTo(this.currentStepNum);
-	}
-
-
-	updateParentStepTo(stepNum){
-		this.props.parent.setState({
-			currentStepNum: this.currentStepNum,
-		});
+		this.props.setStepNum(Number(event.target.value));
 	}
 
 
 	render(){
 		return (
 			<div class="stepManager">
-				<button class="smallCircularBtn orangeBtn stepBtnMargin" onClick={this.previousStep} disabled={!this.props.enabled}>
+				<button class="smallCircularBtn orangeBtn stepBtnMargin" onClick={this.previousStep} disabled={!this.props.algorithm.started}>
 					<img src={LeftArrow} class="backwardIcon"/>
 				</button>
-				<button class="smallCircularBtn orangeBtn stepBtnMargin" onClick={this.nextStep} disabled={!this.props.enabled}>
+				<button class="smallCircularBtn orangeBtn stepBtnMargin" onClick={this.nextStep} disabled={!this.props.algorithm.started}>
 					<img src={RightArrow} class="forwardIcon"/>
 				</button>
-				<input id="stepSlider" type="range" min="0" max={this.props.numSteps}
+				<input id="stepSlider" type="range" min="0" max={this.props.algorithm.steps.length - 1}
 					step="1" onChange={this.handleSliderChange}
-					value={this.props.value} disabled={!this.props.enabled}
+					value={this.props.algorithm.stepNum} disabled={!this.props.algorithm.started}
 				/>
 			</div>
 		)
 	}
 }
 
-export default StepManager;
+const mapStateToProps = (state) => {
+  return {
+      algorithm: state.Algorithm,
+  };
+};
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+		setStepNum: (newNum) => {
+            dispatch(setStepNum(newNum));
+		}
+    };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(StepManager);

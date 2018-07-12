@@ -52,8 +52,8 @@ class AlgorithmInputForm extends React.Component{
         is, the state is updated to contain that url parameter's value.
     */
     handleUrlParams = () => {
-        for (var i = 0; i < this.props.model.forms.length; i++){
-            let entry = this.props.model.forms[i];
+        for (var i = 0; i < this.props.model.inputs.length; i++){
+            let entry = this.props.model.inputs[i];
             if(this.props.model.urlParams[entry.key]){
                 this.state[entry.key] = this.props.model.urlParams[entry.key];
             }
@@ -62,14 +62,14 @@ class AlgorithmInputForm extends React.Component{
 
 
     /*
-        Returns an array of InputBox objects generated from this.props.model.forms.
+        Returns an array of InputBox objects generated from this.props.model.inputs.
         If there were any url parameters, they will be used as initial values for
-        the forms. this.handledUrlParams will be true by the end of the function.
+        the inputs. this.handledUrlParams will be true by the end of the function.
     */
     inputFields = () => {
         var elementsToAdd = [];
-        for (var i = 0; i < this.props.model.forms.length; i++){
-            let entry = this.props.model.forms[i];
+        for (var i = 0; i < this.props.model.inputs.length; i++){
+            let entry = this.props.model.inputs[i];
             elementsToAdd.push(
                 <div class="inputField">
                     <InputBox
@@ -97,8 +97,8 @@ class AlgorithmInputForm extends React.Component{
     */
     checkInputErrors = () => {
         var errors = [];
-        for (var i = 0; i < this.props.model.forms.length; i++){
-            let entry = this.props.model.forms[i];
+        for (var i = 0; i < this.props.model.inputs.length; i++){
+            let entry = this.props.model.inputs[i];
             if(!entry.verifyHandler(this.state[entry.key])){
                 errors.push(entry.key);
             }

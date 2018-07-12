@@ -104,7 +104,7 @@ class BinarySearchInput{
         return {
             validInputHandler: this.validInputHandler.bind(this),
             urlParams: this.urlParams,
-            forms: [
+            inputs: [
                 {   key: "target",
                     displayText: "Target",
                     tooltipText: "Which number to search for.",

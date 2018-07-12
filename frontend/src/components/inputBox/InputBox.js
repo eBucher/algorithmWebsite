@@ -93,6 +93,7 @@ class InputBox extends React.Component{
                                 onMouseOver={this.toolTipIconEnterHandler}
                                 onMouseOut={this.toolTipIconExitHandler}
                                 class="toolTipIcon_InputBox"
+                                alt="help tooltip icon"
                             />
                         </ToolTip>
                     </div>

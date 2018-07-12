@@ -43,10 +43,10 @@ class StepManager extends React.Component{
 		return (
 			<div class="stepManager">
 				<button class="smallCircularBtn orangeBtn stepBtnMargin" onClick={this.previousStep} disabled={!this.props.algorithm.started}>
-					<img src={LeftArrow} class="backwardIcon"/>
+					<img src={LeftArrow} class="backwardIcon" alt="previous step button"/>
 				</button>
 				<button class="smallCircularBtn orangeBtn stepBtnMargin" onClick={this.nextStep} disabled={!this.props.algorithm.started}>
-					<img src={RightArrow} class="forwardIcon"/>
+					<img src={RightArrow} class="forwardIcon" alt="next step button"/>
 				</button>
 				<input id="stepSlider" type="range" min="0" max={this.props.algorithm.steps.length - 1}
 					step="1" onChange={this.handleSliderChange}

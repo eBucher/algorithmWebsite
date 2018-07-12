@@ -42,7 +42,7 @@ class ExplanationBox extends React.Component{
 		return (
 			<div class="explanationBox">
 				<div className="BoxTitle">
-					<img src={CommentIcon} class="subtitleIcon"/>
+					<img src={CommentIcon} class="subtitleIcon" alt=""/>
 					<h2 class="subtitle darkText">What is happening</h2>
 				</div>
 				<div id="explanations">

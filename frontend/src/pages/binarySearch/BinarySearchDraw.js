@@ -25,13 +25,13 @@ class BinarySearchDraw {
         be.
     */
     getBoxColor = (currentStepState, currentElementIndex) => {
-        if(currentStepState.highlightedLines == 13)
+        if(currentStepState.highlightedLines === 13)
             return "red";
         if(currentElementIndex < currentStepState.left)
             return "grey";
         if(currentElementIndex > currentStepState.right)
             return "grey";
-        if(currentStepState.highlightedLines == 5 && currentStepState.mid == currentElementIndex)
+        if(currentStepState.highlightedLines === 5 && currentStepState.mid === currentElementIndex)
             return "green";
         return "white";
     }
@@ -72,15 +72,15 @@ class BinarySearchDraw {
         Draws the left, mid, and right arrows pointing to the correct boxes.
     */
     addArrows = (elements, currentStep) => {
-        if(currentStep.left == currentStep.right && currentStep.left == currentStep.mid){
+        if(currentStep.left === currentStep.right && currentStep.left === currentStep.mid){
             this.addArrow(currentStep.left, "left/right/mid", elements);
-        } else if(currentStep.left == currentStep.mid){
+        } else if(currentStep.left === currentStep.mid){
             this.addArrow(currentStep.left, "left/mid", elements);
             this.addArrow(currentStep.right, "right", elements)
-        } else if(currentStep.left == currentStep.right){
+        } else if(currentStep.left === currentStep.right){
             this.addArrow(currentStep.left, "left/right", elements);
             this.addArrow(currentStep.mid, "mid", elements);
-        } else if(currentStep.right == currentStep.mid){
+        } else if(currentStep.right === currentStep.mid){
             this.addArrow(currentStep.right, "mid/right", elements);
             this.addArrow(currentStep.left, "left", elements);
         } else {

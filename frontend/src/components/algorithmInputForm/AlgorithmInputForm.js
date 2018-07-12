@@ -124,7 +124,7 @@ class AlgorithmInputForm extends React.Component{
         this.setState({
             errors: errors
         })
-        if(errors.length == 0){
+        if(errors.length === 0){
             this.props.model.validInputHandler(this.state);
         }
     }

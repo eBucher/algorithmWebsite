@@ -12,7 +12,7 @@ class StepManager extends React.Component{
 		changed.
 	*/
 	nextStep = () => {
-		if(this.props.algorithm.stepNum != this.props.algorithm.steps.length - 1){
+		if(this.props.algorithm.stepNum !== this.props.algorithm.steps.length - 1){
 			var newStepNum = this.props.algorithm.stepNum + 1;
 			this.props.setStepNum(newStepNum);
 		}
@@ -23,7 +23,7 @@ class StepManager extends React.Component{
 		nothing is changed.
 	*/
 	previousStep = () => {
-		if(this.props.algorithm.stepNum != 0){
+		if(this.props.algorithm.stepNum !== 0){
 			var newStepNum = this.props.algorithm.stepNum - 1;
 			this.props.setStepNum(newStepNum);
 		}

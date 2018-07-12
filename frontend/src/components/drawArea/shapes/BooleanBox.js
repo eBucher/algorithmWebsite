@@ -40,9 +40,9 @@ class IfStatement extends CustomShape {
 	}
 
 	getSymbol = () => {
-		if(this.status == true)
+		if(this.status === true)
 			return this.trueSymbol();
-		else if (this.status == false)
+		else if (this.status === false)
 			return this.falseSymbol();
 		else
 			return "";
@@ -54,9 +54,9 @@ class IfStatement extends CustomShape {
 		s.color = "white";
 		s.topLeft = this.topLeft;
 		s.topText = this.topText;
-		if(this.status == true){
+		if(this.status === true){
 			s.bottomText = "true";
-		} else if (this.status == false){
+		} else if (this.status === false){
 			s.bottomText = "false";
 		}
 

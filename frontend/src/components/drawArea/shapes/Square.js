@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import Coord from 'components/drawArea/math/Coord.js';
 import CustomShape from 'components/drawArea/shapes/CustomShape.js';
 import {toHex} from 'utils/Colors.js';
@@ -24,19 +24,19 @@ class Square extends CustomShape{
 
 
 	getCoord = (position) => {
-		if(position == "CENTER"){
+		if(position === "CENTER"){
 			return new Coord(this.topLeft.x + this.size/2,
 				this.topLeft.y + this.size/2);
-		} else if (position == "TOP"){
+		} else if (position === "TOP"){
 			return new Coord(this.topLeft.x + this.size/2,
 				this.topLeft.y)
-		} else if (position == "BOTTOM"){
+		} else if (position === "BOTTOM"){
 			return new Coord(this.topLeft.x + this.size/2,
 				this.topLeft.y + this.size)
-		} else if (position == "LEFT"){
+		} else if (position === "LEFT"){
 			return new Coord(this.topLeft.x,
 				this.topLeft.y + this.size/2)
-		} else if (position == "RIGHT"){
+		} else if (position === "RIGHT"){
 			return new Coord(this.topLeft.x + this.size,
 				this.topLeft.y + this.size/2)
 		} else {

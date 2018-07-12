@@ -18,7 +18,7 @@ function findPointFromDist(point, distance, slope){
 	if (slope === Infinity){
 		return new Coord(point.x, point.y + distance);
 	}
-	if (slope == 0){
+	if (slope === 0){
 		return new Coord(point.x + distance, point.y);
 	}
 	var xOffset = distance / Math.sqrt(1 + Math.pow(slope, 2));
@@ -32,7 +32,7 @@ function findPointFromDist(point, distance, slope){
 */
 function slopeBetween(p1, p2){
 	var s = (p2.y - p1.y) / (p2.x - p1.x)
-	if(s == -Infinity){
+	if(s === -Infinity){
 		s = Infinity;
 	}
 	return s;
@@ -47,7 +47,7 @@ function perpendicularSlope(originalSlope){
 	// Handle vertical and horizontal slopes
 	if (originalSlope === Infinity) {
 		return 0;
-	} else if (originalSlope == 0) {
+	} else if (originalSlope === 0) {
 		return Infinity;
 	}
 

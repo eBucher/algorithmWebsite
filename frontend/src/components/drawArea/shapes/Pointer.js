@@ -25,25 +25,25 @@ class Pointer extends CustomShape{
 
 
 	textPositionData = (endPoint) => {
-		if(this.direction == "UP")
+		if(this.direction === "UP")
 			return {
 				anchor: "middle",
 				baseline: "hanging",
 				position: new Coord(endPoint.x, endPoint.y + this.fontSize * .4)
 			}
-		if(this.direction == "DOWN")
+		if(this.direction === "DOWN")
 			return {
 				anchor: "middle",
 				baseline: "bottom",
 				position: new Coord(endPoint.x, endPoint.y - this.fontSize * .5)
 			}
-		if(this.direction == "LEFT")
+		if(this.direction === "LEFT")
 			return {
 				anchor: "start",
 				baseline: "middle",
 				position: new Coord(endPoint.x  + this.fontSize * .5, endPoint.y)
 			}
-		if(this.direction == "RIGHT")
+		if(this.direction === "RIGHT")
 			return {
 				anchor: "end",
 				baseline: "middle",
@@ -52,20 +52,20 @@ class Pointer extends CustomShape{
 	}
 
 	getEndCoord = () => {
-		if(this.direction == "UP")
+		if(this.direction === "UP")
 			return new Coord(this.pointCoord.x, this.pointCoord.y + this.length);
-		if(this.direction == "DOWN")
+		if(this.direction === "DOWN")
 			return new Coord(this.pointCoord.x, this.pointCoord.y - this.length);
-		if(this.direction == "LEFT")
+		if(this.direction === "LEFT")
 			return new Coord(this.pointCoord.x + this.length, this.pointCoord.y);
-		if(this.direction == "RIGHT")
+		if(this.direction === "RIGHT")
 			return new Coord(this.pointCoord.x - this.length, this.pointCoord.y);
 	}
 
 
 
 	drawMessage = (endPoint) => {
-		if(this.message.toString() != null && this.message.toString() != ""){
+		if(this.message.toString() !== null && this.message.toString() !== ""){
 			var positionData = this.textPositionData(endPoint);
 
 			return (

@@ -19,7 +19,7 @@ class BinarySearchInput{
             steps.push({left: leftIdx, right: rightIdx, mid: null, highlightedLines: 1, ifBox: true});
             var middle = leftIdx + Math.floor((rightIdx - leftIdx) /2);
             steps.push({left: leftIdx, right: rightIdx, mid: middle, highlightedLines: 2});
-            if(elements[middle] == target){
+            if(elements[middle] === target){
                 steps.push({left: leftIdx, right: rightIdx, mid: middle, highlightedLines: 4, ifBox: true});
                 steps.push({left: leftIdx, right: rightIdx, mid: middle, highlightedLines: 5});
                 return steps;

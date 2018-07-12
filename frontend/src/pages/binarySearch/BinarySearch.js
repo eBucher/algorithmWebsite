@@ -44,26 +44,26 @@ class BinarySearch extends Algorithm{
 			return "";
 
 		var highlightedLine = this.props.algorithm.steps[stepNum].highlightedLines;
-		if(highlightedLine == 0)
+		if(highlightedLine === 0)
 			return "Goal: Determine whether the target is in the given elements.";
-		if(highlightedLine == 1)
+		if(highlightedLine === 1)
 			return "Make sure the two indices have not passed eachother."
-		if(highlightedLine == 2)
+		if(highlightedLine === 2)
 			return "Since the left and right indices are not past eachother, find the midpoint between them.";
-		if(highlightedLine == 4)
+		if(highlightedLine === 4)
 			return "Check to see if the target is found at the midpoint."
-		if(highlightedLine == 5)
+		if(highlightedLine === 5)
 			return "The target was at the midpoint, so its index is returned."
-		if(highlightedLine == 8)
+		if(highlightedLine === 8)
 			return "The midpoint was not the target, so now it will check to see if the target is to the left of the midpoint.";
-		if(highlightedLine == 9)
+		if(highlightedLine === 9)
 			return "If the target exists, it must be to the left of the midpoint. Therefore, the " +
 			"function will be run again on the elements from the left index to the element that " +
 			"is to the left of the midpoint.";
-		if(highlightedLine == 11)
+		if(highlightedLine === 11)
 			return "The target is greater than the element at the midpoint. Therefore, the " +
 			"function will run again on the elements from the right of the midpoint to the right index.";
-		if(highlightedLine == 13)
+		if(highlightedLine === 13)
 			return "The left and right indices have passed each other so the target does not exist in " +
 			"the list of elements.";
 		return "Nothing to show.";
@@ -75,7 +75,7 @@ class BinarySearch extends Algorithm{
 		if(this.props.algorithm.started)
 		{
 			var drawHandler = new BinarySearchDraw(state.algParams.target, state.algParams.elements, state.areaWidth, state.areaHeight)
-			var piecesToShow = drawHandler.visualizeAlgorithm(state.steps[state.stepNum]);
+			piecesToShow = drawHandler.visualizeAlgorithm(state.steps[state.stepNum]);
 		}
 		return piecesToShow;
 	}

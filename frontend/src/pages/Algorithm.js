@@ -24,7 +24,7 @@ class Algorithm extends React.Component{
 	*/
 	highlightedLines = () => {
 		var state = this.props.algorithm;
-		if(state.steps.length == 0){
+		if(state.steps.length === 0){
 			return null;
 		} else {
 			return state.steps[state.stepNum].highlightedLines;
@@ -36,7 +36,7 @@ class Algorithm extends React.Component{
 		Must return a line to be displayed in the explanation box at the given step number.
 	*/
 	generateExplanation = (stepNum) => {
-		if(this.constructor == Algorithm)
+		if(this.constructor === Algorithm)
 			throw new Error("generateExplanation() must be implemented in the " + this.constructor.name + " class.");
 	}
 
@@ -45,7 +45,7 @@ class Algorithm extends React.Component{
 		Must return an array of all of the objects that will be drawn in the drawArea.
 	*/
 	getVisuals = () => {
-		if(this.constructor == Algorithm)
+		if(this.constructor === Algorithm)
 			throw new Error("getVisuals() must be implemented in the " + this.constructor.name + " class.");
 	}
 
@@ -55,7 +55,7 @@ class Algorithm extends React.Component{
 		of the input form's elements.
 	*/
 	getInputModel = () => {
-		if(this.constructor == Algorithm)
+		if(this.constructor === Algorithm)
 			throw new Error("getInputModel() must be implemented in the " + this.constructor.name + " class.");
 	}
 
@@ -64,7 +64,7 @@ class Algorithm extends React.Component{
 		var state = this.props.algorithm;
 		var stepsToShow = 5;
 
-		if(state.steps.length == 0){
+		if(state.steps.length === 0){
 			return [null, null, null, null, null];
 		}
 		var latestSteps = [];

@@ -1,6 +1,5 @@
-import React, { Component } from 'react';
+import React from 'react';
 import Arrow from 'components/drawArea/shapes/primitives/Arrow.js';
-import Square from 'components/drawArea/shapes/Square.js';
 import Coord from 'components/drawArea/math/Coord.js';
 import CustomShape from 'components/drawArea/shapes/CustomShape.js';
 
@@ -9,15 +8,15 @@ class Pointer extends CustomShape{
 
 	constructor(configObj){
 		super();
-		this.pointCoord = null,
-		this.message = null,
-		this.fontSize = 12,
-		this.headWidth = 20,
-		this.headHeight = 20,
-		this.thickness = 8,
-		this.length = 50,
-		this.direction = "UP",
-		this.color = "black"
+		this.pointCoord = null;
+		this.message = null;
+		this.fontSize = 12;
+		this.headWidth = 20;
+		this.headHeight = 20;
+		this.thickness = 8;
+		this.length = 50;
+		this.direction = "UP";
+		this.color = "black";
 
 		for(var prop in arguments[0])   {
         	this[prop]=arguments[0][prop];

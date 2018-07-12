@@ -1,6 +1,5 @@
-import React, { Component } from 'react';
+import React from 'react';
 import 'components/codeBox/CodeBox.css';
-import {toHex} from 'utils/Colors.js';
 import CodeIcon from 'assets/CodeIcon.svg';
 
 class CodeBox extends React.Component{
@@ -22,7 +21,6 @@ class CodeBox extends React.Component{
 	}
 
 	generateLinesOfCode = () => {
-		var t = this.props.highlightedLines;
 		var linesOfCode = this.props.linesOfCode.map(this.buildLine(this.props.highlightedLines, this.cleanLine));
 		return linesOfCode;
 	}

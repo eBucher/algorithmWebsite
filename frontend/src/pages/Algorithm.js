@@ -1,7 +1,5 @@
-import React, { Component } from 'react';
+import React from 'react';
 import "./styles.css";
-import DrawArea from 'components/drawArea/DrawArea.js';
-import CodeBox from 'components/codeBox/CodeBox.js';
 import AlgorithmPage from 'pages/AlgorithmPage.js';
 
 class Algorithm extends React.Component{
@@ -82,7 +80,6 @@ class Algorithm extends React.Component{
 
 
 	render(){
-		var state = this.props.algorithm;
 		var piecesToShow = this.getVisuals();
 		var inputModel = this.getInputModel();
 		return (

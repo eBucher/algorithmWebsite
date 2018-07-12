@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React from 'react';
 import 'tooltip/balloon.css';
 import InputBox from 'components/inputBox/InputBox.js';
 import './AlgorithmInputForm.css';
@@ -74,7 +74,6 @@ class AlgorithmInputForm extends React.Component{
         var elementsToAdd = [];
         for (var i = 0; i < this.props.model.forms.length; i++){
             let entry = this.props.model.forms[i];
-            var errorMsg = "";
             this.handleUrlParam(entry.key);
             elementsToAdd.push(
                 <div class="inputField">

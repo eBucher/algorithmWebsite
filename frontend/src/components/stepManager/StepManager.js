@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import "pages/styles.css";
 import './StepManager.css';
 import RightArrow from 'assets/ForwardIcon.svg';
@@ -7,10 +7,6 @@ import {setStepNum} from 'actions/AlgorithmActions.js';
 import {connect} from "react-redux";
 
 class StepManager extends React.Component{
-	constructor(){
-		super();
-	}
-
 
 	/* 	Increments the step num by 1. If the stepNum is the last step, nothing is
 		changed.

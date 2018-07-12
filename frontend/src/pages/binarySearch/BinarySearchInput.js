@@ -1,9 +1,6 @@
-import React, { Component } from 'react';
 import 'pages/styles.css';
 import {CONTENT_SQUARE} from 'components/drawArea/shapes/Presets.js';
-import AlgorithmInputForm from 'components/algorithmInputForm/AlgorithmInputForm.js';
 import queryString from 'query-string';
-import {connect} from "react-redux";
 import {batchActions} from 'redux-batched-actions';
 import {setStarted, setStepNum, setSteps, setAreaDimensions, setAlgParams} from "actions/AlgorithmActions.js";
 import store from "store.js"

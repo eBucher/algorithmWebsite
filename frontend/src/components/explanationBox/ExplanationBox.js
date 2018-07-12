@@ -1,7 +1,6 @@
-import React, { Component } from 'react';
+import React from 'react';
 import 'components/explanationBox/ExplanationBox.css';
 import 'pages/styles.css';
-import {toHex} from 'utils/Colors.js';
 import CommentIcon from 'assets/CommentIcon.svg';
 
 class ExplanationBox extends React.Component{

@@ -1,6 +1,5 @@
 import CustomShape from 'components/drawArea/shapes/CustomShape.js';
-import React, {Component} from 'react';
-import Coord from 'components/drawArea/math/Coord.js';
+import React from 'react';
 import {toHex} from 'utils/Colors.js';
 
 class CheckMark extends CustomShape {

@@ -1,5 +1,5 @@
-import {distance, findPointFromDist, slopeBetween, perpendicularSlope} from 'components/drawArea/math/Graphing.js';
-import React, { Component } from 'react';
+import {distance} from 'components/drawArea/math/Graphing.js';
+import React from 'react';
 import {toHex} from 'utils/Colors.js';
 import CustomShape from 'components/drawArea/shapes/CustomShape.js';
 import Coord from 'components/drawArea/math/Coord.js';

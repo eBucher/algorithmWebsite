@@ -1,10 +1,9 @@
-import React, { Component } from 'react';
+import React from 'react';
 import Square from 'components/drawArea/shapes/Square.js';
 import Coord from 'components/drawArea/math/Coord.js';
 import CustomShape from 'components/drawArea/shapes/CustomShape.js';
 import CheckMark from 'components/drawArea/shapes/primitives/CheckMark.js';
 import XSymbol from 'components/drawArea/shapes/primitives/XSymbol.js';
-import {toHex} from 'utils/Colors.js';
 import {CONTENT_SQUARE} from 'components/drawArea/shapes/Presets.js';
 
 class IfStatement extends CustomShape {
@@ -55,7 +54,6 @@ class IfStatement extends CustomShape {
 		s.color = "white";
 		s.topLeft = this.topLeft;
 		s.topText = this.topText;
-		var symbolToUse = null;
 		if(this.status == true){
 			s.bottomText = "true";
 		} else if (this.status == false){

@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React from 'react';
 import DrawArea from 'components/drawArea/DrawArea.js';
 import CodeBox from 'components/codeBox/CodeBox.js';
 import ExplanationBox from 'components/explanationBox/ExplanationBox.js';

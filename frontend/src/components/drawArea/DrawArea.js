@@ -1,15 +1,9 @@
 import React, { Component } from 'react';
 import './DrawArea.css';
-import Square from 'components/drawArea/shapes/Square.js';
-import Arrow from 'components/drawArea/shapes/primitives/Arrow.js';
-import Coord from 'components/drawArea/math/Coord.js';
 import CustomShape from 'components/drawArea/shapes/CustomShape.js';
 
 
 class DrawArea extends Component {
-    constructor(){
-        super();
-    }
 
     render() {
         return (

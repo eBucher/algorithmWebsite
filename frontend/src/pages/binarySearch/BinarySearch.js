@@ -1,14 +1,7 @@
-import React, { Component } from 'react';
 import "pages/styles.css";
 import Algorithm from "pages/Algorithm.js";
-import AlgorithmPage from "pages/AlgorithmPage.js";
-import DrawArea from 'components/drawArea/DrawArea.js';
-import CodeBox from 'components/codeBox/CodeBox.js';
-import ExplanationBox from 'components/explanationBox/ExplanationBox.js';
-import StepManager from 'components/stepManager/StepManager.js';
 import BinarySearchInput from 'pages/binarySearch/BinarySearchInput.js';
 import BinarySearchDraw from 'pages/binarySearch/BinarySearchDraw.js';
-import Display from 'components/display/Display.js';
 import {connect} from "react-redux";
 import {setAlgorithmName, resetAlgorithmState} from "actions/AlgorithmActions.js";
 import store from 'store.js';

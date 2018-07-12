@@ -1,12 +1,7 @@
 import React, { Component } from 'react';
-import DrawArea from 'components/drawArea/DrawArea.js';
 import './Display.css';
 
 class Display extends Component {
-    constructor(){
-        super();
-    }
-
     renderContent = () => {
         if(this.props.started){
             return <div class="displayHelper">{this.props.children}</div>;

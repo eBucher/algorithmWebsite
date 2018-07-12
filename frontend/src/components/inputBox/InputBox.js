@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React from 'react';
 import './InputBox.css';
 import 'pages/styles.css';
 import HelpIcon from 'assets/HelpIcon.svg';

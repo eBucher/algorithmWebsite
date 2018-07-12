@@ -1,6 +1,5 @@
 import CustomShape from 'components/drawArea/shapes/CustomShape.js';
-import React, {Component} from 'react';
-import Coord from 'components/drawArea/math/Coord.js';
+import React from 'react';
 import {toHex} from 'utils/Colors.js';
 
 class XSymbol extends CustomShape {
@@ -17,7 +16,7 @@ class XSymbol extends CustomShape {
 		var thickness = this.height * .15;
 		return (
 		<React.Fragment>
-		//Top left to bottom right
+		{/*Top left to bottom right*/}
 		<path
 			d = {
 				" M" + (this.center.x - this.height*.45) + " " + (this.center.y - this.height*.45) +
@@ -26,7 +25,7 @@ class XSymbol extends CustomShape {
 			stroke = {toHex(this.color)}
 			strokeWidth = {thickness}
 		/>
-		//Top right to bottom left
+		{/*Top right to bottom left*/}
 		<path
 			d = {
 				" M" + (this.center.x + this.height*.45) + " " + (this.center.y - this.height*.45) +

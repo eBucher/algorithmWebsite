@@ -49,6 +49,7 @@ const AlgorithmReducer = (state = AlgorithmInitialState, action) => {
                 ...state,
                 algParams: {...action.payload}
             }
+            break;
     }
 
     return state;

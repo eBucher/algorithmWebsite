@@ -43,6 +43,9 @@ class BinarySearchInput{
     }
 
 
+    /*  Given a string of numbers separated by commas, the function will return
+        an array of the numbers in the order that they appear in the string.
+    */
     cleanRawElements = (rawElements) => {
         //Trim the whitespace from the input
         var newElements = rawElements.replace(/\s/g,'');
@@ -71,16 +74,27 @@ class BinarySearchInput{
     }
 
 
+    /*  Accepts any string whose text is an integer
+    */
     verifyTarget = (input) => {
-        if(/^-?[1-9]+$/.test(input)){
+        if(/^-?[0-9]+$/.test(input)){
             return true;
         }
         return false;
     }
 
 
+    /*  Accepts any string that contains integers separated by commas. Whitespace
+        between the integers and commas will be accepted.
+    */
     verifyElements = (input) => {
         if(/^(-?[0-9]+(\s)*,(\s)*)*-?[0-9]+(\s)*$/.test(input)){
+            var elements = this.cleanRawElements(input);
+            for(var i = 0; i < elements.length - 1; i++){
+                if(elements[i] >= elements[i+1]){
+                    return false;
+                }
+            }
             return true;
         }
         return false;
@@ -103,7 +117,7 @@ class BinarySearchInput{
                     displayText: "Sorted elements",
                     tooltipText: "All of the numbers to search through to try to find the target. The numbers should be listed in ascending order and be separated by commas.",
                     verifyHandler: this.verifyElements,
-                    errorMsg: "Must be integers separated by commas"
+                    errorMsg: "Must be sorted integers separated by commas"
                 }
             ]
         }

@@ -26,7 +26,6 @@ class AlgorithmPage extends React.Component {
                         value ={state.stepNum}
                         numSteps={state.steps.length}
                         enabled={state.started}
-                        parent={this.props.parent}
                     />
                 </div>
                 <div class="bottomDescriptions">

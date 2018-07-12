@@ -1,13 +1,12 @@
 import 'pages/styles.css';
 import {CONTENT_SQUARE} from 'components/drawArea/shapes/Presets.js';
-import queryString from 'query-string';
 import {batchActions} from 'redux-batched-actions';
 import {setStarted, setStepNum, setSteps, setAreaDimensions, setAlgParams} from "actions/AlgorithmActions.js";
 import store from "store.js"
 
 class BinarySearchInput{
-    constructor(algorithmLogic){
-        this.algorithmLogic = algorithmLogic;
+    constructor(urlParams){
+        this.urlParams = urlParams;
     }
 
     // checkIndex is where the array will be pointing to.
@@ -104,7 +103,7 @@ class BinarySearchInput{
     buildModel = () => {
         return {
             validInputHandler: this.validInputHandler.bind(this),
-            urlParams: queryString.parse(this.algorithmLogic.props.location.search),
+            urlParams: this.urlParams,
             forms: [
                 {   key: "target",
                     displayText: "Target",

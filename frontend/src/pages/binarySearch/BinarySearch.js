@@ -2,6 +2,7 @@ import "pages/styles.css";
 import Algorithm from "pages/Algorithm.js";
 import BinarySearchInput from 'pages/binarySearch/BinarySearchInput.js';
 import BinarySearchDraw from 'pages/binarySearch/BinarySearchDraw.js';
+import queryString from 'query-string';
 import {connect} from "react-redux";
 import {setAlgorithmName, resetAlgorithmState} from "actions/AlgorithmActions.js";
 import store from 'store.js';
@@ -69,19 +70,22 @@ class BinarySearch extends Algorithm{
 		return "Nothing to show.";
 	}
 
+
 	getVisuals = () => {
 		var state = this.props.algorithm;
 		var piecesToShow = [];
 		if(this.props.algorithm.started)
 		{
-			var drawHandler = new BinarySearchDraw(state.algParams.target, state.algParams.elements, state.areaWidth, state.areaHeight)
+			var drawHandler = new BinarySearchDraw(state.algParams.target, state.algParams.elements, state.areaWidth, state.areaHeight);
 			piecesToShow = drawHandler.visualizeAlgorithm(state.steps[state.stepNum]);
 		}
 		return piecesToShow;
 	}
 
+
 	getInputModel = () => {
-		return new BinarySearchInput(this).buildModel();
+		var urlParams = queryString.parse(this.props.location.search);
+		return new BinarySearchInput(urlParams).buildModel();
 	}
 
 

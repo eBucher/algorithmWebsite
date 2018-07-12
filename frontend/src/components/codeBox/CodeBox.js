@@ -12,7 +12,7 @@ class CodeBox extends React.Component{
 
 	/*
 	Replaces four consecutive space characters with 4 characters that will
-	be rendered as spaces in the HTML
+	be rendered as spaces in the HTML.
 	*/
 	cleanLine = (line) => {
 		if(line == ""){
@@ -27,6 +27,9 @@ class CodeBox extends React.Component{
 		return linesOfCode;
 	}
 
+	/*	Returns a function that generates a line of the codeBox. Highlighted lines
+		receive a golden background.
+	*/
 	buildLine = (highlightedLines, cleanLineCallback) => {
 		return function(line, index){
 			if(highlightedLines == index){

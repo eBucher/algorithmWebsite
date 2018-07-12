@@ -1,3 +1,9 @@
+export function resetAlgorithmState(){
+    return {
+        type: "RESET_ALGORITHM_STATE",
+    }
+}
+
 export function setAlgorithmName(name){
     return {
         type: "SET_ALGORITHM_NAME",
@@ -35,5 +41,12 @@ export function setAreaDimensions(w, h){
             width: w,
             height: h
         }
+    }
+}
+
+export function setAlgParams(newParams){
+    return {
+        type: "SET_ALGORITHM_PARAMS",
+        payload: newParams
     }
 }

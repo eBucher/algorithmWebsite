@@ -4,7 +4,8 @@ import {CONTENT_SQUARE} from 'components/drawArea/shapes/Presets.js';
 import AlgorithmInputForm from 'components/algorithmInputForm/AlgorithmInputForm.js';
 import queryString from 'query-string';
 import {connect} from "react-redux";
-import {setStarted, setStepNum, setSteps, setAreaDimensions} from "actions/AlgorithmActions.js";
+import {batchActions} from 'redux-batched-actions';
+import {setStarted, setStepNum, setSteps, setAreaDimensions, setAlgParams} from "actions/AlgorithmActions.js";
 import store from "store.js"
 
 class BinarySearchInput{
@@ -62,19 +63,14 @@ class BinarySearchInput{
     validInputHandler = (formState) => {
         var newElements = this.cleanRawElements(formState.elements);
         var newSteps = this.calculateSteps(newElements, 0, newElements.length - 1, formState.target);
-        store.dispatch(setStarted(true));
-        store.dispatch(setStepNum(0));
-        store.dispatch(setSteps(newSteps));
-        store.dispatch(setAreaDimensions(CONTENT_SQUARE().size * (newElements.length + 2), 250));
-        this.algorithmLogic.setState({
-            target : formState.target,
-            elements: newElements,
-            steps: newSteps,
-            currentStepNum: 0,
-            started: true,
-            areaWidth: CONTENT_SQUARE().size * (newElements.length + 2),
-            areaHeight: 250,
-        });
+        store.dispatch(batchActions([
+            setStarted(true),
+            setStepNum(0),
+            setSteps(newSteps),
+            setAreaDimensions(CONTENT_SQUARE().size * (newElements.length + 2), 250),
+            setAlgParams({target: formState.target, elements: newElements}),
+        ]));
+
     }
 
 

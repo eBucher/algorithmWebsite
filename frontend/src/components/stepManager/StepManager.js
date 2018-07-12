@@ -12,6 +12,9 @@ class StepManager extends React.Component{
 	}
 
 
+	/* 	Increments the step num by 1. If the stepNum is the last step, nothing is
+		changed.
+	*/
 	nextStep = () => {
 		if(this.props.algorithm.stepNum != this.props.algorithm.steps.length - 1){
 			var newStepNum = this.props.algorithm.stepNum + 1;
@@ -20,6 +23,9 @@ class StepManager extends React.Component{
 	}
 
 
+	/* 	Decrements the step num by 1. If the stepNum is 0 (the first step),
+		nothing is changed.
+	*/
 	previousStep = () => {
 		if(this.props.algorithm.stepNum != 0){
 			var newStepNum = this.props.algorithm.stepNum - 1;
@@ -28,6 +34,10 @@ class StepManager extends React.Component{
 	}
 
 
+	/* 	Given an event from a range slider, the stepNum is changed to be equal
+		to the slider's value.
+		Pre: the slider's value is >= 0 and <= the last step number.
+	*/
 	handleSliderChange = (event) => {
 		this.props.setStepNum(Number(event.target.value));
 	}

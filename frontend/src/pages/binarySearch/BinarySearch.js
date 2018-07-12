@@ -10,16 +10,18 @@ import BinarySearchInput from 'pages/binarySearch/BinarySearchInput.js';
 import BinarySearchDraw from 'pages/binarySearch/BinarySearchDraw.js';
 import Display from 'components/display/Display.js';
 import {connect} from "react-redux";
-import {setAlgorithmName} from "actions/AlgorithmActions.js";
-import {store} from 'store.js';
+import {setAlgorithmName, resetAlgorithmState} from "actions/AlgorithmActions.js";
+import store from 'store.js';
+import {batchActions} from 'redux-batched-actions';
 
 class BinarySearch extends Algorithm{
 
 	constructor(props){
 		super(props);
-		//Denote a line break as a \n
-		this.name = "Binary Search";
-		props.setAlgorithmName("Binary Search");
+		store.dispatch(batchActions([
+            resetAlgorithmState(),
+			setAlgorithmName("Binary Search"),
+        ]));
 		this.algorithm = [
 			"function binarySearch(elements, left, right, target){",
 			"    if (right >= left){",
@@ -37,25 +39,18 @@ class BinarySearch extends Algorithm{
 			"    return -1;",
 			"}"
 		];
-		this.state = {
-			tempTarget : "",
-			tempElements : "",
-			target : null,
-			elements : [],
-
-			currentStepNum: null,
-			steps : [],
-			started : false
-		}
-
 	}
 
 
+	/*	If the algorithm has not started, an empty string is returned. Otherwise,
+		a line for the explanationBox is returned based on which step the user
+		is on and what the highlighted line is for that step.
+	*/
 	generateExplanation = (stepNum) => {
-		if(this.state.elements.length == 0)
+		if(!this.props.algorithm.started)
 			return "";
 
-		var highlightedLine = this.state.steps[stepNum].highlightedLines;
+		var highlightedLine = this.props.algorithm.steps[stepNum].highlightedLines;
 		if(highlightedLine == 0)
 			return "Goal: Determine whether the target is in the given elements.";
 		if(highlightedLine == 1)
@@ -82,11 +77,12 @@ class BinarySearch extends Algorithm{
 	}
 
 	getVisuals = () => {
+		var state = this.props.algorithm;
 		var piecesToShow = [];
-		if(this.state.started)
+		if(this.props.algorithm.started)
 		{
-			var drawHandler = new BinarySearchDraw(this.state.target, this.state.elements, this.state.areaWidth, this.state.areaHeight)
-			var piecesToShow = drawHandler.visualizeAlgorithm(this.state.steps[this.state.currentStepNum]);
+			var drawHandler = new BinarySearchDraw(state.algParams.target, state.algParams.elements, state.areaWidth, state.areaHeight)
+			var piecesToShow = drawHandler.visualizeAlgorithm(state.steps[state.stepNum]);
 		}
 		return piecesToShow;
 	}
@@ -108,6 +104,9 @@ const mapDispatchToProps = (dispatch) => {
     return {
 		setAlgorithmName: (newName) => {
             dispatch(setAlgorithmName(newName));
+		},
+		resetAlgorithmState: () => {
+            dispatch(resetAlgorithmState());
 		}
     };
 };

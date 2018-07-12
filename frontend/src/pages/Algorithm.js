@@ -3,7 +3,6 @@ import "./styles.css";
 import DrawArea from 'components/drawArea/DrawArea.js';
 import CodeBox from 'components/codeBox/CodeBox.js';
 import AlgorithmPage from 'pages/AlgorithmPage.js';
-import store from 'store.js';
 
 class Algorithm extends React.Component{
 
@@ -12,20 +11,11 @@ class Algorithm extends React.Component{
 		this.algorithm: an array of each line in the algorithm that will get
 		highlighted. \n can be used in a string to indicate where where a line
 		break will be upon output. Use four spaces for one tab.
-		this.state: Initialize its values as shown below along with any
-			other state variables that are needed for the specific algorithm.
 	*/
 	constructor(){
 		super();
 		//Denote a line break as a \n
 		this.algorithm = [];
-		this.state = {
-			areaWidth: 0,
-			areaHeight: 0,
-			currentStepNum: null,
-			steps : [],
-			started : false
-		}
 
 	}
 
@@ -35,10 +25,11 @@ class Algorithm extends React.Component{
 		no lines that need to be highlighted, null is returned.
 	*/
 	highlightedLines = () => {
-		if(this.state.steps.length == 0){
+		var state = this.props.algorithm;
+		if(state.steps.length == 0){
 			return null;
 		} else {
-			return this.state.steps[this.state.currentStepNum].highlightedLines;
+			return state.steps[state.stepNum].highlightedLines;
 		}
 	}
 
@@ -72,13 +63,14 @@ class Algorithm extends React.Component{
 
 
 	generateExplanations = () => {
+		var state = this.props.algorithm;
 		var stepsToShow = 5;
 
-		if(this.state.steps.length == 0){
+		if(state.steps.length == 0){
 			return [null, null, null, null, null];
 		}
 		var latestSteps = [];
-		for(var i = this.state.currentStepNum; i > this.state.currentStepNum - stepsToShow; i--){
+		for(var i = state.stepNum; i > state.stepNum - stepsToShow; i--){
 			if(i >= 0){
 				latestSteps.push(this.generateExplanation(i));
 			} else {
@@ -90,20 +82,15 @@ class Algorithm extends React.Component{
 
 
 	render(){
+		var state = this.props.algorithm;
 		var piecesToShow = this.getVisuals();
 		var inputModel = this.getInputModel();
 		return (
 			<AlgorithmPage
-				algorithmName = {this.name}
 				parent = {this}
 				inputModel = {inputModel}
-				currentStepNum = {this.state.currentStepNum}
-				numSteps = {this.state.steps.length}
-				started = {this.state.started}
-				areaWidth = {this.state.areaWidth}
-				areaHeight = {this.state.areaHeight}
 				piecesToShow = {piecesToShow}
-				algorithm = {this.algorithm}
+				linesOfCode = {this.algorithm}
 				highlightedLines = {this.highlightedLines()}
 				explanations = {this.generateExplanations()}
 			/>

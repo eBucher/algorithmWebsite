@@ -1,14 +1,18 @@
-const AlgorithmReducer = (state =
-    {
-        name: null,
-        started: false,
-        stepNum: null,
-        steps: [],
-        areaWidth: 0,
-        areaHeight: 0,
-    }
-, action) => {
+const AlgorithmInitialState = {
+    name: null,
+    started: false,
+    stepNum: null,
+    steps: [],
+    areaWidth: 0,
+    areaHeight: 0,
+    algorithmParams: {},
+}
+
+const AlgorithmReducer = (state = AlgorithmInitialState, action) => {
     switch (action.type){
+        case "RESET_ALGORITHM_STATE":
+            state = AlgorithmInitialState;
+            break;
         case "SET_ALGORITHM_NAME":
             state = {
                 ...state,
@@ -40,6 +44,11 @@ const AlgorithmReducer = (state =
                 areaHeight: action.payload.height
             }
             break;
+        case "SET_ALGORITHM_PARAMS":
+            state = {
+                ...state,
+                algParams: {...action.payload}
+            }
     }
 
     return state;

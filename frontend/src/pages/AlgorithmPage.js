@@ -5,42 +5,43 @@ import ExplanationBox from 'components/explanationBox/ExplanationBox.js';
 import Display from 'components/display/Display.js';
 import AlgorithmInputForm from 'components/algorithmInputForm/AlgorithmInputForm.js';
 import StepManager from 'components/stepManager/StepManager.js';
-import { withRouter } from 'react-router';
+import {connect} from "react-redux";
 import './styles.css';
 
 class AlgorithmPage extends React.Component {
 
     render(){
+        var state = this.props.algorithm;
         return(
             <div id="AlgorithmVisualization">
                 <div class="pageTitle algorithmTitleBox">
-                    {this.props.algorithmName}
+                    {state.name}
                 </div>
                 <AlgorithmInputForm model={this.props.inputModel} />
-                <Display started={this.props.started}>
-						<DrawArea w={this.props.areaWidth} h={this.props.areaHeight} displayedPieces={this.props.piecesToShow}/>
+                <Display started={state.started}>
+						<DrawArea w={state.areaWidth} h={state.areaHeight} displayedPieces={this.props.piecesToShow}/>
 				</Display>
                 <div class="stepManagerArea">
                     <StepManager
-                        value ={this.props.currentStepNum}
-                        numSteps={this.props.numSteps}
-                        enabled={this.props.started}
+                        value ={state.stepNum}
+                        numSteps={state.steps.length}
+                        enabled={state.started}
                         parent={this.props.parent}
                     />
                 </div>
                 <div class="bottomDescriptions">
-					<CodeBox linesOfCode={this.props.algorithm} highlightedLines={this.props.highlightedLines}/>
+					<CodeBox linesOfCode={this.props.linesOfCode} highlightedLines={this.props.highlightedLines}/>
 					<ExplanationBox text={this.props.explanations} />
 				</div>
             </div>
-
-
-
-
-
-
         )
     }
 }
 
-export default AlgorithmPage;
+const mapStateToProps = (state) => {
+  return {
+      algorithm: state.Algorithm,
+  };
+};
+
+export default connect(mapStateToProps)(AlgorithmPage);

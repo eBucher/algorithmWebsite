@@ -16,12 +16,12 @@ import 'pages/styles.css';
 */
 class AlgorithmInputForm extends React.Component{
 
-    constructor(){
-        super();
-        this.handledUrlParams = false;
+    constructor(props){
+        super(props);
         this.state = {
             errors: []
         }
+        this.handleUrlParams();
     }
 
 
@@ -48,20 +48,16 @@ class AlgorithmInputForm extends React.Component{
 
 
     /*
-        Given a key, the function will check to see if there is a parameter in
-        the url that matches that key. If there is, and the url parameters have
-        not been handled yet, the function records the parameter's value in the
-        state and returns that value. If no parameter is found, an empty string
-        is returned and no changes are made to the state.
+        Checks every form key to see if there is a matching url parameter. If there
+        is, the state is updated to contain that url parameter's value.
     */
-    handleUrlParam = (key) => {
-        if(this.props.model.urlParams[key] && !this.handledUrlParams){
-            this.setState({
-                [key]: this.props.model.urlParams[key]
-            });
-            return this.props.model.urlParams[key];
+    handleUrlParams = () => {
+        for (var i = 0; i < this.props.model.forms.length; i++){
+            let entry = this.props.model.forms[i];
+            if(this.props.model.urlParams[entry.key]){
+                this.state[entry.key] = this.props.model.urlParams[entry.key];
+            }
         }
-        return "";
     }
 
 
@@ -74,7 +70,6 @@ class AlgorithmInputForm extends React.Component{
         var elementsToAdd = [];
         for (var i = 0; i < this.props.model.forms.length; i++){
             let entry = this.props.model.forms[i];
-            this.handleUrlParam(entry.key);
             elementsToAdd.push(
                 <div class="inputField">
                     <InputBox
@@ -90,7 +85,6 @@ class AlgorithmInputForm extends React.Component{
                 </div>
             );
         }
-        this.handledUrlParams = true;
         return elementsToAdd;
     }
 

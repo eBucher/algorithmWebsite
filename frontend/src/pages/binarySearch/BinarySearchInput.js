@@ -61,13 +61,14 @@ class BinarySearchInput{
 
     validInputHandler = (formState) => {
         var newElements = this.cleanRawElements(formState.elements);
-        var newSteps = this.calculateSteps(newElements, 0, newElements.length - 1, formState.target);
+        var newTarget = Number(formState.target);
+        var newSteps = this.calculateSteps(newElements, 0, newElements.length - 1, newTarget);
         store.dispatch(batchActions([
             setStarted(true),
             setStepNum(0),
             setSteps(newSteps),
             setAreaDimensions(CONTENT_SQUARE().size * (newElements.length + 2), 250),
-            setAlgParams({target: formState.target, elements: newElements}),
+            setAlgParams({target: newTarget, elements: newElements}),
         ]));
 
     }

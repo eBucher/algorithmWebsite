@@ -85,6 +85,7 @@ class InputBox extends React.Component{
                         style={this.getInputStyle()}
                         onChange={this.props.onChangeHandler}
                         value={this.getValue()}
+                        class="textField"
                     />
                     <div class="toolTipIconPositioning">
                         <ToolTip position="right" text={this.props.tooltip} cursor="help">

@@ -2,7 +2,8 @@ import React from "react";
 import ShareIcon from "assets/ShareIcon.svg";
 import "../ButtonBar.css";
 import store from "store.js";
-import "components/inputBox/InputBox.css";
+import "pages/styles.css";
+import "./LinkGenerator.css";
 
 class LinkGenerator {
     /*  Returns the text/icon that should be displayed on the button
@@ -21,10 +22,14 @@ class LinkGenerator {
     */
     getContent = () => {
         return(
-            <div class="inputArea">
+            <div>
                 <span class="smallLabelText">Link</span>
                 <br/>
-                <input type="text" id="LinkGeneratorUrl" value={this.buildLink()} readOnly="true"></input>
+                <input type="text" class ="textField linkGeneratorTextArea"
+                    id="LinkGeneratorUrl" value={this.buildLink()}
+                    readOnly="true"
+                >
+                </input>
                 <button id="LinkGeneratorCopyButton" onClick={this.copyText} class="smallBtn orangeBtn">
                     Copy to clipboard
                 </button>
@@ -58,7 +63,6 @@ class LinkGenerator {
         as "name=value&name=value...&name=value"
     */
     buildParamString = (params) => {
-        console.log(store.getState());
         var paramString = "";
         for (var propertyName in params) {
             if (params.hasOwnProperty(propertyName)) {

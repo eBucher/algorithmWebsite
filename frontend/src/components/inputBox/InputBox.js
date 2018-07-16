@@ -88,7 +88,7 @@ class InputBox extends React.Component{
                         class="textField"
                     />
                     <div class="toolTipIconPositioning">
-                        <ToolTip position="right" text={this.props.tooltip} cursor="help">
+                        <ToolTip position="up" text={this.props.tooltip} cursor="help">
                             <img
                                 src={this.state.toolTipIcon}
                                 onMouseOver={this.toolTipIconEnterHandler}

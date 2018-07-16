@@ -33,6 +33,11 @@ class LinkGenerator {
                 <button id="LinkGeneratorCopyButton" onClick={this.copyText} class="smallBtn orangeBtn">
                     Copy to clipboard
                 </button>
+                <br/>
+                <span class="noteText">
+                This link will allow you or a friend to return to this page with the<br/>same
+                input that you most recently entered.
+                </span>
             </div>
         )
     }

@@ -5,7 +5,7 @@ const AlgorithmInitialState = {
     steps: [],
     areaWidth: 0,
     areaHeight: 0,
-    algorithmParams: {},
+    algParams: {},
 }
 
 const AlgorithmReducer = (state = AlgorithmInitialState, action) => {

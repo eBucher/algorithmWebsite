@@ -1,4 +1,5 @@
 import React from 'react';
+import ButtonBar from 'components/buttonBar/ButtonBar.js';
 import DrawArea from 'components/drawArea/DrawArea.js';
 import CodeBox from 'components/codeBox/CodeBox.js';
 import ExplanationBox from 'components/explanationBox/ExplanationBox.js';
@@ -27,6 +28,7 @@ class AlgorithmPage extends React.Component {
                         numSteps={state.steps.length}
                         enabled={state.started}
                     />
+                    <ButtonBar/>
                 </div>
                 <div class="bottomDescriptions">
 					<CodeBox linesOfCode={this.props.linesOfCode} highlightedLines={this.props.highlightedLines}/>

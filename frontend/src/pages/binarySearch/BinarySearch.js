@@ -5,6 +5,7 @@ import BinarySearchDraw from 'pages/binarySearch/BinarySearchDraw.js';
 import queryString from 'query-string';
 import {connect} from "react-redux";
 import {setAlgorithmName, resetAlgorithmState} from "actions/AlgorithmActions.js";
+import {setPagePath} from "actions/AppActions.js";
 import store from 'store.js';
 import {batchActions} from 'redux-batched-actions';
 
@@ -15,6 +16,7 @@ class BinarySearch extends Algorithm{
 		store.dispatch(batchActions([
             resetAlgorithmState(),
 			setAlgorithmName("Binary Search"),
+			setPagePath(props.location.pathname),
         ]));
 		this.algorithm = [
 			"function binarySearch(elements, left, right, target){",

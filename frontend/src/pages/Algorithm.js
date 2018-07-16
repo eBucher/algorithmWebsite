@@ -84,7 +84,7 @@ class Algorithm extends React.Component{
 		var inputModel = this.getInputModel();
 		return (
 			<AlgorithmPage
-				parent = {this}
+				urlPath = {this.props.location.pathname}
 				inputModel = {inputModel}
 				piecesToShow = {piecesToShow}
 				linesOfCode = {this.algorithm}

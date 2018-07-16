@@ -1,6 +1,6 @@
-export function setPageType(pageType){
+export function setPagePath(path){
     return {
-        type: "SET_PAGE_TYPE",
-        payload: pageType
+        type: "SET_PAGE_PATH",
+        payload: path
     }
 }

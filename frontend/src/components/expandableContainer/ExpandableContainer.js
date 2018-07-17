@@ -21,7 +21,7 @@ class ExpandableContainer extends React.Component{
     render(){
         if (this.props.open === true){
             return (
-                <div class="ExpandableContainerOpened"
+                <div className="ExpandableContainerOpened"
                     style={this.getDimensions()}
                 >
                     {this.props.children}
@@ -29,7 +29,7 @@ class ExpandableContainer extends React.Component{
             )
         } else {
             return (
-                <div class="ExpandableContainerClosed"
+                <div className="ExpandableContainerClosed"
                     style={{width: this.props.width}}></div>
             )
         }

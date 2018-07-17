@@ -9,12 +9,12 @@ class ExplanationBox extends React.Component{
 		var rows = [];
 		if(this.props.text[0] != null){
 			rows.push(
-				<div class="lineIconContainer">
+				<div className="lineIconContainer">
 					<font color="#e9711c"> > </font>
 				</div>
 			)
 			rows.push(
-				<div class="explanationContainer">
+				<div className="explanationContainer">
 					<font color="#000000">{this.props.text[0]}</font>
 				</div>
 			)
@@ -22,12 +22,12 @@ class ExplanationBox extends React.Component{
 		for(var i = 1; i < this.props.text.length; i++){
 			if(this.props.text[i] != null){
 				rows.push(
-						<div class="lineIconContainer">
+						<div className="lineIconContainer">
 							>
 						</div>
 				)
 				rows.push(
-					<div class="explanationContainer">
+					<div className="explanationContainer">
 						{this.props.text[i]}
 					</div>
 				)
@@ -40,10 +40,10 @@ class ExplanationBox extends React.Component{
 	render(){
 
 		return (
-			<div class="explanationBox">
+			<div className="explanationBox">
 				<div className="BoxTitle">
-					<img src={CommentIcon} class="subtitleIcon" alt=""/>
-					<h2 class="subtitle darkText">What is happening</h2>
+					<img src={CommentIcon} className="subtitleIcon" alt=""/>
+					<h2 className="subtitle darkText">What is happening</h2>
 				</div>
 				<div id="explanations">
 					{this.generateRows()}

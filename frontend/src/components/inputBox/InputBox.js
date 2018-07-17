@@ -76,8 +76,8 @@ class InputBox extends React.Component{
 
     render(){
         return(
-            <div class="inputArea">
-                <label class="smallLabelText">{this.props.label}</label>
+            <div className="inputArea">
+                <label className="smallLabelText">{this.props.label}</label>
                 <br/>
                 <div>
                     <input
@@ -85,21 +85,21 @@ class InputBox extends React.Component{
                         style={this.getInputStyle()}
                         onChange={this.props.onChangeHandler}
                         value={this.getValue()}
-                        class="textField"
+                        className="textField"
                     />
-                    <div class="toolTipIconPositioning">
+                    <div className="toolTipIconPositioning">
                         <ToolTip position="up" text={this.props.tooltip} cursor="help">
                             <img
                                 src={this.state.toolTipIcon}
                                 onMouseOver={this.toolTipIconEnterHandler}
                                 onMouseOut={this.toolTipIconExitHandler}
-                                class="toolTipIcon_InputBox"
+                                className="toolTipIcon_InputBox"
                                 alt="help tooltip icon"
                             />
                         </ToolTip>
                     </div>
                 </div>
-                <span class="inputErrorMsgText" style={this.errorMsgVisibility()}>
+                <span className="inputErrorMsgText" style={this.errorMsgVisibility()}>
                     {this.props.errorMsg}
                 </span>
             </div>

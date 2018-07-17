@@ -11,8 +11,8 @@ class LinkGenerator {
     getLabel = () => {
         return (
             <div>
-                <img src={ShareIcon} class="btnIcon" alt="share icon"/>
-                <span class="btnFont">Get link to this visualization</span>
+                <img src={ShareIcon} className="btnIcon" alt="share icon"/>
+                <span className="btnFont">Get link to this visualization</span>
             </div>
         )
     }
@@ -23,18 +23,18 @@ class LinkGenerator {
     getContent = () => {
         return(
             <div>
-                <span class="smallLabelText">Link</span>
+                <span className="smallLabelText">Link</span>
                 <br/>
-                <input type="text" class ="textField linkGeneratorTextArea"
+                <input type="text" className ="textField linkGeneratorTextArea"
                     id="LinkGeneratorUrl" value={this.buildLink()}
                     readOnly="true"
                 >
                 </input>
-                <button id="LinkGeneratorCopyButton" onClick={this.copyText} class="smallBtn orangeBtn">
+                <button id="LinkGeneratorCopyButton" onClick={this.copyText} className="smallBtn orangeBtn">
                     Copy to clipboard
                 </button>
                 <br/>
-                <span class="noteText">
+                <span className="noteText">
                 This link will allow you or a friend to return to this page with the<br/>same
                 input that you most recently entered.
                 </span>

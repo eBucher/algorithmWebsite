@@ -26,7 +26,7 @@ class ButtonBar extends React.Component{
         for(var i = 0; i < this.buttons.length; i++){
 
             var nextButton =
-                <div class="buttonBarButton"
+                <div className="buttonBarButton"
                     style={this.selectedButtonStyle(i)}
                     onClick={this.setBottomContent.bind(this, i)}
                     key={"buttonBarButton" + i}
@@ -84,7 +84,7 @@ class ButtonBar extends React.Component{
             return "";
         } else{
             return (
-                <div class="ButtonBarCenteredContent">
+                <div className="ButtonBarCenteredContent">
                     {this.buttons[this.state.displayedIdx].getContent()}
                 </div>
             )
@@ -94,8 +94,8 @@ class ButtonBar extends React.Component{
 
 	render(){
 		return (
-			<div class="ButtonBarContainer">
-                <div class="ButtonBarButtonsRow">
+			<div className="ButtonBarContainer">
+                <div className="ButtonBarButtonsRow">
                     {this.generateButtons()}
                 </div>
                 <ExpandableContainer open={this.state.opened} height="120px" width="100%">

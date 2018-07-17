@@ -4,11 +4,11 @@ import './Display.css';
 class Display extends Component {
     renderContent = () => {
         if(this.props.started){
-            return <div class="displayHelper">{this.props.children}</div>;
+            return <div className="displayHelper">{this.props.children}</div>;
         } else {
             return (
-                <div class="greyCover">
-                    <div class="greyScreenTextBox">
+                <div className="greyCover">
+                    <div className="greyScreenTextBox">
                         Begin by entering your parameters for the algorithm at the
                         top of the screen.
                     </div>
@@ -19,9 +19,9 @@ class Display extends Component {
 
     render() {
         return (
-            <div class="display">
+            <div className="display">
                     {this.renderContent()}
-                    <p class="b">Resize Screen</p>
+                    <p className="b">Resize Screen</p>
             </div>
         );
     }

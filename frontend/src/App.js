@@ -11,7 +11,7 @@ class App extends Component {
     return (
       <div className="App">
         <HeaderBar/>
-        <div class="content">
+        <div className="content">
             <Switch>
                 <Route path="/algorithms/binarySearch" component={BinarySearch}/>
                 <Route path="/test" component={Test}/>

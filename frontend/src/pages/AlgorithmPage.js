@@ -15,14 +15,14 @@ class AlgorithmPage extends React.Component {
         var state = this.props.algorithm;
         return(
             <div id="AlgorithmVisualization">
-                <div class="pageTitle algorithmTitleBox">
+                <div className="pageTitle algorithmTitleBox">
                     {state.name}
                 </div>
                 <AlgorithmInputForm model={this.props.inputModel} />
                 <Display started={state.started}>
 						<DrawArea w={state.areaWidth} h={state.areaHeight} displayedPieces={this.props.piecesToShow}/>
 				</Display>
-                <div class="stepManagerArea">
+                <div className="stepManagerArea">
                     <StepManager
                         value ={state.stepNum}
                         numSteps={state.steps.length}
@@ -30,7 +30,7 @@ class AlgorithmPage extends React.Component {
                     />
                     <ButtonBar/>
                 </div>
-                <div class="bottomDescriptions">
+                <div className="bottomDescriptions">
 					<CodeBox linesOfCode={this.props.linesOfCode} highlightedLines={this.props.highlightedLines}/>
 					<ExplanationBox text={this.props.explanations} />
 				</div>

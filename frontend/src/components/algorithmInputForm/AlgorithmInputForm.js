@@ -1,5 +1,4 @@
 import React from 'react';
-import 'tooltip/balloon.css';
 import InputBox from 'components/inputBox/InputBox.js';
 import './AlgorithmInputForm.css';
 import 'pages/styles.css';
@@ -74,7 +73,7 @@ class AlgorithmInputForm extends React.Component{
         for (var i = 0; i < this.props.model.inputs.length; i++){
             let entry = this.props.model.inputs[i];
             elementsToAdd.push(
-                <div class="inputField" key={"AlgorithmInputFormField" + i}>
+                <div className="inputField" key={"AlgorithmInputFormField" + i}>
                     <InputBox
                         label = {entry.displayText}
                         width = {200}
@@ -129,9 +128,9 @@ class AlgorithmInputForm extends React.Component{
 
     render(){
         return (
-            <form class="algorithmInputForm" onSubmit={this.submitForm}>
+            <form className="algorithmInputForm" onSubmit={this.submitForm}>
                 {this.inputFields()}
-                <input type="submit" value="Visualize" class="orangeBtn smallBtn"></input>
+                <input type="submit" value="Visualize" className="orangeBtn smallBtn"></input>
             </form>
         )
     }

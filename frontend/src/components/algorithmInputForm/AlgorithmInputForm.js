@@ -19,9 +19,10 @@ class AlgorithmInputForm extends React.Component{
     constructor(props){
         super(props);
         this.state = {
-            errors: []
+            ...this.getUrlParams(),
+            errors: [],
         }
-        this.handleUrlParams();
+
     }
 
 
@@ -48,16 +49,18 @@ class AlgorithmInputForm extends React.Component{
 
 
     /*
-        Checks every form key to see if there is a matching url parameter. If there
-        is, the state is updated to contain that url parameter's value.
+        Checks every form key to see if there is a matching url parameter. Returns an
+        object with each of these key values.
     */
-    handleUrlParams = () => {
+    getUrlParams = () => {
+        var newStateVars = {};
         for (var i = 0; i < this.props.model.inputs.length; i++){
             let entry = this.props.model.inputs[i];
             if(this.props.model.urlParams[entry.key]){
-                this.state[entry.key] = this.props.model.urlParams[entry.key];
+                newStateVars[entry.key] = this.props.model.urlParams[entry.key];
             }
         }
+        return newStateVars;
     }
 
 
@@ -71,7 +74,7 @@ class AlgorithmInputForm extends React.Component{
         for (var i = 0; i < this.props.model.inputs.length; i++){
             let entry = this.props.model.inputs[i];
             elementsToAdd.push(
-                <div class="inputField">
+                <div class="inputField" key={"AlgorithmInputFormField" + i}>
                     <InputBox
                         label = {entry.displayText}
                         width = {200}

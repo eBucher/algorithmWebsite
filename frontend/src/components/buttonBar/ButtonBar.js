@@ -2,6 +2,7 @@ import React from 'react';
 import "pages/styles.css";
 import "./ButtonBar.css";
 import LinkGenerator from "./buttons/LinkGenerator.js";
+import ExpandableContainer from "components/expandableContainer/ExpandableContainer.js";
 
 class ButtonBar extends React.Component{
 
@@ -18,7 +19,7 @@ class ButtonBar extends React.Component{
     }
 
 
-    /*  Returns an array of the buttons that will appear in the bar
+    /*  Returns an array of the button elements that will appear in the bar
     */
     generateButtons = () => {
         var btns = [];
@@ -51,7 +52,8 @@ class ButtonBar extends React.Component{
 
 
     /*  Changes the state to indicate whether the bottom content should be
-        displayed or not and which button's content should be displayed.
+        displayed or not and which button's content should be displayed. i is
+        the index of the button in this.buttons to be displayed.
     */
     setBottomContent = (i) => {
         if(this.state.opened === false){
@@ -74,20 +76,17 @@ class ButtonBar extends React.Component{
         }
     }
 
-    /*  If the bottom content should be opened, the content for the i'th button
-        will be returned. If the botto conent is closed, a single div with no
-        height is returned.
+    /*  If a button has been selected, its content will be returned. Otherwise,
+        an empty string is returned.
     */
-    showBottomContent = (i) => {
-        if (this.state.opened === true){
+    getBottomContent = () => {
+        if(this.state.displayedIdx === null){
+            return "";
+        } else{
             return (
-                <div class="buttonBarContentOpen">
+                <div class="ButtonBarCenteredContent">
                     {this.buttons[this.state.displayedIdx].getContent()}
                 </div>
-            )
-        } else {
-            return (
-                <div class="buttonBarContentClosed"></div>
             )
         }
     }
@@ -99,9 +98,9 @@ class ButtonBar extends React.Component{
                 <div class="ButtonBarButtonsRow">
                     {this.generateButtons()}
                 </div>
-                <div>
-                    {this.showBottomContent()}
-                </div>
+                <ExpandableContainer open={this.state.opened} height="120px" width="100%">
+                    {this.getBottomContent()}
+                </ExpandableContainer>
             </div>
 		)
 	}

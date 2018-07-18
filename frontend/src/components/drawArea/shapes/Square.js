@@ -138,12 +138,12 @@ class Square extends CustomShape{
 
 	build() {
 		return (
-			<React.Fragment>
+			<g>
 				{this._drawSquare()}
 				{this._drawCenterText()}
 				{this._drawTopText()}
 				{this._drawBottomText()}
-			</React.Fragment>
+			</g>
 		)
 
 	}

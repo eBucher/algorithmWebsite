@@ -9,6 +9,13 @@ class CodeBox extends React.Component{
 		this.linesOfCode = null;
 	}
 
+
+	static getDefaultProps = {
+		linesOfCode: [],
+		highlightedLines: null,
+	}
+
+
 	/*
 	Replaces four consecutive space characters with 4 characters that will
 	be rendered as spaces in the HTML.
@@ -20,25 +27,36 @@ class CodeBox extends React.Component{
 		return line.replace(/    /g, "\u00A0\u00A0\u00A0\u00A0")
 	}
 
+
+	/*	Returns an array of all of the elements for each line of code.
+	*/
 	generateLinesOfCode = () => {
-		var linesOfCode = this.props.linesOfCode.map(this.buildLine(this.props.highlightedLines, this.cleanLine));
+		var linesOfCode = [];
+		for(var i = 0; i < this.props.linesOfCode.length; i++){
+			linesOfCode.push(this.buildLine(i));
+		}
 		return linesOfCode;
 	}
 
-	/*	Returns a function that generates a line of the codeBox. Highlighted lines
-		receive a golden background.
+
+	/*	Given an index of a line of code in this.props.linesOfCode, the function
+		will return an element with that line of code in it. If the index
+		matches the highlightedLines index, its background will be gold.
 	*/
-	buildLine = (highlightedLines, cleanLineCallback) => {
-		return function(line, index){
-			if(highlightedLines === index){
-				return <div style={{backgroundColor: "#ffc947", whiteSpace: "pre-line"}}>{cleanLineCallback(line)}</div>
-			}
-			return <div style={{whiteSpace: "pre-line"}}>{cleanLineCallback(line)}</div>
+	buildLine = (index) => {
+		if(this.props.highlightedLines === index){
+			return (
+				<div key={"CodeBoxLine" + index} style={{backgroundColor: "#ffc947", whiteSpace: "pre-line"}}>
+				{this.cleanLine(this.props.linesOfCode[index])}
+			</div>)
 		}
+		return <div key={"CodeBoxLine" + index} style={{whiteSpace: "pre-line"}}>
+			{this.cleanLine(this.props.linesOfCode[index])}
+		</div>
 	}
 
-	render(){
 
+	render(){
 		return (
 			<div className="codeBox">
 				<div className="BoxTitle">

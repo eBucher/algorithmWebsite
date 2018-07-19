@@ -5,35 +5,48 @@ import RightArrow from 'assets/ForwardIcon.svg';
 import LeftArrow from 'assets/BackwardIcon.svg';
 import {setStepNum} from 'actions/AlgorithmActions.js';
 import {connect} from "react-redux";
+import PropTypes from "prop-types";
 
-class StepManager extends React.Component{
+const propTypes = {
+	/** Whether the user can interact with the step manager.
+		Connected to Redux. */
+	enabled: PropTypes.bool.isRequired,
+	/** The total number of steps. Connected to Redux. */
+	numSteps: PropTypes.number.isRequired,
+	/** The current step index. Connrected to Redux. */
+	stepNum: PropTypes.number.isRequired,
+	/** A function meant for controlling the current step number. Takes one argument
+		that is the new step number. Connected to Redux. */
+	setStepNum: PropTypes.func.isRequired,
+}
 
-	/* 	Increments the step num by 1. If the stepNum is the last step, nothing is
-		changed.
-	*/
+/** A range slider and set of buttons for incrementing and decrementing the
+	current step number in an algorithm. */
+export class StepManager extends React.Component{
+
+	/** Increments the step num by 1. If the stepNum is the last step, nothing is
+		changed. */
 	nextStep = () => {
-		if(this.props.algorithm.stepNum !== this.props.algorithm.steps.length - 1){
-			var newStepNum = this.props.algorithm.stepNum + 1;
+		if(this.props.stepNum !== this.props.numSteps - 1){
+			var newStepNum = this.props.stepNum + 1;
 			this.props.setStepNum(newStepNum);
 		}
 	}
 
 
-	/* 	Decrements the step num by 1. If the stepNum is 0 (the first step),
-		nothing is changed.
-	*/
+	/** Decrements the step num by 1. If the stepNum is 0 (the first step),
+		nothing is changed. */
 	previousStep = () => {
-		if(this.props.algorithm.stepNum !== 0){
-			var newStepNum = this.props.algorithm.stepNum - 1;
+		if(this.props.stepNum !== 0){
+			var newStepNum = this.props.stepNum - 1;
 			this.props.setStepNum(newStepNum);
 		}
 	}
 
 
-	/* 	Given an event from a range slider, the stepNum is changed to be equal
+	/** Given an event from a range slider, the stepNum is changed to be equal
 		to the slider's value.
-		Pre: the slider's value is >= 0 and <= the last step number.
-	*/
+		pre: the slider's value is >= 0 and <= the last step index. */
 	handleSliderChange = (event) => {
 		this.props.setStepNum(Number(event.target.value));
 	}
@@ -42,24 +55,28 @@ class StepManager extends React.Component{
 	render(){
 		return (
 			<div className="stepManager">
-				<button className="smallCircularBtn orangeBtn stepBtnMargin" onClick={this.previousStep} disabled={!this.props.algorithm.started}>
+				<button className="smallCircularBtn orangeBtn stepBtnMargin" onClick={this.previousStep} disabled={!this.props.enabled}>
 					<img src={LeftArrow} className="backwardIcon" alt="previous step button"/>
 				</button>
-				<button className="smallCircularBtn orangeBtn stepBtnMargin" onClick={this.nextStep} disabled={!this.props.algorithm.started}>
+				<button className="smallCircularBtn orangeBtn stepBtnMargin" onClick={this.nextStep} disabled={!this.props.enabled}>
 					<img src={RightArrow} className="forwardIcon" alt="next step button"/>
 				</button>
-				<input id="stepSlider" type="range" min="0" max={this.props.algorithm.steps.length - 1}
+				<input id="stepSlider" type="range" min="0" max={this.props.numSteps - 1}
 					step="1" onChange={this.handleSliderChange}
-					value={this.props.algorithm.stepNum} disabled={!this.props.algorithm.started}
+					value={this.props.stepNum} disabled={!this.props.enabled}
 				/>
 			</div>
 		)
 	}
 }
 
+StepManager.propTypes = propTypes;
+
 const mapStateToProps = (state) => {
   return {
-      algorithm: state.Algorithm,
+	  enabled: state.Algorithm.started,
+	  numSteps: state.Algorithm.steps.length,
+	  stepNum: state.Algorithm.stepNum,
   };
 };
 

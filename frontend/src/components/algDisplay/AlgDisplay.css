@@ -1,4 +1,4 @@
-.display{
+.algDisplay{
     min-width: 650px;
     width: 100%;
     position: relative;
@@ -10,7 +10,7 @@
     resize: vertical;
 }
 
-.displayHelper{
+.algDisplayHelper{
     min-height: min-content; /* needs vendor prefixes */
     min-width: min-content;
     display: flex;

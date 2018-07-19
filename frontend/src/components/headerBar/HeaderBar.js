@@ -1,6 +1,7 @@
 import React from 'react';
 import 'components/headerBar/HeaderBar.css';
 
+/** A header bar for the top of the page */
 class HeaderBar extends React.Component {
 	render(){
 		return (

@@ -4,10 +4,14 @@ import "./ButtonBar.css";
 import LinkGenerator from "./buttons/LinkGenerator.js";
 import ExpandableContainer from "components/expandableContainer/ExpandableContainer.js";
 
+/** A container with one or more buttons to press in it. When a button is pressed,
+    it can expand a container below the list of buttons to display an Additional
+    area for content. */
 class ButtonBar extends React.Component{
 
     constructor(){
         super();
+        // Any new buttons belong in this array
         this.buttons = [
             new LinkGenerator(),
         ];
@@ -19,8 +23,7 @@ class ButtonBar extends React.Component{
     }
 
 
-    /*  Returns an array of the button elements that will appear in the bar
-    */
+    /** @return An array of the button elements that will appear in the bar */
     generateButtons = () => {
         var btns = [];
         for(var i = 0; i < this.buttons.length; i++){
@@ -39,10 +42,8 @@ class ButtonBar extends React.Component{
     }
 
 
-    /*  If the given index i is the same as the button that has been the most
-        recently pressed, an object with a special style for that button is
-        returned. Otherwise, an empty object is returned.
-    */
+    /** @return An additional style for the button if it is the most recently
+        selected one. If it is not selected, an empty object is returned. */
     selectedButtonStyle = (i) => {
         if(this.state.displayedIdx === i){
             return {borderBottom: "4px solid #e9711c"};
@@ -51,7 +52,7 @@ class ButtonBar extends React.Component{
     }
 
 
-    /*  Changes the state to indicate whether the bottom content should be
+    /** Changes the state to indicate whether the bottom content should be
         displayed or not and which button's content should be displayed. i is
         the index of the button in this.buttons to be displayed.
     */
@@ -76,9 +77,10 @@ class ButtonBar extends React.Component{
         }
     }
 
-    /*  If a button has been selected, its content will be returned. Otherwise,
-        an empty string is returned.
-    */
+
+    /** @return The most recently selected button. If none have been selected,
+        then an empty string is returned.
+     */
     getBottomContent = () => {
         if(this.state.displayedIdx === null){
             return "";

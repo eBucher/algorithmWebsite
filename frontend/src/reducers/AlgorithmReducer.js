@@ -1,7 +1,7 @@
 const AlgorithmInitialState = {
     name: null,
     started: false,
-    stepNum: null,
+    stepNum: 0,
     steps: [],
     areaWidth: 0,
     areaHeight: 0,

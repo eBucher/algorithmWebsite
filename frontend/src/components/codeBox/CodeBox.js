@@ -1,25 +1,27 @@
 import React from 'react';
 import 'components/codeBox/CodeBox.css';
 import CodeIcon from 'assets/CodeIcon.svg';
+import PropTypes from 'prop-types';
 
+const propTypes = {
+	/** The text for each line of code to be displayed*/
+	linesOfCode: PropTypes.array.isRequired,
+	/** The index of an element in linesOfCode to highlight. */
+	highlightedLine: PropTypes.number,
+}
+
+const defaultProps = {
+	highlightedLine: -1,
+}
+
+
+/** A series of rows of code. At most, one of the rows can be selected to have a
+ 	gold background.*/
 class CodeBox extends React.Component{
 
-	constructor(){
-		super();
-		this.linesOfCode = null;
-	}
-
-
-	static getDefaultProps = {
-		linesOfCode: [],
-		highlightedLines: null,
-	}
-
-
-	/*
-	Replaces four consecutive space characters with 4 characters that will
-	be rendered as spaces in the HTML.
-	*/
+	/** @arg A string to reformat
+		@return The passed in string where every substring of four consecutive space
+		characters is replaced with four unicode space characters.*/
 	cleanLine = (line) => {
 		if(line === ""){
 			return "\u00A0";
@@ -28,8 +30,7 @@ class CodeBox extends React.Component{
 	}
 
 
-	/*	Returns an array of all of the elements for each line of code.
-	*/
+	/** @return an array of all of the elements for each line of code. */
 	generateLinesOfCode = () => {
 		var linesOfCode = [];
 		for(var i = 0; i < this.props.linesOfCode.length; i++){
@@ -39,12 +40,11 @@ class CodeBox extends React.Component{
 	}
 
 
-	/*	Given an index of a line of code in this.props.linesOfCode, the function
-		will return an element with that line of code in it. If the index
-		matches the highlightedLines index, its background will be gold.
-	*/
+	/** @arg an index for a string in this.props.linesOfCode
+		@return an element that contains the string at the given index. If the
+		index matches the highlightedLine prop, the element will be gold. */
 	buildLine = (index) => {
-		if(this.props.highlightedLines === index){
+		if(this.props.highlightedLine === index){
 			return (
 				<div key={"CodeBoxLine" + index} style={{backgroundColor: "#ffc947", whiteSpace: "pre-line"}}>
 				{this.cleanLine(this.props.linesOfCode[index])}
@@ -71,5 +71,8 @@ class CodeBox extends React.Component{
 	}
 
 }
+
+CodeBox.propTypes = propTypes;
+CodeBox.defaultProps = defaultProps;
 
 export default CodeBox;

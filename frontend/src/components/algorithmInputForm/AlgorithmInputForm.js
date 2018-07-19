@@ -2,17 +2,36 @@ import React from 'react';
 import InputBox from 'components/inputBox/InputBox.js';
 import './AlgorithmInputForm.css';
 import 'pages/styles.css';
+import PropTypes from "prop-types";
 
-/*
-    Required Properties:
-    submitHandler - a function to handle when the form is submitted. It should
-    take in an argument that is the AlgorithmInputForm's state, which contains
-    only the input fields' values at the time of submission.
-    model - an array of objects that have a 'key' property to differentiate
-    between each field and a 'displayText' property which is the text to show
-    next to the input box.
+const propTypes = {
+    model: PropTypes.shape({
+        /** Called when the user's input is all valid (based on the given verifyHandlers)
+            and the user presses the submit button. Takes in an object whose property
+            names are each key in the model and their values are what the user has typed
+            in. */
+        validInputHandler: PropTypes.func.isRequired,
+        /** If any property names match any of the keys in the model, the input fields
+            will automatically be filled with the corresponding values. */
+        urlParams: PropTypes.object.isRequired,
+        /** Each object in the array will produce an input field */
+        inputs: PropTypes.arrayOf(PropTypes.shape({
+            /** A unique key to identify the input */
+            key: PropTypes.string.isRequired,
+            /** The label that will appear above the input field */
+            displayText: PropTypes.string.isRequired,
+            /** Additional information for the user that will appear in a tooltip */
+            tooltipText: PropTypes.string.isRequired,
+            /** Returns true or false based on whether the user's input is valid */
+            verifyHandler: PropTypes.func.isRequired,
+            /** A short message to display when the user tries to submit invalid input */
+            errorMsg: PropTypes.string.isRequired,
+        })).isRequired,
+    }),
+}
 
-*/
+
+/** A series of input fields with a submit button created from a given model */ 
 class AlgorithmInputForm extends React.Component{
 
     constructor(props){
@@ -36,9 +55,8 @@ class AlgorithmInputForm extends React.Component{
     }
 
 
-    /*
-        Given a string, the function returns if a medium or large tooltip is
-        needed.
+    /** @param  A string that will appear in a tooltip
+        @return A size for the tooltip based on the length of the given string.
     */
     getToolTipSize = (text) => {
         if(text.length < 60)
@@ -47,9 +65,8 @@ class AlgorithmInputForm extends React.Component{
     }
 
 
-    /*
-        Checks every form key to see if there is a matching url parameter. Returns an
-        object with each of these key values.
+    /** @return An object that contains every key/value from the model.urlParams
+        prop that also has a key in the model.inputs prop.
     */
     getUrlParams = () => {
         var newStateVars = {};
@@ -63,8 +80,7 @@ class AlgorithmInputForm extends React.Component{
     }
 
 
-    /*
-        Returns an array of InputBox objects generated from this.props.model.inputs.
+    /** @return an array of InputBox objects generated from this.props.model.inputs.
         If there were any url parameters, they will be used as initial values for
         the inputs. this.handledUrlParams will be true by the end of the function.
     */
@@ -135,5 +151,7 @@ class AlgorithmInputForm extends React.Component{
         )
     }
 }
+
+AlgorithmInputForm.propTypes = propTypes;
 
 export default AlgorithmInputForm;

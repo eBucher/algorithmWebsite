@@ -90,6 +90,7 @@
 	font-weight: bold;
 	text-align: left;
 	display: block;
+	margin: 0px;
 }
 
 .BoxTitle{
@@ -97,7 +98,11 @@
 	padding-top: 10px;
 	padding-bottom: 10px;
 	display: flex;
+	flex-direction: row;
+	justify-content: flex-start;
+	align-items: center;
 	color: #FFFFFF;
+	height: min-content;
 }
 
 .noteText{

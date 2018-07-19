@@ -5,9 +5,10 @@ import store from "store.js";
 import "pages/styles.css";
 import "./LinkGenerator.css";
 
+/** Creates a label for a button bar and the displayed content creates a URL with
+    the user's input in the current algorithm */
 class LinkGenerator {
-    /*  Returns the text/icon that should be displayed on the button
-    */
+    /**  Returns the text/icon that should be displayed on the button*/
     getLabel = () => {
         return (
             <div>
@@ -18,7 +19,7 @@ class LinkGenerator {
     }
 
 
-    /*  Returns the content that will be displayed when the button is pressed
+    /** @return The content that will be displayed when the button is pressed
     */
     getContent = () => {
         return(

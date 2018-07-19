@@ -1,0 +1,4 @@
+ButtonBar example:
+```js
+<ButtonBar/>
+```

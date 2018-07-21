@@ -25,10 +25,10 @@ class LinearSearchDraw {
 		function will return what color the box should be.
 	*/
 	getBoxColor = (currentStepState, currentElementIndex) => {
-		if(currentStepState.highlightedLines == 3 &&
-			this.elements[currentElementIndex] == this.target)
+		if(currentStepState.highlightedLines === 3 &&
+			this.elements[currentElementIndex] === this.target)
 			return "green";
-		else if (currentStepState.highlightedLines == 6)
+		else if (currentStepState.highlightedLines === 6)
 			return "red";
 		else if (currentStepState.checkIndex > currentElementIndex)
 			return "grey";
@@ -53,7 +53,7 @@ class LinearSearchDraw {
 
 
 	/*
-		Pre: i == this.elements.length
+		Pre: i === this.elements.length
 		The function will add a new component to elementsToDraw that is a red
 		arrow and that is one position beyond the last box.
 	*/
@@ -95,7 +95,7 @@ class LinearSearchDraw {
 			p.message = "i = " + currentStep.checkIndex;
 			elementsToDraw.push(p);
 		}
-		if(currentStep.checkIndex == this.elements.length){
+		if(currentStep.checkIndex === this.elements.length){
 			this.beyondBoundsArrow(elementsToDraw, currentStep.checkIndex);
 		}
 	}

@@ -84,8 +84,8 @@ class BinarySearchInput{
     }
 
 
-    /*  Accepts any string that contains integers separated by commas. Whitespace
-        between the integers and commas will be accepted.
+    /*  Accepts any string that contains sorted integers separated by commas.
+        Whitespace between the integers and commas will be accepted.
     */
     verifyElements = (input) => {
         if(/^(-?[0-9]+(\s)*,(\s)*)*-?[0-9]+(\s)*$/.test(input)){

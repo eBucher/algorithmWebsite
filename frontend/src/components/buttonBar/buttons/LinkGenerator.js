@@ -4,6 +4,8 @@ import "../ButtonBar.css";
 import store from "store.js";
 import "pages/styles.css";
 import "./LinkGenerator.css";
+import {Button, Icon} from "semantic-ui-react";
+import 'semantic-ui-css/semantic.min.css';
 
 /** Creates a label for a button bar and the displayed content creates a URL with
     the user's input in the current algorithm */
@@ -12,7 +14,7 @@ class LinkGenerator {
     getLabel = () => {
         return (
             <div>
-                <img src={ShareIcon} className="btnIcon" alt="share icon"/>
+                <Icon name="share alternate" color="orange"/>
                 <span className="btnFont">Get link to this visualization</span>
             </div>
         )
@@ -31,9 +33,8 @@ class LinkGenerator {
                     readOnly="true"
                 >
                 </input>
-                <button id="LinkGeneratorCopyButton" onClick={this.copyText} className="smallBtn orangeBtn">
-                    Copy to clipboard
-                </button>
+
+                <Button id="LinkGeneratorCopyButton" onClick={this.copyText} color="orange" size="medium">Copy to clipboard</Button>
                 <br/>
                 <span className="noteText">
                 This link will allow you or a friend to return to this page with the<br/>same

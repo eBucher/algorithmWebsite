@@ -2,6 +2,8 @@ import React from 'react';
 import 'components/codeBox/CodeBox.css';
 import CodeIcon from 'assets/CodeIcon.svg';
 import PropTypes from 'prop-types';
+import {Icon} from "semantic-ui-react";
+import 'semantic-ui-css/semantic.min.css';
 
 const propTypes = {
 	/** The text for each line of code to be displayed*/
@@ -60,7 +62,9 @@ class CodeBox extends React.Component{
 		return (
 			<div className="codeBox">
 				<div className="BoxTitle">
-					<img src={CodeIcon} className="subtitleIcon" alt=""/>
+					<div className="subtitleIcon">
+						<Icon name="code"/>
+					</div>
 					<h2 className="subtitle darkText">Algorithm</h2>
 				</div>
 				<div className="code">

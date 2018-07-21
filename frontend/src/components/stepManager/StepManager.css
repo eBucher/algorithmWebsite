@@ -11,16 +11,8 @@
     margin-right: 10px;
 }
 
-.forwardIcon{
-    margin: 2px 0px 0px 3px;
-    height: 24px;
-    width: 24px;
-}
-
-.backwardIcon{
-    margin: 2px 2px 0px 0px;
-    height: 24px;
-    width: 24px;
+.stepManagerButtons{
+    width: max-content;
 }
 
 .stepManager input[type=range] {

@@ -3,7 +3,8 @@ import InputBox from 'components/inputBox/InputBox.js';
 import './AlgorithmInputForm.css';
 import 'pages/styles.css';
 import PropTypes from "prop-types";
-import Button from "components/button/Button.js";
+import {Button} from "semantic-ui-react";
+import 'semantic-ui-css/semantic.min.css';
 
 const propTypes = {
     model: PropTypes.shape({
@@ -147,7 +148,7 @@ class AlgorithmInputForm extends React.Component{
         return (
             <form className="algorithmInputForm" onSubmit={this.submitForm}>
                 {this.inputFields()}
-                <Button size="small" color="orange" type="submit">Visualize</Button>
+                <Button size="medium" color="orange" type="submit">Visualize</Button>
             </form>
         )
     }

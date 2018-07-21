@@ -3,10 +3,12 @@ import "pages/styles.css";
 import './StepManager.css';
 import RightArrow from 'assets/ForwardIcon.svg';
 import LeftArrow from 'assets/BackwardIcon.svg';
-import Button from "components/button/Button.js";
 import {setStepNum} from 'actions/AlgorithmActions.js';
 import {connect} from "react-redux";
+import {Button, Icon} from "semantic-ui-react";
+import 'semantic-ui-css/semantic.min.css';
 import PropTypes from "prop-types";
+
 
 const propTypes = {
 	/** Whether the user can interact with the step manager.
@@ -56,12 +58,10 @@ export class StepManager extends React.Component{
 	render(){
 		return (
 			<div className="stepManager">
-				<Button color="orange" size="small" shape="circle" clickHandler={this.previousStep} disabled={!this.props.enabled}>
-					<img src={LeftArrow} height="60%" alt="previous step button"/>
-				</Button>
-				<Button color="orange" size="small" shape="circle" clickHandler={this.nextStep} disabled={!this.props.enabled}>
-					<img src={RightArrow} height="60%" alt="next step button"/>
-				</Button>
+				<div className="stepManagerButtons">
+					<Button circular icon="backward" color="orange" onClick={this.previousStep} disabled={!this.props.enabled}/>
+					<Button circular icon="forward" color="orange" onClick={this.nextStep} disabled={!this.props.enabled}/>
+				</div>
 				<input id="stepSlider" type="range" min="0" max={this.props.numSteps - 1}
 					step="1" onChange={this.handleSliderChange}
 					value={this.props.stepNum} disabled={!this.props.enabled}

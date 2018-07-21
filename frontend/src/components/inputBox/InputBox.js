@@ -5,6 +5,8 @@ import HelpIcon from 'assets/HelpIcon.svg';
 import SelectedHelpIcon from 'assets/HelpIconHighlighted.svg';
 import WarningIcon from 'assets/WarningIcon.svg';
 import ToolTip from 'components/toolTip/ToolTip.js';
+import {Icon} from "semantic-ui-react";
+import 'semantic-ui-css/semantic.min.css';
 import PropTypes from "prop-types";
 
 const propTypes = {
@@ -39,7 +41,7 @@ class InputBox extends React.Component{
     constructor(){
         super();
         this.state = {
-            toolTipIcon: HelpIcon
+            toolTipIconColor: "grey",
         }
     }
 
@@ -66,7 +68,7 @@ class InputBox extends React.Component{
     /** Switches the tooltip icon to be highlighted. */
     toolTipIconEnterHandler = () => {
         this.setState({
-            toolTipIcon: SelectedHelpIcon
+            toolTipIconColor: "orange",
         })
     }
 
@@ -74,7 +76,7 @@ class InputBox extends React.Component{
     /** Switches the tooltip icon to not be highlighted. */
     toolTipIconExitHandler = () => {
         this.setState({
-            toolTipIcon: HelpIcon
+            toolTipIconColor: "grey",
         })
     }
 
@@ -99,14 +101,13 @@ class InputBox extends React.Component{
             return (
                 <div className="toolTipIconPositioning">
                     <ToolTip position="up" text={this.props.tooltip} cursor="help">
-                        <img
-                            src={this.state.toolTipIcon}
-                            onMouseOver={this.toolTipIconEnterHandler}
-                            onMouseOut={this.toolTipIconExitHandler}
-                            className="toolTipIcon_InputBox"
-                            alt="help tooltip icon"
-                        />
+                    <Icon name="question circle"
+                        onMouseOver={this.toolTipIconEnterHandler}
+                        onMouseOut={this.toolTipIconExitHandler}
+                        color={this.state.toolTipIconColor}
+                    />
                     </ToolTip>
+
                 </div>
             )
         } else return "";

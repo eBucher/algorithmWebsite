@@ -3,6 +3,8 @@ import 'components/explanationBox/ExplanationBox.css';
 import 'pages/styles.css';
 import CommentIcon from 'assets/CommentIcon.svg';
 import PropTypes from 'prop-types';
+import {Icon} from "semantic-ui-react";
+import 'semantic-ui-css/semantic.min.css';
 
 const propTypes = {
 	/** The most recent descriptions of each step to display. Newest
@@ -53,7 +55,9 @@ class ExplanationBox extends React.Component{
 		return (
 			<div className="explanationBox">
 				<div className="BoxTitle">
-					<img src={CommentIcon} className="subtitleIcon" alt=""/>
+					<div className="subtitleIcon">
+						<Icon name="comment alternate"/>
+					</div>
 					<h2 className="subtitle darkText">What is happening</h2>
 				</div>
 				<div id="explanations">

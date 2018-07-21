@@ -3,6 +3,7 @@ import InputBox from 'components/inputBox/InputBox.js';
 import './AlgorithmInputForm.css';
 import 'pages/styles.css';
 import PropTypes from "prop-types";
+import Button from "components/button/Button.js";
 
 const propTypes = {
     model: PropTypes.shape({
@@ -31,7 +32,7 @@ const propTypes = {
 }
 
 
-/** A series of input fields with a submit button created from a given model */ 
+/** A series of input fields with a submit button created from a given model */
 class AlgorithmInputForm extends React.Component{
 
     constructor(props){
@@ -146,7 +147,7 @@ class AlgorithmInputForm extends React.Component{
         return (
             <form className="algorithmInputForm" onSubmit={this.submitForm}>
                 {this.inputFields()}
-                <input type="submit" value="Visualize" className="orangeBtn smallBtn"></input>
+                <Button size="small" color="orange" type="submit">Visualize</Button>
             </form>
         )
     }

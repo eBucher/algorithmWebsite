@@ -37,21 +37,22 @@
      guidetolerance="10"
      inkscape:pageopacity="0"
      inkscape:pageshadow="2"
-     inkscape:window-width="640"
-     inkscape:window-height="480"
+     inkscape:window-width="1920"
+     inkscape:window-height="1001"
      id="namedview52"
      showgrid="false"
      inkscape:zoom="9.8333333"
      inkscape:cx="12"
      inkscape:cy="12"
-     inkscape:window-x="135"
-     inkscape:window-y="74"
-     inkscape:window-maximized="0"
+     inkscape:window-x="-9"
+     inkscape:window-y="-9"
+     inkscape:window-maximized="1"
      inkscape:current-layer="svg50" />
   <path
-     d="M21.99 4c0-1.1-.89-2-1.99-2H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h14l4 4-.01-18zM18 14H6v-2h12v2zm0-3H6V9h12v2zm0-3H6V6h12v2z"
+     d="M 23.988,2.4 C 23.988,1.08 22.92,0 21.6,0 H 2.4 C 1.08,0 0,1.08 0,2.4 v 14.4 c 0,1.32 1.08,2.4 2.4,2.4 H 19.2 L 24,24 Z M 19.2,14.4 H 4.8 V 12 h 14.4 z m 0,-3.6 H 4.8 V 8.4 h 14.4 z m 0,-3.6 H 4.8 V 4.8 h 14.4 z"
      id="path46"
-     style="fill:#999999" />
+     style="fill:#999999;stroke-width:1.19999993"
+     inkscape:connector-curvature="0" />
   <path
      d="M0 0h24v24H0z"
      fill="none"

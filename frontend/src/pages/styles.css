@@ -122,7 +122,7 @@
 }
 
 /****************** Buttons ******************/
-
+/*
 button, input[type=submit]{
 	font-size: 18px;
 	text-decoration: none;
@@ -188,3 +188,4 @@ input[type=submit][disabled], input[type=submit][disabled]:hover{
     background: #95a5a6;
     cursor: not-allowed;
 }
+*/

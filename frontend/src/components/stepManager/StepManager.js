@@ -3,6 +3,7 @@ import "pages/styles.css";
 import './StepManager.css';
 import RightArrow from 'assets/ForwardIcon.svg';
 import LeftArrow from 'assets/BackwardIcon.svg';
+import Button from "components/button/Button.js";
 import {setStepNum} from 'actions/AlgorithmActions.js';
 import {connect} from "react-redux";
 import PropTypes from "prop-types";
@@ -55,12 +56,12 @@ export class StepManager extends React.Component{
 	render(){
 		return (
 			<div className="stepManager">
-				<button className="smallCircularBtn orangeBtn stepBtnMargin" onClick={this.previousStep} disabled={!this.props.enabled}>
-					<img src={LeftArrow} className="backwardIcon" alt="previous step button"/>
-				</button>
-				<button className="smallCircularBtn orangeBtn stepBtnMargin" onClick={this.nextStep} disabled={!this.props.enabled}>
-					<img src={RightArrow} className="forwardIcon" alt="next step button"/>
-				</button>
+				<Button color="orange" size="small" shape="circle" clickHandler={this.previousStep} disabled={!this.props.enabled}>
+					<img src={LeftArrow} height="60%" alt="previous step button"/>
+				</Button>
+				<Button color="orange" size="small" shape="circle" clickHandler={this.nextStep} disabled={!this.props.enabled}>
+					<img src={RightArrow} height="60%" alt="next step button"/>
+				</Button>
 				<input id="stepSlider" type="range" min="0" max={this.props.numSteps - 1}
 					step="1" onChange={this.handleSliderChange}
 					value={this.props.stepNum} disabled={!this.props.enabled}

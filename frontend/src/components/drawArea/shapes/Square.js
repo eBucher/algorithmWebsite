@@ -24,13 +24,22 @@ class Square extends CustomShape{
 
 
 	getCoord = (position) => {
+		console.log(this.topText);
 		if(position === "CENTER"){
 			return new Coord(this.topLeft.x + this.size/2,
 				this.topLeft.y + this.size/2);
 		} else if (position === "TOP"){
+			if(this.topText !== null){
+				return new Coord(this.topLeft.x + this.size/2,
+					this.topLeft.y  - this.outerFontSize  - 5)
+			}
 			return new Coord(this.topLeft.x + this.size/2,
 				this.topLeft.y)
 		} else if (position === "BOTTOM"){
+			if(this.bottomText !== null){
+				return new Coord(this.topLeft.x + this.size/2,
+					this.topLeft.y + this.size  + this.outerFontSize  + 5)
+			}
 			return new Coord(this.topLeft.x + this.size/2,
 				this.topLeft.y + this.size)
 		} else if (position === "LEFT"){

@@ -5,7 +5,7 @@ import HelpIcon from 'assets/HelpIcon.svg';
 import SelectedHelpIcon from 'assets/HelpIconHighlighted.svg';
 import WarningIcon from 'assets/WarningIcon.svg';
 import ToolTip from 'components/toolTip/ToolTip.js';
-import {Icon} from "semantic-ui-react";
+import {Icon, Popup} from "semantic-ui-react";
 import 'semantic-ui-css/semantic.min.css';
 import PropTypes from "prop-types";
 
@@ -98,16 +98,21 @@ class InputBox extends React.Component{
         Otherwise, an empty string is returned. */
     optionalToolTip = () => {
         if(this.props.tooltip){
+            var icon = <Icon name="question circle"
+                onMouseOver={this.toolTipIconEnterHandler}
+                onMouseOut={this.toolTipIconExitHandler}
+                color={this.state.toolTipIconColor}
+            />
+
             return (
                 <div className="toolTipIconPositioning">
-                    <ToolTip position="up" text={this.props.tooltip} cursor="help">
-                    <Icon name="question circle"
-                        onMouseOver={this.toolTipIconEnterHandler}
-                        onMouseOut={this.toolTipIconExitHandler}
-                        color={this.state.toolTipIconColor}
-                    />
-                    </ToolTip>
-
+                    <Popup trigger = {icon}
+                        position="right center"
+                        inverted={true}
+                        style={{opacity: .9}}
+                    >
+                        {this.props.tooltip}
+                    </Popup>
                 </div>
             )
         } else return "";

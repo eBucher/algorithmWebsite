@@ -19,7 +19,7 @@ const propTypes = {
     /** The text to be displayed in the input field. This must change on every
         keystroke to show what the user is typing. Consider using onChangeHandler()
         to update this. */
-    text: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
+    text: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
     /** Any text that should appear in a help icon next to the input field. Leaving
         this empty will prevent the help icon from appearing. */
     tooltip: PropTypes.string,
@@ -32,6 +32,7 @@ const defaultProps = {
     label: "",
     toolTip: null,
     width: 200,
+    text: null,
 }
 
 /** A specially modifiable input field */
@@ -114,6 +115,11 @@ class InputBox extends React.Component{
 
 
     render(){
+        var text = ""
+        if(this.props.text !== undefined && this.props.text !== null){
+            text = this.props.text;
+        }
+        
         return(
             <div className="inputArea">
                 <label className="smallLabelText">{this.props.label}</label>
@@ -123,7 +129,7 @@ class InputBox extends React.Component{
                         type="text"
                         style={this.getInputStyle()}
                         onChange={this.props.onChangeHandler}
-                        value={this.props.text}
+                        value={text}
                         className="textField"
                     />
                     {this.optionalToolTip()}

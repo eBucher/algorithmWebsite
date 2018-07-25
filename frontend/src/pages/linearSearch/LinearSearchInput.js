@@ -82,9 +82,9 @@ class LinearSearchInput{
 	buildModel = () => {
 		return {
             validInputHandler: this.validInputHandler.bind(this),
-            urlParams: this.urlParams,
             inputs: [
                 {   key: "target",
+					initialValue: this.urlParams["target"],
                     displayText: "Target",
                     tooltipText: "Which number to search for.",
                     verifyHandler: this.verifyTarget,
@@ -92,6 +92,7 @@ class LinearSearchInput{
                 },
                 {
                     key: "elements",
+					initialValue: this.urlParams["elements"],
                     displayText: "Elements",
                     tooltipText: "All of the numbers to search through to try to find the target.",
                     verifyHandler: this.verifyElements,

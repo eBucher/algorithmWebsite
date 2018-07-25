@@ -104,16 +104,17 @@ class BinarySearchInput{
     buildModel = () => {
         return {
             validInputHandler: this.validInputHandler.bind(this),
-            urlParams: this.urlParams,
             inputs: [
                 {   key: "target",
+                    initialValue: this.urlParams["target"],
                     displayText: "Target",
                     tooltipText: "Which number to search for.",
                     verifyHandler: this.verifyTarget,
-                    errorMsg: "Must be an integer"
+                    errorMsg: "Must be an integer",
                 },
                 {
                     key: "elements",
+                    initialValue: this.urlParams["elements"],
                     displayText: "Sorted elements",
                     tooltipText: "All of the numbers to search through to try to find the target. The numbers should be listed in ascending order and be separated by commas.",
                     verifyHandler: this.verifyElements,

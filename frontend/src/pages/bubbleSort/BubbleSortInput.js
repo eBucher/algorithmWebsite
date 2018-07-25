@@ -87,10 +87,10 @@ class BubbleSortInput{
     buildModel = () => {
         return {
             validInputHandler: this.validInputHandler.bind(this),
-            urlParams: this.urlParams,
             inputs: [
                 {
                     key: "elements",
+                    initialValue: this.urlParams["elements"],
                     displayText: "Elements",
                     tooltipText: "All of the numbers to sort. The numbers should be listed in ascending order and be separated by commas.",
                     verifyHandler: this.verifyElements,

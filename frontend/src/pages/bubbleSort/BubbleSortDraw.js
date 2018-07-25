@@ -95,7 +95,7 @@ class BubbleSortDraw {
 	addConditionBoxesTo(elementsToDraw, currentStepState){
 		var ifBox = new BooleanBox(IF_STATEMENT());
 		ifBox.topText = "Swap elements?";
-		ifBox.topLeft = new Coord(this.areaWidth / 2 - 100, 200);
+		ifBox.topLeft = new Coord(this.areaWidth / 2 - CONTENT_SQUARE().size * 1.5 - 100, 200);
 		if(typeof currentStepState.ifBox !== "undefined"){
 			ifBox.status = currentStepState.ifBox;
 
@@ -104,12 +104,21 @@ class BubbleSortDraw {
 
 		var loopBox = new BooleanBox(LOOP_CONTINUATION());
 		loopBox.topText = "Continue loop?";
-		loopBox.topLeft = new Coord(this.areaWidth / 2 + CONTENT_SQUARE().size, 200);
+		loopBox.topLeft = new Coord(this.areaWidth / 2 - CONTENT_SQUARE().size / 2, 200);
 		if(typeof currentStepState.loopBox !== "undefined"){
 			loopBox.status = currentStepState.loopBox;
 
 		}
 		elementsToDraw.push(loopBox);
+		console.log(currentStepState.i);
+		var iBox = new Square(CONTENT_SQUARE());
+		iBox.topText = "Value of i";
+		iBox.color = "white";
+		iBox.topLeft = new Coord(this.areaWidth / 2 + CONTENT_SQUARE().size * .5 + 100, 200);
+		if(currentStepState.i !== null){
+			iBox.centerText = currentStepState.i;
+		}
+		elementsToDraw.push(iBox);
 	}
 
 

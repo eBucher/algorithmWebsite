@@ -37,10 +37,17 @@ class BubbleSort extends Algorithm{
         var highlightedLine = this.props.algorithm.steps[stepNum].highlightedLines;
         if(highlightedLine === 0)
             return "Goal: Sort all of the elements in ascending order.";
-        if(highlightedLine === 1 && stepNum === 2)
+        console.log("i is " + this.props.algorithm.steps[stepNum].i);
+        if(highlightedLine === 1 && this.props.algorithm.steps[stepNum].i === 0)
             return "With each outer loop iteration, one number will be moved to the correct postition. i keeps count of how many numbers have moved into the correct position at the end of the array.";
+        if(highlightedLine === 1 && this.props.algorithm.steps[stepNum].loopBox === false)
+            return "i is now equal to the numElements - 1, so the outer loop will end. ";
         if(highlightedLine === 1)
             return "Increment the number of elements in the correct position and get ready to move another element into the correct position.";
+        if(highlightedLine === 2 && this.props.algorithm.steps[stepNum].loopBox === false)
+                return "j has reached the end of the unsorted elements so this for loop ends and elements[j] is now in the correct position.";
+        if(highlightedLine === 2 && this.props.algorithm.steps[stepNum].j !== 0)
+                return "Continue shifting one element towards the correct position.";
         if(highlightedLine === 2)
             return "Loop through all of the elements at the beginning of the array that are not in their correct positions yet.";
         if(highlightedLine === 3)
@@ -48,7 +55,7 @@ class BubbleSort extends Algorithm{
         if(highlightedLine === 4)
             return "elements[j] was in the wrong position, so it gets shifted to the right.";
         if(highlightedLine === 8)
-            return "All of the elements have been sorted to the correct position.";
+            return "All but one element have been manually moved to the correct position, which means that the last remaining element must be in the correct position already and the array is sorted.";
         return "Nothing to show.";
     }
 

@@ -3,7 +3,7 @@ import Square from 'components/drawArea/shapes/Square.js';
 import Pointer from 'components/drawArea/shapes/Pointer.js';
 import BooleanBox from 'components/drawArea/shapes/BooleanBox.js';
 import Coord from 'components/drawArea/math/Coord.js';
-import {CONTENT_SQUARE, SMALL_POINTER, IF_STATEMENT} from 'components/drawArea/shapes/Presets.js';
+import {CONTENT_SQUARE, SMALL_POINTER, IF_STATEMENT, LOOP_CONTINUATION} from 'components/drawArea/shapes/Presets.js';
 
 class BubbleSortDraw {
 
@@ -92,16 +92,25 @@ class BubbleSortDraw {
 	}
 
 
-	addIfBox = (elementsToDraw, currentStepState) => {
-        var ifBox = new BooleanBox(IF_STATEMENT());
-        ifBox.topText = "if statement result";
-        ifBox.topLeft = new Coord(this.areaWidth / 2 - ifBox.size/2, 200);
-        if(typeof currentStepState.ifBox !== "undefined"){
-            ifBox.status = currentStepState.ifBox;
-        }
+	addConditionBoxesTo(elementsToDraw, currentStepState){
+		var ifBox = new BooleanBox(IF_STATEMENT());
+		ifBox.topText = "Swap elements?";
+		ifBox.topLeft = new Coord(this.areaWidth / 2 - 100, 200);
+		if(typeof currentStepState.ifBox !== "undefined"){
+			ifBox.status = currentStepState.ifBox;
 
-        elementsToDraw.push(ifBox)
-    }
+		}
+		elementsToDraw.push(ifBox);
+
+		var loopBox = new BooleanBox(LOOP_CONTINUATION());
+		loopBox.topText = "Continue loop?";
+		loopBox.topLeft = new Coord(this.areaWidth / 2 + CONTENT_SQUARE().size, 200);
+		if(typeof currentStepState.loopBox !== "undefined"){
+			loopBox.status = currentStepState.loopBox;
+
+		}
+		elementsToDraw.push(loopBox);
+	}
 
 
     visualizeAlgorithm = (currentStepState) => {
@@ -111,7 +120,7 @@ class BubbleSortDraw {
         this.addBoxes(elementsToDraw, currentStepState);
 		this.addJPointer(elementsToDraw, currentStepState);
 		this.addSwap(elementsToDraw, currentStepState);
-		this.addIfBox(elementsToDraw, currentStepState);
+		this.addConditionBoxesTo(elementsToDraw, currentStepState);
 
         return (elementsToDraw);
     }

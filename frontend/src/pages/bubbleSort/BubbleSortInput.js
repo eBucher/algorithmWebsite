@@ -16,11 +16,11 @@ class BubbleSortInput{
         steps.push({elements: elements.slice(0), i: null, j: null, highlightedLines: 0});
         for(var i = 0; i < numElements - 1; i++){
             if(i === 0)
-                steps.push({elements: elements.slice(0), i: i, j: null, highlightedLines: 1});
+                steps.push({elements: elements.slice(0), i: i, j: null, loopBox: true, highlightedLines: 1});
             else
-                steps.push({elements: elements.slice(0), i: i, j: j, highlightedLines: 1});
+                steps.push({elements: elements.slice(0), i: i, j: j, loopBox: true, highlightedLines: 1});
             for(var j = 0; j < numElements - i - 1; j++){
-                steps.push({elements: elements.slice(0), i: i, j: j, highlightedLines: 2});
+                steps.push({elements: elements.slice(0), i: i, j: j, loopBox: true, highlightedLines: 2});
                 if(elements[j] > elements[j + 1]){
                     steps.push({elements: elements.slice(0), i: i, j: j, ifBox: true, highlightedLines: 3});
                     this.swap(elements, j, j+1);
@@ -29,7 +29,9 @@ class BubbleSortInput{
                     steps.push({elements: elements.slice(0), i: i, j: j, ifBox: false, highlightedLines: 3});
                 }
             }
+            steps.push({elements: elements.slice(0), i: i, j: j, loopBox: false, highlightedLines: 2});
         }
+        steps.push({elements: elements.slice(0), i: i, j: j, loopBox: false, highlightedLines: 1});
         steps.push({elements: elements.slice(0), i: i, j: j, finished: true, highlightedLines: 8});
         return steps;
     }

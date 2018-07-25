@@ -67,7 +67,7 @@ class BinarySearchInput{
             setStarted(true),
             setStepNum(0),
             setSteps(newSteps),
-            setAreaDimensions(CONTENT_SQUARE().size * (newElements.length + 2), 250),
+            setAreaDimensions(Math.max(450, CONTENT_SQUARE().size * (newElements.length + 2)), 250),
             setAlgParams({target: newTarget, elements: newElements}),
         ]));
 

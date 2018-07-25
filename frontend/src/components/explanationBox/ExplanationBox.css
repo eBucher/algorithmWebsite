@@ -20,11 +20,11 @@
 	font-size: 36px;
 	text-align: right;
 	font-weight: bold;
+	padding-top: 2px;
 }
 
 .explanationContainer{
 	grid-column-start: 2;
     grid-column-end: 3;
-	padding-top: 8px;
-	padding-bottom: 5px;
+	padding-bottom: 12px;
 }

@@ -54,11 +54,24 @@ export class StepManager extends React.Component{
 		this.props.setStepNum(Number(event.target.value));
 	}
 
+	stepNumDisplay = () => {
+		var visibility = "hidden";
+		if(this.props.enabled){
+			visibility = "visible";
+		}
+		return (
+			<div className="stepNumCounter smallLabelText" style={{visibility: visibility}}>
+				{this.props.stepNum + 1} / {this.props.numSteps}
+			</div>
+		)
+	}
 
 	render(){
 		return (
 			<div className="stepManager">
+
 				<div className="stepManagerButtons">
+					{this.stepNumDisplay()}
 					<Button circular icon="backward" color="orange" onClick={this.previousStep} disabled={!this.props.enabled}/>
 					<Button circular icon="forward" color="orange" onClick={this.nextStep} disabled={!this.props.enabled}/>
 				</div>

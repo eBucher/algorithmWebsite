@@ -67,7 +67,7 @@ class BinarySearchInput{
             setStarted(true),
             setStepNum(0),
             setSteps(newSteps),
-            setAreaDimensions(CONTENT_SQUARE().size * (newElements.length + 2), 250),
+            setAreaDimensions(Math.max(450, CONTENT_SQUARE().size * (newElements.length + 2)), 250),
             setAlgParams({target: newTarget, elements: newElements}),
         ]));
 
@@ -84,8 +84,8 @@ class BinarySearchInput{
     }
 
 
-    /*  Accepts any string that contains integers separated by commas. Whitespace
-        between the integers and commas will be accepted.
+    /*  Accepts any string that contains sorted integers separated by commas.
+        Whitespace between the integers and commas will be accepted.
     */
     verifyElements = (input) => {
         if(/^(-?[0-9]+(\s)*,(\s)*)*-?[0-9]+(\s)*$/.test(input)){

@@ -1,18 +1,13 @@
-import React, { Component } from 'react';
-import "../styles.css";
+import 'pages/styles.css';
+import {CONTENT_SQUARE} from 'components/drawArea/shapes/Presets.js';
+import {batchActions} from 'redux-batched-actions';
+import {setStarted, setStepNum, setSteps, setAreaDimensions, setAlgParams} from "actions/AlgorithmActions.js";
+import store from "store.js"
 
-class LinearSearchInput extends React.Component{
-	// Props: a this referring to the parent.
-
-	handleTargetChange = (event) => {
-		this.setState({tempTarget : event.target.value});
-	}
-
-
-	handleElementsChange = (event) => {
-		this.setState({tempElements : event.target.value});
-	}
-
+class LinearSearchInput{
+	constructor(urlParams){
+        this.urlParams = urlParams;
+    }
 
 	// checkIndex is where the array will be pointing to.
 	calculateSteps = (target, elements) => {
@@ -22,7 +17,7 @@ class LinearSearchInput extends React.Component{
 
 		for(i; i < elements.length; i++){
 			steps.push({checkIndex: i, highlightedLines: 1, loopBox: true});
-			if(elements[i] == target){
+			if(elements[i] === target){
 				steps.push({checkIndex: i, highlightedLines: 2, ifBox: true});
 				steps.push({ checkIndex: i,highlightedLines: 3});
 				return steps;
@@ -35,36 +30,75 @@ class LinearSearchInput extends React.Component{
 		return steps;
 	}
 
-
-	handleSubmit = (event) => {
+	/*  Given a string of numbers separated by commas, the function will return
+		an array of the numbers in the order that they appear in the string. */
+	cleanRawElements = (rawElements) => {
 		//Trim the whitespace from the input
-		var newElements = this.state.tempElements.replace(/\s/g,'');
+		var newElements = rawElements.replace(/\s/g,'');
 		//Convert the elements to an array
 		newElements = newElements.split(',');
 		//Convert all of the strings to numbers
-		for(var i = 0; i < newElements.length; i++){newElements[i] = Number(newElements[i])};
-		var newSteps = this.calculateSteps(this.state.tempTarget, newElements);
-		this.props.parent.setState({
-			target : this.state.tempTarget,
-			elements: newElements,
-			steps: newSteps,
-			currentStepNum: 0,
-			started: true,
-		});
-		event.preventDefault();
+		for(var i = 0; i < newElements.length; i++){
+			newElements[i] = Number(newElements[i])
+		};
+
+		return newElements;
 	}
 
+	validInputHandler = (formState) => {
+        var newElements = this.cleanRawElements(formState.elements);
+        var newTarget = Number(formState.target);
+        var newSteps = this.calculateSteps(newTarget, newElements);
+        store.dispatch(batchActions([
+            setStarted(true),
+            setStepNum(0),
+            setSteps(newSteps),
+            setAreaDimensions(Math.max(450, CONTENT_SQUARE().size * (newElements.length + 2)), 250),
+            setAlgParams({target: newTarget, elements: newElements}),
+        ]));
 
-	render(){
-		return(
-			<form onSubmit={this.handleSubmit}>
-				Target
-				<input type="text" onChange={this.handleTargetChange}></input>
-				Elements to search through
-				<input type="text" onChange={this.handleElementsChange}></input>
-				<input type="submit" value="Visualize"></input>
-			</form>
-		)
+    }
+
+
+	/*  Accepts any string whose text is an integer */
+    verifyTarget = (input) => {
+        if(/^-?[0-9]+$/.test(input)){
+            return true;
+        }
+        return false;
+    }
+
+
+	/*  Accepts any string that contains integers separated by commas. Whitespace
+        between the integers and commas will be accepted. */
+    verifyElements = (input) => {
+        if(/^(-?[0-9]+(\s)*,(\s)*)*-?[0-9]+(\s)*$/.test(input)){
+            return true;
+        }
+        return false;
+    }
+
+
+	buildModel = () => {
+		return {
+            validInputHandler: this.validInputHandler.bind(this),
+            urlParams: this.urlParams,
+            inputs: [
+                {   key: "target",
+                    displayText: "Target",
+                    tooltipText: "Which number to search for.",
+                    verifyHandler: this.verifyTarget,
+                    errorMsg: "Must be an integer"
+                },
+                {
+                    key: "elements",
+                    displayText: "Elements",
+                    tooltipText: "All of the numbers to search through to try to find the target.",
+                    verifyHandler: this.verifyElements,
+                    errorMsg: "Must be integers separated by commas"
+                }
+            ]
+        }
 	}
 }
 

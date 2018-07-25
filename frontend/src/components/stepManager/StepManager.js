@@ -52,16 +52,30 @@ export class StepManager extends React.Component{
 		this.props.setStepNum(Number(event.target.value));
 	}
 
+	stepNumDisplay = () => {
+		var visibility = "hidden";
+		if(this.props.enabled){
+			visibility = "visible";
+		}
+		return (
+			<div className="stepNumCounter smallLabelText" style={{visibility: visibility}}>
+				{this.props.stepNum + 1} / {this.props.numSteps}
+			</div>
+		)
+	}
 
 	render(){
 		return (
 			<div className="stepManager">
-				<Button color="orange" size="small" shape="circle" clickHandler={this.previousStep} disabled={!this.props.enabled}>
-					<img src={LeftArrow} height="60%" alt="previous step button"/>
-				</Button>
-				<Button color="orange" size="small" shape="circle" clickHandler={this.nextStep} disabled={!this.props.enabled}>
-					<img src={RightArrow} height="60%" alt="next step button"/>
-				</Button>
+				<div>
+					{this.stepNumDisplay()}
+					<Button color="orange" size="small" shape="circle" clickHandler={this.previousStep} disabled={!this.props.enabled}>
+						<img src={LeftArrow} height="60%" alt="previous step button"/>
+					</Button>
+					<Button color="orange" size="small" shape="circle" clickHandler={this.nextStep} disabled={!this.props.enabled}>
+						<img src={RightArrow} height="60%" alt="next step button"/>
+					</Button>
+				</div>
 				<input id="stepSlider" type="range" min="0" max={this.props.numSteps - 1}
 					step="1" onChange={this.handleSliderChange}
 					value={this.props.stepNum} disabled={!this.props.enabled}

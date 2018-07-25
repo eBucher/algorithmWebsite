@@ -61,8 +61,6 @@ class BubbleSortDraw {
 	/** Adds a pointer whose location is above the j'th element to elementsToDraw */
 	addJPointer = (elementsToDraw, currentStepState) => {
 		if(currentStepState.j !== null){
-			console.log(currentStepState);
-			console.log(elementsToDraw);
 			var ptr = new Pointer(SMALL_POINTER());
 			ptr.direction = "DOWN";
 			ptr.pointCoord = elementsToDraw[currentStepState.j].getCoord("TOP")
@@ -110,7 +108,6 @@ class BubbleSortDraw {
 
 		}
 		elementsToDraw.push(loopBox);
-		console.log(currentStepState.i);
 		var iBox = new Square(CONTENT_SQUARE());
 		iBox.topText = "Value of i";
 		iBox.color = "white";

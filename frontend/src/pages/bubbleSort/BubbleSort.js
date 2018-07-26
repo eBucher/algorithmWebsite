@@ -3,20 +3,16 @@ import BubbleSortInput from './BubbleSortInput.js';
 import BubbleSortDraw from './BubbleSortDraw.js';
 import queryString from 'query-string';
 import {connect} from "react-redux";
-import {setAlgorithmName, resetAlgorithmState} from "actions/AlgorithmActions.js";
-import {setPagePath} from "actions/AppActions.js";
-import store from 'store.js';
-import {batchActions} from 'redux-batched-actions';
 
 class BubbleSort extends Algorithm{
-    constructor(props){
-        super(props);
-        store.dispatch(batchActions([
-            resetAlgorithmState(),
-			setAlgorithmName("Bubble Sort"),
-			setPagePath(props.location.pathname),
-        ]));
-        this.algorithm = [
+
+    getAlgorithmName = () => {
+        return "Bubble Sort";
+    }
+
+
+    getAlgorithmLines = () => {
+        return [
             "function bubbleSort(elements, numElements){",
             "    for(int i = 0; i < numElements - 1; i++){",
             "        for(int j = 0; j < numElements - i - 1; j++){",
@@ -26,7 +22,7 @@ class BubbleSort extends Algorithm{
             "        }",
             "    }",
             "}",
-        ]
+        ];
     }
 
 
@@ -37,7 +33,6 @@ class BubbleSort extends Algorithm{
         var highlightedLine = this.props.algorithm.steps[stepNum].highlightedLines;
         if(highlightedLine === 0)
             return "Goal: Sort all of the elements in ascending order.";
-        console.log("i is " + this.props.algorithm.steps[stepNum].i);
         if(highlightedLine === 1 && this.props.algorithm.steps[stepNum].i === 0)
             return "With each outer loop iteration, one number will be moved to the correct postition. i keeps count of how many numbers have moved into the correct position at the end of the array.";
         if(highlightedLine === 1 && this.props.algorithm.steps[stepNum].loopBox === false)
@@ -85,15 +80,4 @@ const mapStateToProps = (state) => {
   };
 };
 
-const mapDispatchToProps = (dispatch) => {
-    return {
-		setAlgorithmName: (newName) => {
-            dispatch(setAlgorithmName(newName));
-		},
-		resetAlgorithmState: () => {
-            dispatch(resetAlgorithmState());
-		}
-    };
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(BubbleSort);
+export default connect(mapStateToProps)(BubbleSort);

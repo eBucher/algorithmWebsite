@@ -4,21 +4,16 @@ import BinarySearchInput from 'pages/binarySearch/BinarySearchInput.js';
 import BinarySearchDraw from 'pages/binarySearch/BinarySearchDraw.js';
 import queryString from 'query-string';
 import {connect} from "react-redux";
-import {setAlgorithmName, resetAlgorithmState} from "actions/AlgorithmActions.js";
-import {setPagePath} from "actions/AppActions.js";
-import store from 'store.js';
-import {batchActions} from 'redux-batched-actions';
 
 class BinarySearch extends Algorithm{
 
-	constructor(props){
-		super(props);
-		store.dispatch(batchActions([
-            resetAlgorithmState(),
-			setAlgorithmName("Binary Search"),
-			setPagePath(props.location.pathname),
-        ]));
-		this.algorithm = [
+	getAlgorithmName = () => {
+		return "Binary Search";
+	}
+
+
+	getAlgorithmLines = () => {
+		return [
 			"function binarySearch(elements, left, right, target){",
 			"    if (right >= left){",
 			"        int mid = left + (right - 1)/2",
@@ -99,15 +94,4 @@ const mapStateToProps = (state) => {
   };
 };
 
-const mapDispatchToProps = (dispatch) => {
-    return {
-		setAlgorithmName: (newName) => {
-            dispatch(setAlgorithmName(newName));
-		},
-		resetAlgorithmState: () => {
-            dispatch(resetAlgorithmState());
-		}
-    };
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(BinarySearch);
+export default connect(mapStateToProps)(BinarySearch);

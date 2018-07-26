@@ -1,20 +1,19 @@
 import React from 'react';
 import "./styles.css";
 import AlgorithmPage from 'pages/AlgorithmPage.js';
+import {resetAlgorithmState} from "actions/AlgorithmActions.js";
+import {setPagePath} from "actions/AppActions.js";
+import store from 'store.js';
+import {batchActions} from 'redux-batched-actions';
 
 class Algorithm extends React.Component{
 
-	/*
-		Required member variables:
-		this.algorithm: an array of each line in the algorithm that will get
-		highlighted. \n can be used in a string to indicate where where a line
-		break will be upon output. Use four spaces for one tab.
-	*/
-	constructor(){
-		super();
-		//Denote a line break as a \n
-		this.algorithm = [];
-
+	constructor(props){
+		super(props);
+		store.dispatch(batchActions([
+            resetAlgorithmState(),
+			setPagePath(props.location.pathname),
+        ]));
 	}
 
 
@@ -31,6 +30,20 @@ class Algorithm extends React.Component{
 		}
 	}
 
+
+	/** Must return the name of the algorithm to appear at the top of the page */
+	getAlgorithmName = () => {
+		if(this.constructor === Algorithm)
+			throw new Error("getAlgorithmName() must be implemented in the " + this.constructor.name + " class.");
+	}
+
+
+	/** Must return an array of strings where each string is a line of code in
+		the algorithm that will be displayed. */
+	getAlgorithmLines = () => {
+		if(this.constructor === Algorithm)
+			throw new Error("getAlgorithmLines() must be implemented in the " + this.constructor.name + " class.");
+	}
 
 	/*
 		Must return a line to be displayed in the explanation box at the given step number.
@@ -84,10 +97,11 @@ class Algorithm extends React.Component{
 		var inputModel = this.getInputModel();
 		return (
 			<AlgorithmPage
+				algorithmName = {this.getAlgorithmName()}
 				urlPath = {this.props.location.pathname}
 				inputModel = {inputModel}
 				piecesToShow = {piecesToShow}
-				linesOfCode = {this.algorithm}
+				linesOfCode = {this.getAlgorithmLines()}
 				highlightedLines = {this.highlightedLines()}
 				explanations = {this.generateExplanations()}
 			/>

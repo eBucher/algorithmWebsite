@@ -24,7 +24,6 @@ class Square extends CustomShape{
 
 
 	getCoord = (position) => {
-		console.log(this.topText);
 		if(position === "CENTER"){
 			return new Coord(this.topLeft.x + this.size/2,
 				this.topLeft.y + this.size/2);

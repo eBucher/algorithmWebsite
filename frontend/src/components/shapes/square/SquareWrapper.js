@@ -31,7 +31,7 @@ class SquareWrapper {
         } else if (position === "BOTTOM"){
             return {x: center.x, y: center.y + size/2}
         } else if (position === "OUTER_BOTTOM"){
-            if(this.settings.topText !== null){
+            if(this.settings.bottomText !== null){
                 return {x: center.x, y: center.y + size/2 + this.settings.outerFontSize + 5}
             } else {
                 return {x: center.x, y: center.y + size/2 + 5}

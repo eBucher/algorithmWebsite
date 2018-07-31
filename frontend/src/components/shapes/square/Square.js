@@ -12,11 +12,11 @@ const propTypes = {
     /** Thickness of the border */
     thickness: PropTypes.number,
     /** Text to appear above the square */
-    topText: PropTypes.string,
+    topText: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
     /** Text to appear below the square */
-    bottomText: PropTypes.string,
+    bottomText: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
     /** Text to appear inside the square */
-    centerText: PropTypes.string,
+    centerText: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
     /** Font size for top and bottom text */
     centerFontSize: PropTypes.number,
     /** Front size for text inside the square */
@@ -41,7 +41,7 @@ class Square extends React.Component{
         super(props);
     }
 
-    drawSquare = (context) => {
+    drawSquare = () => {
         var center = this.props.center;
         var size = this.props.size;
         var thickness = this.props.thickness;
@@ -60,7 +60,7 @@ class Square extends React.Component{
 	}
 
     drawCenterText = () => {
-		if(this.props.centerText != null){
+		if(this.props.centerText !== null){
 			return (
 				<text
 					x={this.props.center.x}
@@ -79,7 +79,7 @@ class Square extends React.Component{
 	}
 
     drawTopText = () => {
-		if(this.props.topText != null){
+		if(this.props.topText !== null){
 			return(
 				<text
 					x={this.props.center.x}
@@ -98,7 +98,7 @@ class Square extends React.Component{
 	}
 
     drawBottomText = () => {
-		if(this.props.bottomText != null){
+		if(this.props.bottomText !== null){
 			return(
 				<text
 					x={this.props.center.x}

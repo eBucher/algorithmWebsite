@@ -1,5 +1,4 @@
 import React from 'react';
-import {toHex} from 'utils/Colors.js';
 import PropTypes from 'prop-types';
 import Square, {squareDefaultProps} from 'components/shapes/square/Square.js';
 import XSymbol from 'components/shapes/xSymbol/XSymbol.js';
@@ -28,7 +27,6 @@ class BooleanBox extends React.Component{
 
     //Creates an X
     falseSymbol = () => {
-        console.log("Rendering false");
         return (
             <XSymbol
                 color="red"
@@ -41,7 +39,6 @@ class BooleanBox extends React.Component{
 
     //Creates a check symbol
     trueSymbol = () => {
-        console.log("Rendering true");
         return (
             <CheckMark
                 color="green"

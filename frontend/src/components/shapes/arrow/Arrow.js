@@ -30,8 +30,7 @@ class Arrow extends React.Component{
         var endCoord = this.props.endCoord;
         var headHeight = this.props.headHeight;
         var headWidth = this.props.headWidth;
-        var pointCoord = this.props.pointCoord;
-		var lengthOfArrow = distance(pointCoord, endCoord);
+		var lengthOfArrow = distance(this.props.pointCoord, endCoord);
 
 		var pointCoord = {
 			x: endCoord.x + lengthOfArrow,

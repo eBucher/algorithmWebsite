@@ -28,7 +28,7 @@ const propTypes = {
 export const pointerDefaultProps = {
     length: 50,
     message: null,
-    fontSize: 12,
+    fontSize: 16,
     headWidth: 20,
     headHeight: 20,
     thickness: 8,

@@ -30,7 +30,7 @@ const propTypes = {
 
 
 export const arrayVisualDefaultProps = {
-    indexPosition: "ABOVE",
+    indexPosition: "TOP",
     pointers: [],
 }
 

@@ -9,24 +9,24 @@ class LinearSearchInput{
         this.urlParams = urlParams;
     }
 
-	// checkIndex is where the array will be pointing to.
+	// i is where the array will be pointing to.
 	calculateSteps = (target, elements) => {
 		var i = 0;
 		var steps = [];
-		steps.push({checkIndex: null, highlightedLines: 0});
+		steps.push({i: null, highlightedLines: 0});
 
 		for(i; i < elements.length; i++){
-			steps.push({checkIndex: i, highlightedLines: 1, loopBox: true});
+			steps.push({i: i, highlightedLines: 1, loopBox: true});
 			if(elements[i] === target){
-				steps.push({checkIndex: i, highlightedLines: 2, ifBox: true});
-				steps.push({ checkIndex: i,highlightedLines: 3});
+				steps.push({i: i, highlightedLines: 2, ifBox: true});
+				steps.push({ i: i,highlightedLines: 3});
 				return steps;
 			} else {
-				steps.push({checkIndex: i, highlightedLines: 2, ifBox: false});
+				steps.push({i: i, highlightedLines: 2, ifBox: false});
 			}
 		}
-		steps.push({checkIndex: i, highlightedLines: 1, loopBox: false});
-		steps.push({checkIndex: null, highlightedLines: 6});
+		steps.push({i: i, highlightedLines: 1, loopBox: false});
+		steps.push({i: null, highlightedLines: 6});
 		return steps;
 	}
 

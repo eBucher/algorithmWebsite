@@ -1,6 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {toHex} from 'utils/Colors.js';
 import Arrow from 'components/shapes/arrow/Arrow.js';
 
 const propTypes = {

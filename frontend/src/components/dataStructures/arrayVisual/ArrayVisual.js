@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import {squareDefaultProps} from 'components/shapes/square/Square.js';
 import SquareWrapper from 'components/shapes/square/SquareWrapper.js';
 import Pointer from 'components/shapes/pointer/Pointer.js';
+import BracketPointer from 'components/shapes/bracketPointer/BracketPointer.js';
 
 const propTypes = {
     /** An array of objects to represent each element displayed in the array.
@@ -21,6 +22,15 @@ const propTypes = {
         position: PropTypes.oneOf(["TOP", "BOTTOM"]),
         text: PropTypes.string,
     })),
+    /** An array of bracket pointers that point to two elements each. Each object
+        should two indices to point two, a position relative to the array, and
+        optional text to display next to the bracket pointer. */
+    bracketPointers: PropTypes.arrayOf(PropTypes.shape({
+        index1: PropTypes.number,
+        index2: PropTypes.number,
+        position: PropTypes.oneOf(["TOP", "BOTTOM"]),
+        text: PropTypes.string,
+    })),
     /** The coordinate of the center of the array. */
     center: PropTypes.shape({
         x: PropTypes.number,
@@ -32,6 +42,7 @@ const propTypes = {
 export const arrayVisualDefaultProps = {
     indexPosition: "TOP",
     pointers: [],
+    bracketPointers: [],
 }
 
 class ArrayVisual extends React.Component {
@@ -99,12 +110,44 @@ class ArrayVisual extends React.Component {
     }
 
 
+    /** @param squareWrappers - An array of SquareWrapper objects
+        @return an array of <BracketPointer/> components that will point to specific
+        elements based on this.props.bracketPointers. Any that have a null index1 or
+        index2 will not be rendered. */
+    buildBracketPointers = (squareWrappers) => {
+        var pointers = [];
+        for(var i = 0; i < this.props.bracketPointers.length; i++){
+            var direction = "";
+            if(this.props.bracketPointers[i].position === "TOP"){
+                direction = "DOWN";
+            } else{
+                direction = "UP";
+            }
+            if(this.props.bracketPointers[i].index1 !== null &&
+                this.props.bracketPointers[i].index2 !== null){
+                pointers.push(<BracketPointer
+                    point1={squareWrappers[this.props.bracketPointers[i].index1].getCoordAt(
+                        "OUTER_" + this.props.bracketPointers[i].position)
+                    }
+                    point2={squareWrappers[this.props.bracketPointers[i].index2].getCoordAt(
+                        "OUTER_" + this.props.bracketPointers[i].position)
+                    }
+                    text={this.props.bracketPointers[i].text}
+                    direction={direction}
+                />);
+            }
+        }
+        return pointers;
+    }
+
+
     render(){
         var squares = this.getSquares();
         return (
             <g>
                 {this.buildSquares(squares)}
                 {this.buildPointers(squares)}
+                {this.buildBracketPointers(squares)}
             </g>
         )
     }

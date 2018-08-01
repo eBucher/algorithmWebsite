@@ -29,3 +29,22 @@ ArrayVisual with pointers example:
         <ArrayVisual arrayModel={arrayModel} pointers={pointers} center={{x: 250, y: 150}}/>
     </svg>
 ```
+
+ArrayVisual with bracket pointers example:
+```js
+    var arrayModel = [
+        {value: "10", color: "yellow"},
+        {value: "20", color: "orange"},
+        {value: "30", color: "red"},
+        {value: "40", color: "red"},
+        {value: "50", color: "orange"},
+        {value: "60", color: "yellow"},
+    ];
+    var bracketPointers = [
+        {index1: 1, index2: 4, position: "TOP", text: "Swap"},
+        {index1: 2, index2: 3, position: "BOTTOM", text: "Swap"},
+    ];
+    <svg height="300" width="500" >
+        <ArrayVisual arrayModel={arrayModel} bracketPointers={bracketPointers} center={{x: 250, y: 150}}/>
+    </svg>
+```

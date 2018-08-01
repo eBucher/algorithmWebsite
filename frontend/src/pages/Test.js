@@ -1,6 +1,5 @@
 import React from 'react';
 import "./styles.css";
-import Square from 'components/shapes/square/Square.js';
 import SquareWrapper from 'components/shapes/square/SquareWrapper.js';
 import Arrow from 'components/shapes/arrow/Arrow.js';
 import PointerWrapper from 'components/shapes/pointer/PointerWrapper.js';

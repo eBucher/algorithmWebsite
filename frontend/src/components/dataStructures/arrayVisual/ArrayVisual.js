@@ -15,7 +15,7 @@ const propTypes = {
     /** Any pointers that need to point to an element. Each object should have
         an index that is less than the length of the arrayModel, a position
         relative to the array, and any text to be displayed at the end of
-        the pointer. */
+        the pointer. Pointers with a null index don't get rendered. */
     pointers: PropTypes.arrayOf(PropTypes.shape({
         index: PropTypes.number,
         position: PropTypes.oneOf(["TOP", "BOTTOM"]),
@@ -75,7 +75,7 @@ class ArrayVisual extends React.Component {
 
     /** @param squareWrappers - An array of SquareWrapper objects
         @return an array of <Pointer/> components that will point to specific elements
-        based on this.props.pointers */
+        based on this.props.pointers. Any pointers with a null index will not be added. */
     buildPointers = (squareWrappers) => {
         var pointers = [];
         for(var i = 0; i < this.props.pointers.length; i++){
@@ -85,13 +85,15 @@ class ArrayVisual extends React.Component {
             } else{
                 direction = "UP";
             }
-            pointers.push(<Pointer
-                pointCoord={squareWrappers[this.props.pointers[i].index].getCoordAt(
-                    "OUTER_" + this.props.pointers[i].position)
-                }
-                message={this.props.pointers[i].text}
-                direction={direction}
-            />);
+            if(this.props.pointers[i].index !== null){
+                pointers.push(<Pointer
+                    pointCoord={squareWrappers[this.props.pointers[i].index].getCoordAt(
+                        "OUTER_" + this.props.pointers[i].position)
+                    }
+                    message={this.props.pointers[i].text}
+                    direction={direction}
+                />);
+            }
         }
         return pointers;
     }

@@ -1,9 +1,7 @@
 import React from 'react';
-import Square from 'components/drawArea/shapes/Square.js';
-import Pointer from 'components/drawArea/shapes/Pointer.js';
-import BooleanBox from 'components/drawArea/shapes/BooleanBox.js';
-import Coord from 'components/drawArea/math/Coord.js';
-import {CONTENT_SQUARE, SMALL_POINTER, IF_STATEMENT, LOOP_CONTINUATION} from 'components/drawArea/shapes/Presets.js';
+import ArrayVisual from 'components/dataStructures/arrayVisual/ArrayVisual.js';
+import BooleanBox from 'components/shapes/booleanBox/BooleanBox.js';
+import Square, {squareDefaultProps} from 'components/shapes/square/Square.js';
 
 class BubbleSortDraw {
 
@@ -15,18 +13,6 @@ class BubbleSortDraw {
 		this.areaHeight = areaHeight;
 	}
 
-
-    /** Returns the top left coordinate of where the element at the given
-        index should be drawn. */
-    boxLocation = (currentElementIndex, currentStepState) => {
-        var drawAreaCenterX = this.areaWidth /2;
-        var squareSize = CONTENT_SQUARE().size;
-
-        var x = (drawAreaCenterX - currentStepState.elements.length/2.0*squareSize) +
-            squareSize * currentElementIndex;
-        var y = 100;
-        return new Coord(x, y);
-    }
 
     /** Given the current step object and the index of the element that will
         be drawn, the function returns what color the element's box should
@@ -45,86 +31,74 @@ class BubbleSortDraw {
     }
 
 
-    /** Adds all of the boxes with the numbers to elementsToDraw. */
-    addBoxes = (elementsToDraw, currentStepState) => {
-        for(var i = 0; i < currentStepState.elements.length; i++){
-            var r = new Square(CONTENT_SQUARE());
-            r.topLeft = this.boxLocation(i, currentStepState);
-            r.centerText = currentStepState.elements[i];
-            r.topText = i;
-            r.color = this.getBoxColor(currentStepState, i);
-            elementsToDraw.push(r);
-        }
-    }
-
-
-	/** Adds a pointer whose location is above the j'th element to elementsToDraw */
-	addJPointer = (elementsToDraw, currentStepState) => {
-		if(currentStepState.j !== null){
-			var ptr = new Pointer(SMALL_POINTER());
-			ptr.direction = "DOWN";
-			ptr.pointCoord = elementsToDraw[currentStepState.j].getCoord("TOP")
-			ptr.message = "j";
-			elementsToDraw.push(ptr);
-		}
-	}
-
-
 	/** If two elements are being swapped in the current step, the word "Swapped"
 		whose position is below the two elements will be added to elementsToDraw. */
-	addSwap = (elementsToDraw, currentStepState) => {
+	addSwap = (currentStepState) => {
 		if(currentStepState.highlightedLines === 4){
-			var centerX = elementsToDraw[currentStepState.j].getCoord("BOTTOM").x +
-				CONTENT_SQUARE().size/2;
-			var centerY = elementsToDraw[currentStepState.j].getCoord("BOTTOM").y + 20;
-			elementsToDraw.push(
-				<text x={centerX} y={centerY}
-					font-family="arial"
-					font-size="20px"
-					text-anchor="middle"
-				>
- 					Swapped
-				</text>
-			)
+			return [{
+				index1: currentStepState.j,
+				index2: currentStepState.j + 1,
+				text: "swap",
+				position: "BOTTOM",
+			}];
 		}
 	}
 
 
-	addConditionBoxesTo(elementsToDraw, currentStepState){
-		var ifBox = new BooleanBox(IF_STATEMENT());
-		ifBox.topText = "Swap elements?";
-		ifBox.topLeft = new Coord(this.areaWidth / 2 - CONTENT_SQUARE().size * 1.5 - 100, 200);
-		if(typeof currentStepState.ifBox !== "undefined"){
-			ifBox.status = currentStepState.ifBox;
+	/** Adds three centered boxes to show the value of the ifBox, loopBox, and i
+		to elementsToDraw */
+	addConditionBoxesTo = (elementsToDraw, currentStepState) => {
+		elementsToDraw.push(<BooleanBox
+			topText="Swap elements?"
+			status={currentStepState.ifBox}
+			center={{x: this.areaWidth/2 - squareDefaultProps.size * 3, y: 275}}
+		/>);
+		elementsToDraw.push(<BooleanBox
+			topText="Continue loop?"
+			status={currentStepState.loopBox}
+			center={{x: this.areaWidth/2, y: 275}}
+		/>);
+		elementsToDraw.push(<Square
+			topText="value of i"
+			centerText={currentStepState.i}
+			center={{x: this.areaWidth/2 + squareDefaultProps.size * 3, y: 275}}
+		/>);
+	}
 
-		}
-		elementsToDraw.push(ifBox);
 
-		var loopBox = new BooleanBox(LOOP_CONTINUATION());
-		loopBox.topText = "Continue loop?";
-		loopBox.topLeft = new Coord(this.areaWidth / 2 - CONTENT_SQUARE().size / 2, 200);
-		if(typeof currentStepState.loopBox !== "undefined"){
-			loopBox.status = currentStepState.loopBox;
+	/** @return an array that can be used in an ArrayVisual pointer prop for making
+		one pointer to indicate where i is */
+	getPointers = (currentStepState) => {
+		if(currentStepState.i < currentStepState.elements.length){
+			return [{index: currentStepState.j, text: "j", position: "TOP"}];
+		}
+		return [];
+	}
 
+
+	/** Adds an ArrayVisual component to elementsToDraw that will render the
+		array in the algorithm and the position of i. */
+	addArrayTo = (elementsToDraw, currentStepState) => {
+		var arrayModel = [];
+		for(var i = 0; i < currentStepState.elements.length; i++){
+			arrayModel.push({
+				value: currentStepState.elements[i],
+				color: this.getBoxColor(currentStepState, i)
+			});
 		}
-		elementsToDraw.push(loopBox);
-		var iBox = new Square(CONTENT_SQUARE());
-		iBox.topText = "Value of i";
-		iBox.color = "white";
-		iBox.topLeft = new Coord(this.areaWidth / 2 + CONTENT_SQUARE().size * .5 + 100, 200);
-		if(currentStepState.i !== null){
-			iBox.centerText = currentStepState.i;
-		}
-		elementsToDraw.push(iBox);
+		elementsToDraw.push(<ArrayVisual
+			arrayModel={arrayModel}
+			pointers={this.getPointers(currentStepState)}
+			bracketPointers={this.addSwap(currentStepState)}
+			center={{x: this.areaWidth/2, y: 125}}
+		/>);
 	}
 
 
     visualizeAlgorithm = (currentStepState) => {
-
         var elementsToDraw = [];
 
-        this.addBoxes(elementsToDraw, currentStepState);
-		this.addJPointer(elementsToDraw, currentStepState);
+        this.addArrayTo(elementsToDraw, currentStepState);
 		this.addSwap(elementsToDraw, currentStepState);
 		this.addConditionBoxesTo(elementsToDraw, currentStepState);
 

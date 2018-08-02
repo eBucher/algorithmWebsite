@@ -68,7 +68,7 @@ class BubbleSortInput{
             setStarted(true),
             setStepNum(0),
             setSteps(newSteps),
-            setAreaDimensions(Math.max(450, CONTENT_SQUARE().size * (newElements.length + 2)), 250),
+            setAreaDimensions(Math.max(450, CONTENT_SQUARE().size * (newElements.length + 2)), 350),
             setAlgParams({elements: newElements}),
         ]));
     }

@@ -15,7 +15,7 @@ class InsertionSortInput{
         var steps = [];
         var key = null;
         var j = null;
-        steps.push({elements: elements, i: null, j: null, key: null, loopBox: null, highlightedLines: 0});
+        steps.push({elements: elements.slice(0), i: null, j: null, key: null, loopBox: null, highlightedLines: 0});
         for(var i = 1; i < numElements; i++){
             steps.push({elements: elements.slice(0), i: i, j: null, key: null, loopBox: true, highlightedLines: 1});
             key = elements[i];
@@ -63,7 +63,7 @@ class InsertionSortInput{
             setStarted(true),
             setStepNum(0),
             setSteps(newSteps),
-            setAreaDimensions(Math.max(450, CONTENT_SQUARE().size * (newElements.length + 2)), 250),
+            setAreaDimensions(Math.max(450, CONTENT_SQUARE().size * (newElements.length + 2)), 350),
             setAlgParams({elements: newElements}),
         ]));
     }

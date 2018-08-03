@@ -16,7 +16,7 @@ class AlgorithmPage extends React.Component {
         return(
             <div id="AlgorithmVisualization">
                 <div className="pageTitle algorithmTitleBox">
-                    {state.name}
+                    {this.props.algorithmName}
                 </div>
                 <AlgorithmInputForm model={this.props.inputModel} />
                 <AlgDisplay started={state.started}>

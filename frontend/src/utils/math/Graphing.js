@@ -1,5 +1,3 @@
-import Coord from 'components/drawArea/math/Coord.js';
-
 /*
 	Takes in two Coords. Returns the distance between them.
 */
@@ -16,14 +14,14 @@ function distance(p1, p2){
 */
 function findPointFromDist(point, distance, slope){
 	if (slope === Infinity){
-		return new Coord(point.x, point.y + distance);
+		return {x: point.x, y: point.y + distance};
 	}
 	if (slope === 0){
-		return new Coord(point.x + distance, point.y);
+		return {x: point.x + distance, y: point.y};
 	}
 	var xOffset = distance / Math.sqrt(1 + Math.pow(slope, 2));
 	var yOffset = slope * xOffset;
-	return new Coord(point.x + xOffset, point.y + yOffset);
+	return {x: point.x + xOffset, y: point.y + yOffset};
 }
 
 

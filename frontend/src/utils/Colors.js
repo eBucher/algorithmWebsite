@@ -18,6 +18,7 @@ function toHex(color){
 	} else if (color === "white"){
 		return "#FFFFFF";
 	}
+	throw new Error("Invalid color passed to toHex(): " + color);
 }
 
 export {toHex};

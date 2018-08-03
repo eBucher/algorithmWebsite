@@ -1,5 +1,5 @@
 import 'pages/styles.css';
-import {CONTENT_SQUARE} from 'components/drawArea/shapes/Presets.js';
+import {squareDefaultProps} from 'components/shapes/square/Square.js';
 import {batchActions} from 'redux-batched-actions';
 import {setStarted, setStepNum, setSteps, setAreaDimensions, setAlgParams} from "actions/AlgorithmActions.js";
 import store from "store.js"
@@ -9,24 +9,24 @@ class LinearSearchInput{
         this.urlParams = urlParams;
     }
 
-	// checkIndex is where the array will be pointing to.
+	// i is where the array will be pointing to.
 	calculateSteps = (target, elements) => {
 		var i = 0;
 		var steps = [];
-		steps.push({checkIndex: null, highlightedLines: 0});
+		steps.push({i: null, highlightedLines: 0});
 
 		for(i; i < elements.length; i++){
-			steps.push({checkIndex: i, highlightedLines: 1, loopBox: true});
+			steps.push({i: i, highlightedLines: 1, loopBox: true});
 			if(elements[i] === target){
-				steps.push({checkIndex: i, highlightedLines: 2, ifBox: true});
-				steps.push({ checkIndex: i,highlightedLines: 3});
+				steps.push({i: i, highlightedLines: 2, ifBox: true});
+				steps.push({ i: i,highlightedLines: 3});
 				return steps;
 			} else {
-				steps.push({checkIndex: i, highlightedLines: 2, ifBox: false});
+				steps.push({i: i, highlightedLines: 2, ifBox: false});
 			}
 		}
-		steps.push({checkIndex: i, highlightedLines: 1, loopBox: false});
-		steps.push({checkIndex: null, highlightedLines: 6});
+		steps.push({i: i, highlightedLines: 1, loopBox: false});
+		steps.push({i: null, highlightedLines: 6});
 		return steps;
 	}
 
@@ -53,7 +53,7 @@ class LinearSearchInput{
             setStarted(true),
             setStepNum(0),
             setSteps(newSteps),
-            setAreaDimensions(Math.max(450, CONTENT_SQUARE().size * (newElements.length + 2)), 250),
+            setAreaDimensions(Math.max(450, squareDefaultProps.size * (newElements.length + 2)), 250),
             setAlgParams({target: newTarget, elements: newElements}),
         ]));
 
@@ -82,9 +82,9 @@ class LinearSearchInput{
 	buildModel = () => {
 		return {
             validInputHandler: this.validInputHandler.bind(this),
-            urlParams: this.urlParams,
             inputs: [
                 {   key: "target",
+					initialValue: this.urlParams["target"],
                     displayText: "Target",
                     tooltipText: "Which number to search for.",
                     verifyHandler: this.verifyTarget,
@@ -92,6 +92,7 @@ class LinearSearchInput{
                 },
                 {
                     key: "elements",
+					initialValue: this.urlParams["elements"],
                     displayText: "Elements",
                     tooltipText: "All of the numbers to search through to try to find the target.",
                     verifyHandler: this.verifyElements,

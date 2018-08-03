@@ -1,7 +1,7 @@
 import 'pages/styles.css';
-import {CONTENT_SQUARE} from 'components/drawArea/shapes/Presets.js';
 import {batchActions} from 'redux-batched-actions';
 import {setStarted, setStepNum, setSteps, setAreaDimensions, setAlgParams} from "actions/AlgorithmActions.js";
+import {squareDefaultProps} from 'components/shapes/square/Square.js';
 import store from "store.js"
 
 class BinarySearchInput{
@@ -67,7 +67,7 @@ class BinarySearchInput{
             setStarted(true),
             setStepNum(0),
             setSteps(newSteps),
-            setAreaDimensions(Math.max(450, CONTENT_SQUARE().size * (newElements.length + 2)), 250),
+            setAreaDimensions(Math.max(450, squareDefaultProps.size * (newElements.length + 2)), 250),
             setAlgParams({target: newTarget, elements: newElements}),
         ]));
 
@@ -104,16 +104,17 @@ class BinarySearchInput{
     buildModel = () => {
         return {
             validInputHandler: this.validInputHandler.bind(this),
-            urlParams: this.urlParams,
             inputs: [
                 {   key: "target",
+                    initialValue: this.urlParams["target"],
                     displayText: "Target",
                     tooltipText: "Which number to search for.",
                     verifyHandler: this.verifyTarget,
-                    errorMsg: "Must be an integer"
+                    errorMsg: "Must be an integer",
                 },
                 {
                     key: "elements",
+                    initialValue: this.urlParams["elements"],
                     displayText: "Sorted elements",
                     tooltipText: "All of the numbers to search through to try to find the target. The numbers should be listed in ascending order and be separated by commas.",
                     verifyHandler: this.verifyElements,

@@ -34,11 +34,11 @@ class CodeBox extends React.Component{
 
 	/** @return an array of all of the elements for each line of code. */
 	generateLinesOfCode = () => {
-		var linesOfCode = [];
+		var codeToDisplay = [];
 		for(var i = 0; i < this.props.linesOfCode.length; i++){
-			linesOfCode.push(this.buildLine(i));
+			codeToDisplay.push(this.buildLine(i));
 		}
-		return linesOfCode;
+		return codeToDisplay;
 	}
 
 
@@ -48,11 +48,11 @@ class CodeBox extends React.Component{
 	buildLine = (index) => {
 		if(this.props.highlightedLine === index){
 			return (
-				<div key={"CodeBoxLine" + index} style={{backgroundColor: "#ffc947", whiteSpace: "pre-line"}}>
+				<div key={"codeBoxLine" + index} style={{backgroundColor: "#ffc947", whiteSpace: "pre-line"}}>
 				{this.cleanLine(this.props.linesOfCode[index])}
 			</div>)
 		}
-		return <div key={"CodeBoxLine" + index} style={{whiteSpace: "pre-line"}}>
+		return <div key={"codeBoxLine" + index} style={{whiteSpace: "pre-line"}}>
 			{this.cleanLine(this.props.linesOfCode[index])}
 		</div>
 	}

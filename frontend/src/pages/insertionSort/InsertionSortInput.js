@@ -4,7 +4,7 @@ import {batchActions} from 'redux-batched-actions';
 import {setStarted, setStepNum, setSteps, setAreaDimensions, setAlgParams} from "actions/AlgorithmActions.js";
 import store from "store.js"
 
-class BubbleSortInput{
+class InsertionSortInput{
     constructor(urlParams){
         this.urlParams = urlParams;
     }
@@ -13,35 +13,30 @@ class BubbleSortInput{
         var elements = nums.slice(0); //copy nums
         var numElements = elements.length;
         var steps = [];
-        steps.push({elements: elements.slice(0), i: null, j: null, highlightedLines: 0});
-        for(var i = 0; i < numElements - 1; i++){
-            if(i === 0)
-                steps.push({elements: elements.slice(0), i: i, j: null, loopBox: true, highlightedLines: 1});
-            else
-                steps.push({elements: elements.slice(0), i: i, j: null, loopBox: true, highlightedLines: 1});
-            for(var j = 0; j < numElements - i - 1; j++){
-                steps.push({elements: elements.slice(0), i: i, j: j, loopBox: true, highlightedLines: 2});
-                if(elements[j] > elements[j + 1]){
-                    steps.push({elements: elements.slice(0), i: i, j: j, ifBox: true, highlightedLines: 3});
-                    this.swap(elements, j, j+1);
-                    steps.push({elements: elements.slice(0), i: i, j: j, highlightedLines: 4});
-                } else {
-                    steps.push({elements: elements.slice(0), i: i, j: j, ifBox: false, highlightedLines: 3});
-                }
+        var key = null;
+        var j = null;
+        steps.push({elements: elements.slice(0), i: null, j: null, key: null, loopBox: null, highlightedLines: 0});
+        for(var i = 1; i < numElements; i++){
+            steps.push({elements: elements.slice(0), i: i, j: null, key: null, loopBox: true, highlightedLines: 1});
+            key = elements[i];
+            steps.push({elements: elements.slice(0), i: i, j: null, key: key, loopBox: null, highlightedLines: 2});
+            j = i - 1;
+            steps.push({elements: elements.slice(0), i: i, j: j, key: key, loopBox: null, highlightedLines: 3});
+            while(j >= 0 && elements[j] > key){
+                steps.push({elements: elements.slice(0), i: i, j: j, key: key, loopBox: true, highlightedLines: 5});
+                elements[j + 1] = elements[j];
+                steps.push({elements: elements.slice(0), i: i, j: j, key: key, loopBox: null, highlightedLines: 6});
+                j = j - 1;
+                steps.push({elements: elements.slice(0), i: i, j: j, key: key, loopBox: null, highlightedLines: 7});
             }
-            steps.push({elements: elements.slice(0), i: i, j: j, loopBox: false, highlightedLines: 2});
+            steps.push({elements: elements.slice(0), i: i, j: j, key: key, loopBox: false, highlightedLines: 5});
+            elements[j + 1] = key;
+            steps.push({elements: elements.slice(0), i: i, j: j, key: key, loopBox: null, highlightedLines: 9});
         }
-        steps.push({elements: elements.slice(0), i: i, j: j, loopBox: false, highlightedLines: 1});
-        steps.push({elements: elements.slice(0), i: i, j: j, finished: true, highlightedLines: 8});
+        steps.push({elements: elements.slice(0), i: i, j: null, key: null, loopBox: false, highlightedLines: 1});
+        steps.push({elements: elements.slice(0), i: null, j: null, key: null, loopbox: null, highlightedLines: 11});
+
         return steps;
-    }
-
-
-    /** Helper function to swap the elements at arr[idx1] and arr[idx2] */
-    swap(arr, idx1, idx2){
-        var temp = arr[idx1];
-        arr[idx1] = arr[idx2];
-        arr[idx2] = temp;
     }
 
 
@@ -99,7 +94,6 @@ class BubbleSortInput{
             ]
         }
     }
-
 }
 
-export default BubbleSortInput;
+export default InsertionSortInput;

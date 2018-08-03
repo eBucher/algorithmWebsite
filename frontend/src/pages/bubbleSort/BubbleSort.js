@@ -3,20 +3,16 @@ import BubbleSortInput from './BubbleSortInput.js';
 import BubbleSortDraw from './BubbleSortDraw.js';
 import queryString from 'query-string';
 import {connect} from "react-redux";
-import {setAlgorithmName, resetAlgorithmState} from "actions/AlgorithmActions.js";
-import {setPagePath} from "actions/AppActions.js";
-import store from 'store.js';
-import {batchActions} from 'redux-batched-actions';
 
 class BubbleSort extends Algorithm{
-    constructor(props){
-        super(props);
-        store.dispatch(batchActions([
-            resetAlgorithmState(),
-			setAlgorithmName("Bubble Sort"),
-			setPagePath(props.location.pathname),
-        ]));
-        this.algorithm = [
+
+    getAlgorithmName = () => {
+        return "Bubble Sort";
+    }
+
+
+    getAlgorithmLines = () => {
+        return [
             "function bubbleSort(elements, numElements){",
             "    for(int i = 0; i < numElements - 1; i++){",
             "        for(int j = 0; j < numElements - i - 1; j++){",
@@ -26,7 +22,7 @@ class BubbleSort extends Algorithm{
             "        }",
             "    }",
             "}",
-        ]
+        ];
     }
 
 
@@ -84,15 +80,4 @@ const mapStateToProps = (state) => {
   };
 };
 
-const mapDispatchToProps = (dispatch) => {
-    return {
-		setAlgorithmName: (newName) => {
-            dispatch(setAlgorithmName(newName));
-		},
-		resetAlgorithmState: () => {
-            dispatch(resetAlgorithmState());
-		}
-    };
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(BubbleSort);
+export default connect(mapStateToProps)(BubbleSort);

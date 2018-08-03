@@ -13,13 +13,12 @@ const propTypes = {
             names are each key in the model and their values are what the user has typed
             in. */
         validInputHandler: PropTypes.func.isRequired,
-        /** If any property names match any of the keys in the model, the input fields
-            will automatically be filled with the corresponding values. */
-        urlParams: PropTypes.object.isRequired,
         /** Each object in the array will produce an input field */
         inputs: PropTypes.arrayOf(PropTypes.shape({
             /** A unique key to identify the input */
             key: PropTypes.string.isRequired,
+            /** Optional initial text in the input field */
+            initialValue: PropTypes.string,
             /** The label that will appear above the input field */
             displayText: PropTypes.string.isRequired,
             /** Additional information for the user that will appear in a tooltip */
@@ -39,7 +38,7 @@ class AlgorithmInputForm extends React.Component{
     constructor(props){
         super(props);
         this.state = {
-            ...this.getUrlParams(),
+            ...this.getInitialValues(),
             errors: [],
         }
 
@@ -67,15 +66,15 @@ class AlgorithmInputForm extends React.Component{
     }
 
 
-    /** @return An object that contains every key/value from the model.urlParams
-        prop that also has a key in the model.inputs prop.
+    /** @return Any input that has an initialValue that is not undefined will be
+        added to the returned object.
     */
-    getUrlParams = () => {
+    getInitialValues = () => {
         var newStateVars = {};
         for (var i = 0; i < this.props.model.inputs.length; i++){
             let entry = this.props.model.inputs[i];
-            if(this.props.model.urlParams[entry.key]){
-                newStateVars[entry.key] = this.props.model.urlParams[entry.key];
+            if(entry.initialValue){
+                newStateVars[entry.key] = entry.initialValue;
             }
         }
         return newStateVars;
@@ -83,8 +82,7 @@ class AlgorithmInputForm extends React.Component{
 
 
     /** @return an array of InputBox objects generated from this.props.model.inputs.
-        If there were any url parameters, they will be used as initial values for
-        the inputs. this.handledUrlParams will be true by the end of the function.
+        Each one will start out empty unless there was a specified initial value.
     */
     inputFields = () => {
         var elementsToAdd = [];

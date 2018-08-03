@@ -4,22 +4,16 @@ import LinearSearchInput from 'pages/linearSearch/LinearSearchInput.js';
 import LinearSearchDraw from 'pages/linearSearch/LinearSearchDraw.js';
 import queryString from 'query-string';
 import {connect} from "react-redux";
-import {setAlgorithmName, resetAlgorithmState} from "actions/AlgorithmActions.js";
-import {setPagePath} from "actions/AppActions.js";
-import store from 'store.js';
-import {batchActions} from 'redux-batched-actions';
 
 class LinearSearch extends Algorithm{
 
-	constructor(props){
-		super(props);
-		store.dispatch(batchActions([
-            resetAlgorithmState(),
-			setAlgorithmName("Linear Search"),
-			setPagePath(props.location.pathname),
-        ]));
+	getAlgorithmName = () => {
+		return "Linear Search";
+	}
 
-		this.algorithm = [
+
+	getAlgorithmLines = () => {
+		return [
 			"function linearSearch(elements, target){",
 			"    for(int i = 0; i < elements.length; i++){",
 			"        if(elements[i] == target){",
@@ -79,15 +73,4 @@ const mapStateToProps = (state) => {
   };
 };
 
-const mapDispatchToProps = (dispatch) => {
-    return {
-		setAlgorithmName: (newName) => {
-            dispatch(setAlgorithmName(newName));
-		},
-		resetAlgorithmState: () => {
-            dispatch(resetAlgorithmState());
-		}
-    };
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(LinearSearch);
+export default connect(mapStateToProps)(LinearSearch);

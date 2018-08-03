@@ -1,5 +1,5 @@
 import 'pages/styles.css';
-import {CONTENT_SQUARE} from 'components/drawArea/shapes/Presets.js';
+import {squareDefaultProps} from 'components/shapes/square/Square.js';
 import {batchActions} from 'redux-batched-actions';
 import {setStarted, setStepNum, setSteps, setAreaDimensions, setAlgParams} from "actions/AlgorithmActions.js";
 import store from "store.js"
@@ -18,7 +18,7 @@ class BubbleSortInput{
             if(i === 0)
                 steps.push({elements: elements.slice(0), i: i, j: null, loopBox: true, highlightedLines: 1});
             else
-                steps.push({elements: elements.slice(0), i: i, j: j, loopBox: true, highlightedLines: 1});
+                steps.push({elements: elements.slice(0), i: i, j: null, loopBox: true, highlightedLines: 1});
             for(var j = 0; j < numElements - i - 1; j++){
                 steps.push({elements: elements.slice(0), i: i, j: j, loopBox: true, highlightedLines: 2});
                 if(elements[j] > elements[j + 1]){
@@ -68,7 +68,7 @@ class BubbleSortInput{
             setStarted(true),
             setStepNum(0),
             setSteps(newSteps),
-            setAreaDimensions(Math.max(450, CONTENT_SQUARE().size * (newElements.length + 2)), 350),
+            setAreaDimensions(Math.max(450, squareDefaultProps.size * (newElements.length + 2)), 350),
             setAlgParams({elements: newElements}),
         ]));
     }

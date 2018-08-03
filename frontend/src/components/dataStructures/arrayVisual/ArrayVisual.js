@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Square, {squareDefaultProps} from 'components/shapes/square/Square.js';
+import {squareDefaultProps} from 'components/shapes/square/Square.js';
 import SquareWrapper from 'components/shapes/square/SquareWrapper.js';
 import Pointer from 'components/shapes/pointer/Pointer.js';
 import BracketPointer from 'components/shapes/bracketPointer/BracketPointer.js';

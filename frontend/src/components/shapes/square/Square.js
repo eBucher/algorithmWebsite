@@ -37,10 +37,6 @@ export const squareDefaultProps = {
 /** Renders an SVG object that is a square with various labels */
 class Square extends React.Component{
 
-    constructor(props) {
-        super(props);
-    }
-
     drawSquare = () => {
         var center = this.props.center;
         var size = this.props.size;

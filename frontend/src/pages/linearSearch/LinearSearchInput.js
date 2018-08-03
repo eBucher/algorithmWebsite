@@ -1,5 +1,5 @@
 import 'pages/styles.css';
-import {CONTENT_SQUARE} from 'components/drawArea/shapes/Presets.js';
+import {squareDefaultProps} from 'components/shapes/square/Square.js';
 import {batchActions} from 'redux-batched-actions';
 import {setStarted, setStepNum, setSteps, setAreaDimensions, setAlgParams} from "actions/AlgorithmActions.js";
 import store from "store.js"
@@ -53,7 +53,7 @@ class LinearSearchInput{
             setStarted(true),
             setStepNum(0),
             setSteps(newSteps),
-            setAreaDimensions(Math.max(450, CONTENT_SQUARE().size * (newElements.length + 2)), 250),
+            setAreaDimensions(Math.max(450, squareDefaultProps.size * (newElements.length + 2)), 250),
             setAlgParams({target: newTarget, elements: newElements}),
         ]));
 

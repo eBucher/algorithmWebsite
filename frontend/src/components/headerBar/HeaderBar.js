@@ -20,6 +20,7 @@ class HeaderBar extends React.Component {
 						<Dropdown.Item as={Link} to="/algorithms/LinearSearch">Linear Search</Dropdown.Item>
 						<Dropdown.Header icon='sort amount up' content='Sorting' />
 						<Dropdown.Item as={Link} to="/algorithms/bubbleSort">Bubble Sort</Dropdown.Item>
+						<Dropdown.Item as={Link} to="/algorithms/insertionSort">Insertion Sort</Dropdown.Item>
 				      </Dropdown.Menu>
 				    </Dropdown>
 				</div>

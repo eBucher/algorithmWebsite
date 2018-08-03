@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {squareDefaultProps} from 'components/shapes/square/Square.js';
+import Square, {squareDefaultProps} from 'components/shapes/square/Square.js';
 import SquareWrapper from 'components/shapes/square/SquareWrapper.js';
 import Pointer from 'components/shapes/pointer/Pointer.js';
 import BracketPointer from 'components/shapes/bracketPointer/BracketPointer.js';
@@ -46,13 +46,31 @@ export const arrayVisualDefaultProps = {
 }
 
 class ArrayVisual extends React.Component {
-    /** @return the x and y coordinate of the center of the i'th square. */
-    getPositionAtIndex = (i) => {
-        return {
-            x: this.props.center.x + squareDefaultProps.size *
-                (i - Math.floor(this.props.arrayModel.length/2)),
-            y: this.props.center.y
-        };
+
+
+    /** @param numElements - The number of elements in the array to draw
+        @param midPoint - An object with x and y properties to indicate the middle
+            of the array.
+        @returns a function that takes in an index i and returns the center of a
+            square that would be at that index. */
+    positionCalculation = (numElements, midPoint) => {
+        if(numElements % 2 === 0){
+            return (i) => {
+                return {
+                    x: (i - numElements/2) * squareDefaultProps.size
+                        + midPoint.x + squareDefaultProps.size/2,
+                    y: midPoint.y,
+                };
+            }
+        } else {
+            return (i) => {
+                return {
+                    x: (i - Math.floor(numElements/2)) * squareDefaultProps.size
+                        + midPoint.x,
+                    y: midPoint.y,
+                };
+            }
+        }
     }
 
 
@@ -60,12 +78,14 @@ class ArrayVisual extends React.Component {
         to draw. */
     getSquares = () => {
         var arr = [];
+        var positionFunction = this.positionCalculation(this.props.arrayModel.length,
+            this.props.center);
         for(var i = 0; i < this.props.arrayModel.length; i++){
             var props = {
                 topText: i,
                 centerText: this.props.arrayModel[i].value,
                 color: this.props.arrayModel[i].color,
-                center: this.getPositionAtIndex(i)
+                center: positionFunction(i),
             }
             arr.push(new SquareWrapper(props));
         }

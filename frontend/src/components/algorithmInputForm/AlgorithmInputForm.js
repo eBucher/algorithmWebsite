@@ -4,7 +4,6 @@ import './AlgorithmInputForm.css';
 import 'pages/styles.css';
 import PropTypes from "prop-types";
 import {Button} from "semantic-ui-react";
-import 'semantic-ui-css/semantic.min.css';
 
 const propTypes = {
     model: PropTypes.shape({

@@ -2,12 +2,33 @@ import React, { Component } from 'react';
 import 'App.css';
 import 'reset.css';
 import HeaderBar from 'components/headerBar/HeaderBar.js';
-import LinearSearch from 'pages/linearSearch/LinearSearch.js';
-import BinarySearch from 'pages/binarySearch/BinarySearch.js';
-import BubbleSort from 'pages/bubbleSort/BubbleSort.js';
-import InsertionSort from 'pages/insertionSort/InsertionSort.js';
 import Test from 'pages/Test.js';
 import { Switch, Route } from 'react-router-dom';
+import Loadable from 'react-loadable';
+
+function Loading() {
+  return <h3>Loading...</h3>;
+}
+
+const LinearSearch = Loadable({
+  loader: () => import('pages/linearSearch/LinearSearch.js'),
+  loading: Loading
+});
+
+const BinarySearch = Loadable({
+  loader: () => import('pages/binarySearch/BinarySearch.js'),
+  loading: Loading
+});
+
+const BubbleSort = Loadable({
+  loader: () => import('pages/bubbleSort/BubbleSort.js'),
+  loading: Loading
+});
+
+const InsertionSort = Loadable({
+  loader: () => import('pages/insertionSort/InsertionSort.js'),
+  loading: Loading
+});
 
 class App extends Component {
   render() {

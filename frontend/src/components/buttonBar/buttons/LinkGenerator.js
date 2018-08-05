@@ -5,7 +5,6 @@ import store from "store.js";
 import "pages/styles.css";
 import "./LinkGenerator.css";
 import {Button, Icon} from "semantic-ui-react";
-import 'semantic-ui-css/semantic.min.css';
 
 /** Creates a label for a button bar and the displayed content creates a URL with
     the user's input in the current algorithm */

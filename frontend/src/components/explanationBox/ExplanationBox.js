@@ -4,7 +4,6 @@ import 'pages/styles.css';
 import CommentIcon from 'assets/CommentIcon.svg';
 import PropTypes from 'prop-types';
 import {Icon} from "semantic-ui-react";
-import 'semantic-ui-css/semantic.min.css';
 
 const propTypes = {
 	/** The most recent descriptions of each step to display. Newest

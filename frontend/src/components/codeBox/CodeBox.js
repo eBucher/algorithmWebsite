@@ -3,7 +3,6 @@ import 'components/codeBox/CodeBox.css';
 import CodeIcon from 'assets/CodeIcon.svg';
 import PropTypes from 'prop-types';
 import {Icon} from "semantic-ui-react";
-import 'semantic-ui-css/semantic.min.css';
 
 const propTypes = {
 	/** The text for each line of code to be displayed*/

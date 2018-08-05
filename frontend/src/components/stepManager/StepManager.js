@@ -6,7 +6,6 @@ import LeftArrow from 'assets/BackwardIcon.svg';
 import {setStepNum} from 'actions/AlgorithmActions.js';
 import {connect} from "react-redux";
 import {Button, Icon} from "semantic-ui-react";
-import 'semantic-ui-css/semantic.min.css';
 import PropTypes from "prop-types";
 
 

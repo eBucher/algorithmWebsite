@@ -2,7 +2,6 @@ import React from 'react';
 import 'components/headerBar/HeaderBar.css';
 import {Dropdown, Menu} from "semantic-ui-react";
 import {Link} from 'react-router-dom';
-import 'semantic-ui-css/semantic.min.css';
 
 /** A header bar for the top of the page */
 class HeaderBar extends React.Component {

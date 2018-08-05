@@ -6,7 +6,6 @@ import SelectedHelpIcon from 'assets/HelpIconHighlighted.svg';
 import WarningIcon from 'assets/WarningIcon.svg';
 import ToolTip from 'components/toolTip/ToolTip.js';
 import {Icon, Popup} from "semantic-ui-react";
-import 'semantic-ui-css/semantic.min.css';
 import PropTypes from "prop-types";
 
 const propTypes = {
@@ -125,7 +124,7 @@ class InputBox extends React.Component{
         if(this.props.text !== undefined && this.props.text !== null){
             text = this.props.text;
         }
-        
+
         return(
             <div className="inputArea">
                 <label className="smallLabelText">{this.props.label}</label>

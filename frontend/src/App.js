@@ -5,10 +5,16 @@ import HeaderBar from 'components/headerBar/HeaderBar.js';
 import Test from 'pages/Test.js';
 import { Switch, Route } from 'react-router-dom';
 import Loadable from 'react-loadable';
+import 'semantic-ui-css/semantic.min.css';
 
 function Loading() {
   return <h3>Loading...</h3>;
 }
+
+const Home = Loadable({
+  loader: () => import('pages/Home.js'),
+  loading: Loading
+});
 
 const LinearSearch = Loadable({
   loader: () => import('pages/linearSearch/LinearSearch.js'),
@@ -37,6 +43,7 @@ class App extends Component {
         <HeaderBar/>
         <div className="content">
             <Switch>
+                <Route exact path="/" component={Home}/>
                 <Route path="/algorithms/binarySearch" component={BinarySearch}/>
                 <Route path="/algorithms/bubbleSort" component={BubbleSort}/>
                 <Route path="/algorithms/insertionSort" component={InsertionSort}/>

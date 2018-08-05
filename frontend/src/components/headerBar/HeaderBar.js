@@ -11,7 +11,12 @@ class HeaderBar extends React.Component {
 				<div className="headerMargin">
 				</div>
 				<div className="headerBar">
-					<p><font className="orangeText">&#8226;</font> SeeTheSteps.com</p>
+					<Link to="/">
+						<p>
+							<font className="orangeText">&#8226;</font>
+							<font color="white">SeeTheSteps.com</font>
+						</p>
+					</Link>
 					<Dropdown item text='Other Algorithms'>
 				      <Dropdown.Menu direction="left">
 					  <Dropdown.Header icon='search' content='Searching' />

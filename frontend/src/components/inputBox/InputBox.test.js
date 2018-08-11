@@ -2,8 +2,6 @@ import React from 'react';
 import InputBox from './InputBox.js';
 import Enzyme, { shallow } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
-import HelpIcon from 'assets/HelpIcon.svg';
-import SelectedHelpIcon from 'assets/HelpIconHighlighted.svg';
 import WarningIcon from 'assets/WarningIcon.svg';
 import ToolTip from 'components/toolTip/ToolTip.js';
 
@@ -20,7 +18,7 @@ describe('Testing <InputBox/>', () => {
             onChangeHandler: () => {},
         }
         const inst = setup(props);
-        expect(inst.state).toEqual({toolTipIcon: HelpIcon});
+        expect(inst.state).toEqual({toolTipIconColor: "grey"});
     });
 
     test('getWidth(): subtract correct spacing', () => {
@@ -59,7 +57,7 @@ describe('Testing <InputBox/>', () => {
         }
         const inst = setup(props);
         inst.toolTipIconEnterHandler();
-        expect(inst.state).toEqual({toolTipIcon: SelectedHelpIcon});
+        expect(inst.state).toEqual({toolTipIconColor: "orange"});
     });
 
     test("toolTipIconExitHandler(): state's icon changes to unselected one", () => {
@@ -68,7 +66,7 @@ describe('Testing <InputBox/>', () => {
         }
         const inst = setup(props);
         inst.toolTipIconExitHandler();
-        expect(inst.state).toEqual({toolTipIcon: HelpIcon});
+        expect(inst.state).toEqual({toolTipIconColor: "grey"});
     });
 
     test("getInputStyle(): returns error style when there is an error", () => {

@@ -5,10 +5,16 @@ import HeaderBar from 'components/headerBar/HeaderBar.js';
 import Test from 'pages/Test.js';
 import { Switch, Route } from 'react-router-dom';
 import Loadable from 'react-loadable';
+import { Loader, Header } from 'semantic-ui-react';
 import 'semantic-ui-css/semantic.min.css';
 
 function Loading() {
-  return <h3>Loading...</h3>;
+    return (
+        <div>
+            <Header as='h3' textAlign='center'>Loading...</Header>
+            <Loader active inline='centered' />
+        </div>
+    );
 }
 
 const Home = Loadable({
